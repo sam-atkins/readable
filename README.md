@@ -16,8 +16,8 @@ The client app is built with React and Redux.
 - [Getting started](#getting-started)
   - [Installation](#installation)
 - [Develop](#develop)
+  - [How to run: React App](#how-to-run-react-app)
   - [How to run: API Server](#how-to-run-api-server)
-  - [How to run: React App](#react-app)
   - [Tests](#tests)
   - [Continuous Integration](#continuous-integration)
   - [Style Guide](#style-guide)
@@ -59,6 +59,13 @@ yarn install
 Note, this repo uses [Yarn workspaces](https://yarnpkg.com/en/docs/workspaces). This means you only need to run `yarn install` from the workspace root to install the dependencies for the whole project i.e. run the command once and the dependencies for the `api-server` and the `client` will install.
 
 ## Develop
+
+### How to run: React App
+
+```sh
+cd client/
+yarn start
+```
 
 ### How to run: API Server
 
@@ -107,14 +114,6 @@ The following endpoints are available:
 | `POST /comments/:id` | Used for voting on a comment. | **option** - [String]: Either `"upVote"` or `"downVote"`.  |
 | `PUT /comments/:id` | Edit the details of an existing comment. | **timestamp** - timestamp. Get this however you want. <br> **body** - [String] |
 | `DELETE /comments/:id` | Sets a comment's deleted flag to `true`. | &nbsp; |
-
-
-#### React App
-
-```sh
-cd client/
-yarn start
-```
 
 ### Tests
 
