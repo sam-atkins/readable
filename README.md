@@ -117,9 +117,10 @@ The following endpoints are available:
 
 ### Tests
 
-[Jest](https://facebook.github.io/jest/) is used for tests. To run the test suite, use this command:
+[Jest](https://facebook.github.io/jest/) is used for tests in the React app. To run the test suite, use this command:
 
 ```sh
+cd client/
 yarn test
 ```
 
