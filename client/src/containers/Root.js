@@ -1,17 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchCategories } from '../actions/categoryActions';
 import App from './App';
 import CategoryContainer from './CategoryContainer';
 import PostContainer from './PostContainer';
 
-const Root = () => (
-  <Router>
-    <div>
-      <Route exact path="/" component={App} />
-      <Route path="/category" component={CategoryContainer} />
-      <Route path="/post" component={PostContainer} />
-    </div>
-  </Router>
-);
+class Root extends Component {
+  componentWillMount() {
+    this.props.getCategories;
+  }
 
-export default Root;
+  render() {
+    const { category } = this.props.category;
+    return (
+      <Router>
+        <div>
+          <Route exact path="/" component={App} />
+          {category &&
+            category.map((c) => {
+              const routePath = `path="/${c.path}"`;
+              return <Route path={routePath} component={CategoryContainer} />;
+            })}
+          <Route path="/post" component={PostContainer} />
+        </div>
+      </Router>
+    );
+  }
+}
+
+Root.propTypes = {
+  category: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object,
+  ]).isRequired,
+};
+
+const mapStateToProps = state => ({
+  category: state.category,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getCategories: dispatch(fetchCategories()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Root);
