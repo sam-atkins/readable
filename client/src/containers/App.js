@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-import getCategories from '../api';
+import { connect } from 'react-redux';
+// import getCategories from '../utils/api';
+import { fetchCategories } from '../actions/categoryActions';
 import logo from '../assets/logo.svg';
 import './App.css';
 import Navbar from '../components/Navbar';
 
 class App extends Component {
-  state = {};
-
   componentWillMount() {
-    getCategories().then((categories) => {
-      this.setState({ categories });
-      console.log('====================================');
-      console.log('categories:', categories);
-      console.log('====================================');
-      console.log('====================================');
-      console.log('state - categories:', this.state.categories);
-      console.log('====================================');
-    });
+    this.props.getCategories;
+    console.log('====================================');
+    console.log('getCategories called');
+    console.log('====================================');
   }
 
   render() {
@@ -35,4 +30,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  getCategories: dispatch(fetchCategories()),
+});
+
+export default connect(null, mapDispatchToProps)(App);
