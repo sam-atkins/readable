@@ -21,7 +21,8 @@ const getCategories = () =>
       ...headers,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(),
-  }).then(res => res.json());
+  })
+    .then(res => res.json())
+    .then(data => data.categories);
 
 export default getCategories;

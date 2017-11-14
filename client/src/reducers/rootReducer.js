@@ -1,20 +1,17 @@
 import { combineReducers } from 'redux';
 import { RECEIVE_CATEGORIES } from '../actions/categoryActions';
 
-const categoryReducer = (state = {}, action) => {
+const category = (state = {}, action) => {
   const { categories } = action;
 
   switch (action.type) {
     case RECEIVE_CATEGORIES:
-      return {
-        ...state,
-        categories,
-      };
+      return categories;
     default:
       return state;
   }
 };
 
 export default combineReducers({
-  categoryReducer,
+  category,
 });
