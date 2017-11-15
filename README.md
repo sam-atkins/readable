@@ -25,6 +25,7 @@ The client app is built with React and Redux.
   - [Build](#build)
   - [Deploy](#deploy)
   - [Demo](#demo)
+- [Inspiration and Information](#inspiration-and-information)
 
 ## Getting started
 
@@ -86,7 +87,7 @@ All requests should use an **Authorization header** to work with your own data:
 fetch(
     url,
     {
-        headers: { 'Authorization': 'whatever-you-want' }
+        headers: { Authorization: 'whatever-you-want' }
     }
 )
 ```
@@ -147,3 +148,14 @@ The ESLint config extends from AirBnB, with a few changes. Refer to the `.eslint
 ### Demo
 
 [placeholder]
+
+
+## Inspiration and Information
+
+Links for articles / docs I've found useful:
+
+- [Container Components – Learn React with chantastic – Medium](https://medium.com/@learnreact/container-components-c0e67432e005)
+
+- [Presentational and Container Components – Dan Abramov – Medium](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
+
+- [How to Structure Your React Project](https://daveceddia.com/react-project-structure/)
