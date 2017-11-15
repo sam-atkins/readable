@@ -9,7 +9,7 @@ import PostContainer from './PostContainer';
 
 class Root extends Component {
   componentWillMount() {
-    this.props.getCategories;
+    this.props.getCategories();
   }
 
   render() {
@@ -35,6 +35,7 @@ Root.propTypes = {
     PropTypes.array,
     PropTypes.object,
   ]).isRequired,
+  getCategories: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -42,7 +43,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getCategories: dispatch(fetchCategories()),
+  getCategories: () => dispatch(fetchCategories()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);
