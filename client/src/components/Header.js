@@ -12,6 +12,8 @@ const Header = () => (
 );
 
 const StyledHeader = styled.div`
+  grid-column: col 1 / span 3;
+  grid-row: 1;
   text-align: center;
 `;
 

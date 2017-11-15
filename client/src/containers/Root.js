@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCategories } from '../actions/categoryActions';
 import App from './App';
-import CategoryContainer from './CategoryContainer';
+import CategoryViewContainer from './CategoryViewContainer';
 import PostContainer from './PostContainer';
 
 class Root extends Component {
@@ -21,7 +21,7 @@ class Root extends Component {
           {category &&
             category.map((c) => {
               const routePath = `path="/${c.path}"`;
-              return <Route path={routePath} component={CategoryContainer} />;
+              return <Route path={routePath} component={CategoryViewContainer} />;
             })}
           <Route path="/post" component={PostContainer} />
         </div>
