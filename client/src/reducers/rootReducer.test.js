@@ -16,30 +16,43 @@ describe('category reducer', () => {
     expect(category(initialState, action)).toEqual(expectedState);
   });
 
-  // it('should add categories to the global store', () => {
-  //   const initialState = {
-  //     category: {},
-  //   };
-  //   const action = {
-  //     type: RECEIVE_CATEGORIES,
-  //     categories: [
-  //       {
-  //         name: 'react',
-  //         path: 'react',
-  //       },
-  //       {
-  //         name: 'redux',
-  //         path: 'redux',
-  //       },
-  //       {
-  //         name: 'udacity',
-  //         path: 'udacity',
-  //       },
-  //     ],
-  //   };
-  //   const expectedState = {
-  //     category: {},
-  //   };
-  //   expect(category(initialState, action)).toEqual(expectedState);
-  // });
+  it('should add categories to the global store', () => {
+    const initialState = {
+      category: {},
+    };
+    const action = {
+      type: RECEIVE_CATEGORIES,
+      categories: [
+        {
+          name: 'react',
+          path: 'react',
+        },
+        {
+          name: 'redux',
+          path: 'redux',
+        },
+        {
+          name: 'udacity',
+          path: 'udacity',
+        },
+      ],
+    };
+    const expectedState = {
+      category: [
+        {
+          name: 'react',
+          path: 'react',
+        },
+        {
+          name: 'redux',
+          path: 'redux',
+        },
+        {
+          name: 'udacity',
+          path: 'udacity',
+        },
+      ],
+    };
+    expect(category(initialState, action)).toEqual(expectedState);
+  });
 });
