@@ -2,10 +2,14 @@
   "name": "readable",
   "version": "0.1.0",
   "private": true,
-  "workspaces": ["api-server", "client"],
+  "workspaces": [
+    "api-server",
+    "client"
+  ],
   "dependencies": {},
   "scripts": {
-    "lint": "eslint --fix"
+    "lint": "eslint --fix",
+    "test": "jest"
   },
   "devDependencies": {
     "eslint": "^4.9.0",
@@ -15,6 +19,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.4.0",
+    "jest": "^21.2.1",
     "prettier": "^1.7.4"
   }
 }
