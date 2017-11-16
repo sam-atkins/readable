@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CategoryView from '../components/CategoryView';
+import Loading from '../components/Loading';
 
 const CategoryViewContainer = (props) => {
   if (props.category.length > 0) {
@@ -10,7 +11,7 @@ const CategoryViewContainer = (props) => {
     ));
   }
 
-  return <div>Loading...</div>;
+  return <Loading />;
 };
 
 CategoryViewContainer.propTypes = {
