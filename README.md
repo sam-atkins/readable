@@ -18,6 +18,7 @@ The client app is built with React and Redux.
 - [Develop](#develop)
   - [How to run: React App](#how-to-run-react-app)
   - [How to run: API Server](#how-to-run-api-server)
+  - [Using the API Server](#using-the-server)
   - [Tests](#tests)
   - [Continuous Integration](#continuous-integration)
   - [Style Guide](#style-guide)
@@ -31,7 +32,7 @@ The client app is built with React and Redux.
 
 ### Installation
 
-The React app (in directory `/client`) was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). The api-server code is taken from the Udacity project starter repo.
+The React app was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). The api-server code is taken from the Udacity project starter repo and is available [here](https://github.com/cubiio/api-readable).
 
 **Dependencies:**
 
@@ -57,27 +58,25 @@ cd readable
 yarn install
 ```
 
-Note, this repo uses [Yarn workspaces](https://yarnpkg.com/en/docs/workspaces). This means you only need to run `yarn install` from the workspace root to install the dependencies for the whole project i.e. run the command once and the dependencies for the `api-server` and the `client` will install.
+To install the API server refer to the docs in this [repo](https://github.com/cubiio/api-readable).
 
 ## Develop
 
 ### How to run: React App
 
 ```sh
-cd client/
 yarn start
 ```
 
 ### How to run: API Server
 
-To start the API server:
-
 ```sh
-cd api-server/
+# in a new Terminal window/tab
+cd api-readable
 node server
 ```
 
-#### Using The Server
+#### Using the API Server
 
 ##### Include An Authorization Header
 
