@@ -2,7 +2,10 @@
 
 // import deepFreeze from 'deep-freeze';
 import category from './rootReducer';
-import { RECEIVE_CATEGORIES } from '../actions/categoryActions';
+import {
+  FAIL_FETCH_CATEGORIES,
+  RECEIVE_CATEGORIES,
+} from '../actions/categoryActions';
 
 describe('category reducer', () => {
   it('should return the initial state', () => {
@@ -18,7 +21,7 @@ describe('category reducer', () => {
 
   it('should add categories to the global store', () => {
     const initialState = {
-      category: {},
+      category: { loading: true, error: false },
     };
     const action = {
       type: RECEIVE_CATEGORIES,
@@ -38,20 +41,37 @@ describe('category reducer', () => {
       ],
     };
     const expectedState = {
-      category: [
-        {
-          name: 'react',
-          path: 'react',
-        },
-        {
-          name: 'redux',
-          path: 'redux',
-        },
-        {
-          name: 'udacity',
-          path: 'udacity',
-        },
-      ],
+      category: {
+        loading: false,
+        error: false,
+        categories: [
+          {
+            name: 'react',
+            path: 'react',
+          },
+          {
+            name: 'redux',
+            path: 'redux',
+          },
+          {
+            name: 'udacity',
+            path: 'udacity',
+          },
+        ],
+      },
+    };
+    expect(category(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should fail the fetch gracefully', () => {
+    const initialState = {
+      category: { loading: true, error: false },
+    };
+    const action = {
+      type: FAIL_FETCH_CATEGORIES,
+    };
+    const expectedState = {
+      category: { loading: false, error: true },
     };
     expect(category(initialState, action)).toEqual(expectedState);
   });
