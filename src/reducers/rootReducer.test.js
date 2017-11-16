@@ -1,6 +1,6 @@
 /* global describe, it, expect */
 
-// import deepFreeze from 'deep-freeze';
+import deepFreeze from 'deep-freeze';
 import category from './rootReducer';
 import {
   FAIL_FETCH_CATEGORIES,
@@ -16,6 +16,7 @@ describe('category reducer', () => {
     const expectedState = {
       category: {},
     };
+    deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
   });
 
@@ -60,6 +61,7 @@ describe('category reducer', () => {
         ],
       },
     };
+    deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
   });
 
@@ -73,6 +75,7 @@ describe('category reducer', () => {
     const expectedState = {
       category: { loading: false, error: true },
     };
+    deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
   });
 });
