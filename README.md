@@ -2,6 +2,7 @@
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![CircleCI](https://circleci.com/gh/cubiio/readable/tree/master.svg?style=svg)](https://circleci.com/gh/cubiio/readable/tree/master)
 
 
 ## Description
@@ -18,7 +19,7 @@ The client app is built with React and Redux.
 - [Develop](#develop)
   - [How to run: React App](#how-to-run-react-app)
   - [How to run: API Server](#how-to-run-api-server)
-  - [Using the API Server](#using-the-server)
+  - [Using the API Server](#using-the-api-server)
   - [Tests](#tests)
   - [Continuous Integration](#continuous-integration)
   - [Style Guide](#style-guide)
@@ -76,7 +77,7 @@ cd api-readable
 node server
 ```
 
-#### Using the API Server
+### Using the API Server
 
 ##### Include An Authorization Header
 
@@ -126,7 +127,7 @@ yarn test
 
 ### Continuous Integration
 
-[placeholder]
+Circle CI is used and the config is in the `.circle` folder.
 
 ### Style Guide
 
