@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import {
   fetchCategories,
+  FAIL_FETCH_CATEGORIES,
   RECEIVE_CATEGORIES,
 } from './categoryActions';
 
@@ -60,6 +61,23 @@ describe('categoryActions', () => {
     const store = mockStore({ mockedAPIReturn });
 
     return store.dispatch(fetchCategories()).then(() => {
+      const actions = store.getActions();
+      expect(actions).toEqual(expectedActions);
+    });
+  });
+
+  it('should catch the fetch error', () => {
+    fetchMock.getOnce('http://localhost:3001/categories', 304);
+
+    const expectedActions = [
+      {
+        type: FAIL_FETCH_CATEGORIES,
+      },
+    ];
+
+    const store = mockStore({});
+
+    return store.dispatch(fetchCategories()).catch(() => {
       const actions = store.getActions();
       expect(actions).toEqual(expectedActions);
     });
