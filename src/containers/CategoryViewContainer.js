@@ -10,16 +10,16 @@ import {
   getCategoryLoadingStatus,
 } from '../utils/selectors';
 
-const CategoryViewContainer = (props) => {
-  if (props.loading) {
+const CategoryViewContainer = ({ category, error, loading }) => {
+  if (loading) {
     return <Loading />;
   }
 
-  if (props.error) {
+  if (error) {
     return <Error />;
   }
 
-  return props.category.map(c => <CategoryView category={c} key={c.name} />);
+  return category.map(c => <CategoryView category={c} key={c.name} />);
 };
 
 CategoryViewContainer.propTypes = {
