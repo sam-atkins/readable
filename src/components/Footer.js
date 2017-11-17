@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Footer = () => (
   <FooterWrapper>
     <FooterText>
-      Built with ♥ by <a href="https://github.com/cubiio">Cubiio</a>. View
+      Built with ♥ by <a href="https://www.samatkins.me">Sam</a>. View
       source code on <a href="https://github.com/cubiio/readable">Github</a>.
     </FooterText>
   </FooterWrapper>
