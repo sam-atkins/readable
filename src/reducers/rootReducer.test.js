@@ -4,7 +4,7 @@ import deepFreeze from 'deep-freeze';
 import category from './rootReducer';
 import {
   FAIL_FETCH_CATEGORIES,
-  RECEIVE_CATEGORIES,
+  SUCCESS_RECEIVE_CATEGORIES,
 } from '../actions/categoryActions';
 
 describe('category reducer', () => {
@@ -25,7 +25,7 @@ describe('category reducer', () => {
       category: { loading: true, error: false },
     };
     const action = {
-      type: RECEIVE_CATEGORIES,
+      type: SUCCESS_RECEIVE_CATEGORIES,
       categories: [
         {
           name: 'react',

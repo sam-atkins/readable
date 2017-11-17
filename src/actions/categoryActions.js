@@ -1,10 +1,10 @@
 import getCategories from '../utils/api';
 
-export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
+export const SUCCESS_RECEIVE_CATEGORIES = 'SUCCESS_RECEIVE_CATEGORIES';
 export const FAIL_FETCH_CATEGORIES = 'FAIL_FETCH_CATEGORIES';
 
 export const receiveCategories = categories => ({
-  type: RECEIVE_CATEGORIES,
+  type: SUCCESS_RECEIVE_CATEGORIES,
   categories,
 });
 

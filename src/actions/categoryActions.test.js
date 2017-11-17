@@ -6,7 +6,7 @@ import fetchMock from 'fetch-mock';
 import {
   fetchCategories,
   FAIL_FETCH_CATEGORIES,
-  RECEIVE_CATEGORIES,
+  SUCCESS_RECEIVE_CATEGORIES,
 } from './categoryActions';
 
 const middlewares = [thunk];
@@ -54,7 +54,7 @@ describe('categoryActions', () => {
             path: 'udacity',
           },
         ],
-        type: RECEIVE_CATEGORIES,
+        type: SUCCESS_RECEIVE_CATEGORIES,
       },
     ];
 
