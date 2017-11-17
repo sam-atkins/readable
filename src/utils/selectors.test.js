@@ -20,7 +20,7 @@ describe('selectors', () => {
         ],
       },
     };
-    const expectedShape = { error: false };
+    const expectedShape = false;
     expect(getCategoryErrorStatus(selectedState)).toEqual(expectedShape);
   });
 
@@ -37,7 +37,7 @@ describe('selectors', () => {
         ],
       },
     };
-    const expectedShape = { loading: false };
+    const expectedShape = false;
     expect(getCategoryLoadingStatus(selectedState)).toEqual(expectedShape);
   });
 

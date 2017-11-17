@@ -1,9 +1,5 @@
-export const getCategoryLoadingStatus = obj => ({
-  loading: obj.category.loading,
-});
+export const getCategoryLoadingStatus = ({ category }) => category.loading;
 
-export const getCategoryErrorStatus = obj => ({
-  error: obj.category.error,
-});
+export const getCategoryErrorStatus = ({ category }) => category.error;
 
 export const getCategoryValues = ({ category }) => category.categories;
