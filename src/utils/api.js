@@ -1,8 +1,9 @@
-/* global fetch, localStorage */
+/* global fetch */
 
 const api = 'http://localhost:3001';
 
-// Generate a unique token
+// Generates a unique token; removed as in order to test components using
+// localStorage need to eject from `create-react-app`
 // let { token } = localStorage;
 // if (!token) {
 //   token = localStorage.token = Math.random()
