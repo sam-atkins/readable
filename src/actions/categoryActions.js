@@ -1,4 +1,4 @@
-import getCategories from '../utils/api';
+import { getCategories } from '../utils/api';
 
 export const SUCCESS_RECEIVE_CATEGORIES = 'SUCCESS_RECEIVE_CATEGORIES';
 export const FAIL_FETCH_CATEGORIES = 'FAIL_FETCH_CATEGORIES';

@@ -10,11 +10,11 @@ import {
 describe('category reducer', () => {
   it('should return the initial state', () => {
     const initialState = {
-      category: {},
+      category: { category: { error: false, loading: true } },
     };
     const action = {};
     const expectedState = {
-      category: {},
+      category: { category: { error: false, loading: true } },
     };
     deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
@@ -43,22 +43,10 @@ describe('category reducer', () => {
     };
     const expectedState = {
       category: {
-        loading: false,
-        error: false,
-        categories: [
-          {
-            name: 'react',
-            path: 'react',
-          },
-          {
-            name: 'redux',
-            path: 'redux',
-          },
-          {
-            name: 'udacity',
-            path: 'udacity',
-          },
-        ],
+        0: { name: 'react', path: 'react' },
+        1: { name: 'redux', path: 'redux' },
+        2: { name: 'udacity', path: 'udacity' },
+        categoryStatus: { error: false, loading: false },
       },
     };
     deepFreeze(initialState);
@@ -73,7 +61,7 @@ describe('category reducer', () => {
       type: FAIL_FETCH_CATEGORIES,
     };
     const expectedState = {
-      category: { loading: false, error: true },
+      category: { categoryStatus: { error: false, loading: false } },
     };
     deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
