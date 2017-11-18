@@ -8,12 +8,11 @@ const category = (state = {}, action) => {
 
   switch (action.type) {
     case SUCCESS_RECEIVE_CATEGORIES:
-      const newCats = categories.reduce(
-        (newObj, cat) => ({ ...newObj, [cat.name]: cat }),
-        {}
-      );
       return {
-        ...newCats,
+        ...categories.reduce(
+          (newObj, cat) => ({ ...newObj, [cat.name]: cat }),
+          {}
+        ),
         categoryStatus: {
           error: false,
           loading: false,
