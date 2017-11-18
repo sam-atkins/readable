@@ -42,12 +42,10 @@ describe('category reducer', () => {
       ],
     };
     const expectedState = {
-      category: {
-        0: { name: 'react', path: 'react' },
-        1: { name: 'redux', path: 'redux' },
-        2: { name: 'udacity', path: 'udacity' },
-        categoryStatus: { error: false, loading: false },
-      },
+      0: { name: 'react', path: 'react' },
+      1: { name: 'redux', path: 'redux' },
+      2: { name: 'udacity', path: 'udacity' },
+      categoryStatus: { error: false, loading: false },
     };
     deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
@@ -61,7 +59,7 @@ describe('category reducer', () => {
       type: FAIL_FETCH_CATEGORIES,
     };
     const expectedState = {
-      category: { categoryStatus: { error: true, loading: false } },
+      categoryStatus: { error: true, loading: false },
     };
     deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
