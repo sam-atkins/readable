@@ -1,7 +1,7 @@
 /* global describe, it, expect */
 
 import deepFreeze from 'deep-freeze';
-import category from './rootReducer';
+import category from './categoryReducer';
 import {
   FAIL_FETCH_CATEGORIES,
   SUCCESS_RECEIVE_CATEGORIES,
@@ -55,13 +55,13 @@ describe('category reducer', () => {
 
   it('should fail the fetch gracefully', () => {
     const initialState = {
-      category: { loading: true, error: false },
+      category: { categoryStatus: { error: false, loading: true } },
     };
     const action = {
       type: FAIL_FETCH_CATEGORIES,
     };
     const expectedState = {
-      category: { categoryStatus: { error: false, loading: false } },
+      category: { categoryStatus: { error: true, loading: false } },
     };
     deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
