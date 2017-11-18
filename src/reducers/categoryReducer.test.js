@@ -42,9 +42,9 @@ describe('category reducer', () => {
       ],
     };
     const expectedState = {
-      0: { name: 'react', path: 'react' },
-      1: { name: 'redux', path: 'redux' },
-      2: { name: 'udacity', path: 'udacity' },
+      react: { name: 'react', path: 'react' },
+      redux: { name: 'redux', path: 'redux' },
+      udacity: { name: 'udacity', path: 'udacity' },
       categoryStatus: { error: false, loading: false },
     };
     deepFreeze(initialState);
