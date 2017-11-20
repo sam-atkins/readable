@@ -3,7 +3,14 @@ import {
   SUCCESS_RECEIVE_CATEGORIES,
 } from '../actions/categoryActions';
 
-const category = (state = {}, action) => {
+const initialState = {
+  category: {
+    error: false,
+    loading: true,
+  },
+};
+
+const category = (state = initialState, action) => {
   const { categories } = action;
 
   switch (action.type) {
