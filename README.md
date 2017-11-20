@@ -127,7 +127,7 @@ yarn test
 
 ### Continuous Integration
 
-Circle CI is used and the config is in the `.circle` folder.
+Circle CI is set-up for this repo. Pushes made to remote will trigger a Circle build. The config is in the `.circle` folder.
 
 ### Style Guide
 
