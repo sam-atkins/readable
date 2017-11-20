@@ -13,8 +13,8 @@ const CategoryView = props => (
 );
 
 const ViewWrapper = styled.div`
-  grid-column: col 1 / span 3;
-  display: flex;
+  grid-column-start: 1;
+  grid-column-end: 4;
 `;
 
 const CategoryContent = styled.div`
