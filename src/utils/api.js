@@ -35,4 +35,4 @@ export const getPosts = () =>
     },
   })
     .then(res => res.json())
-    .then(data => data.posts);
+    .then(data => data);

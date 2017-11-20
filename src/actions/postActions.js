@@ -5,7 +5,7 @@ export const FAIL_FETCH_POSTS = 'FAIL_FETCH_POSTS';
 
 export const receivePosts = posts => ({
   type: SUCCESS_RECEIVE_POSTS,
-  payload: posts,
+  posts,
 });
 
 export const errorReceivingPosts = () => ({
