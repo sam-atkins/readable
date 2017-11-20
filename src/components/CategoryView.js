@@ -7,14 +7,19 @@ const CategoryView = props => (
   <ViewWrapper>
     <CategoryContent>
       <CategoryHeader>{props.category.name}</CategoryHeader>
-      <PostView />
+      <SortPostsMenu>
+        <option disabled>Sort posts by:</option>
+        <option>Sort by vote</option>
+        <option>Sort by comment</option>
+      </SortPostsMenu>
     </CategoryContent>
+    <PostView />
   </ViewWrapper>
 );
 
 const ViewWrapper = styled.div`
-  grid-column: col 1 / span 3;
-  display: flex;
+  grid-column-start: 1;
+  grid-column-end: 4;
 `;
 
 const CategoryContent = styled.div`
@@ -22,7 +27,15 @@ const CategoryContent = styled.div`
 `;
 
 const CategoryHeader = styled.h2`
+  grid-column-start: 1;
+  grid-row-start: 1;
   text-decoration: underline;
+`;
+
+const SortPostsMenu = styled.select`
+  grid-column-start: 1;
+  grid-row-start: 1;
+  cursor: pointer;
 `;
 
 CategoryView.propTypes = {
