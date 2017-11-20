@@ -4,7 +4,7 @@ import {
 } from '../actions/categoryActions';
 
 const initialState = {
-  category: {
+  categoryStatus: {
     error: false,
     loading: true,
   },
