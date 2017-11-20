@@ -1,7 +1,7 @@
 /* global describe, it, expect */
 
 import deepFreeze from 'deep-freeze';
-import category from './rootReducer';
+import category from './categoryReducer';
 import {
   FAIL_FETCH_CATEGORIES,
   SUCCESS_RECEIVE_CATEGORIES,
@@ -10,11 +10,11 @@ import {
 describe('category reducer', () => {
   it('should return the initial state', () => {
     const initialState = {
-      category: {},
+      category: { category: { error: false, loading: true } },
     };
     const action = {};
     const expectedState = {
-      category: {},
+      category: { category: { error: false, loading: true } },
     };
     deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
@@ -42,24 +42,10 @@ describe('category reducer', () => {
       ],
     };
     const expectedState = {
-      category: {
-        loading: false,
-        error: false,
-        categories: [
-          {
-            name: 'react',
-            path: 'react',
-          },
-          {
-            name: 'redux',
-            path: 'redux',
-          },
-          {
-            name: 'udacity',
-            path: 'udacity',
-          },
-        ],
-      },
+      react: { name: 'react', path: 'react' },
+      redux: { name: 'redux', path: 'redux' },
+      udacity: { name: 'udacity', path: 'udacity' },
+      categoryStatus: { error: false, loading: false },
     };
     deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);
@@ -67,13 +53,13 @@ describe('category reducer', () => {
 
   it('should fail the fetch gracefully', () => {
     const initialState = {
-      category: { loading: true, error: false },
+      category: { categoryStatus: { error: false, loading: true } },
     };
     const action = {
       type: FAIL_FETCH_CATEGORIES,
     };
     const expectedState = {
-      category: { loading: false, error: true },
+      categoryStatus: { error: true, loading: false },
     };
     deepFreeze(initialState);
     expect(category(initialState, action)).toEqual(expectedState);

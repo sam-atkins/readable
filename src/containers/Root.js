@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCategories } from '../actions/categoryActions';
+import { getCategoryValues } from '../utils/selectors';
 import App from './App';
 import CategoryViewContainer from './CategoryViewContainer';
 import PostContainer from './PostContainer';
@@ -21,7 +22,9 @@ class Root extends Component {
           {category &&
             category.map((c) => {
               const routePath = `path="/${c.path}"`;
-              return <Route path={routePath} component={CategoryViewContainer} />;
+              return (
+                <Route path={routePath} component={CategoryViewContainer} />
+              );
             })}
           <Route path="/post" component={PostContainer} />
         </div>
@@ -31,15 +34,12 @@ class Root extends Component {
 }
 
 Root.propTypes = {
-  category: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-  ]).isRequired,
+  category: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   getCategories: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  category: state.category,
+  category: getCategoryValues(state),
 });
 
 const mapDispatchToProps = dispatch => ({

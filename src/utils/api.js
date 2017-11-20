@@ -15,7 +15,7 @@ const headers = {
   Authorization: 'some-token',
 };
 
-const getCategories = () =>
+export const getCategories = () =>
   fetch(`${api}/categories`, {
     method: 'GET',
     headers: {
@@ -26,4 +26,13 @@ const getCategories = () =>
     .then(res => res.json())
     .then(data => data.categories);
 
-export default getCategories;
+export const getPosts = () =>
+  fetch(`${api}/posts`, {
+    method: 'GET',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(res => res.json())
+    .then(data => data.posts);
