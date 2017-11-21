@@ -13,10 +13,10 @@ import {
 } from '../utils/selectors';
 
 const CategoryPostViewContainer = ({
-  category,
+  categories,
   categoryError,
   categoryLoading,
-  post,
+  posts,
 }) => {
   if (categoryLoading) {
     return <Loading />;
@@ -28,19 +28,25 @@ const CategoryPostViewContainer = ({
 
   return (
     <CategoryViewWrapper>
-      {category.map(cat => (
+      {categories.map(cat => (
         <CategoryPostWrapper key={cat.id}>
           <CategoryContent>
             <CategoryHeader>{cat.name}</CategoryHeader>
             <SortPostsMenu>
               <option disabled>Sort posts by:</option>
-              <option>Sort by vote</option>
-              <option>Sort by comment</option>
+              <option>Sort by score</option>
+              <option>Sort by date</option>
             </SortPostsMenu>
           </CategoryContent>
-          {post
-            .filter(pst => cat.id === pst.category)
-            .map(pst => <PostView post={pst} key={pst.id} />)}
+          {posts.reduce((postArray, post) => {
+            if (post.category === cat.id) {
+              return [
+                ...postArray,
+                <PostView post={post} key={post.id} />,
+              ];
+            }
+            return postArray;
+          }, [])}
         </CategoryPostWrapper>
       ))}
     </CategoryViewWrapper>
@@ -48,17 +54,17 @@ const CategoryPostViewContainer = ({
 };
 
 CategoryPostViewContainer.propTypes = {
-  category: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   categoryLoading: PropTypes.bool.isRequired,
   categoryError: PropTypes.bool.isRequired,
-  post: PropTypes.array.isRequired,
+  posts: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({
-  category: getCategoryValues(state),
+  categories: getCategoryValues(state),
   categoryError: getCategoryErrorStatus(state),
   categoryLoading: getCategoryLoadingStatus(state),
-  post: getPostValues(state),
+  posts: getPostValues(state),
 });
 
 const CategoryViewWrapper = styled.div`
