@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
 import FaArrowDown from 'react-icons/lib/fa/arrow-down';
+import moment from 'moment';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import { getPostErrorStatus, getPostLoadingStatus } from '../utils/selectors';
@@ -31,7 +32,8 @@ const PostView = (props) => {
       <StyledPostMetaWrapper>
         <StyledPostTitle>{post.title}</StyledPostTitle>
         <StyledPostMeta>
-          Submitted on {post.timestamp} by {post.author}
+          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}
+          {' '}by {post.author}
         </StyledPostMeta>
       </StyledPostMetaWrapper>
       <StyledPostBody>{post.body}</StyledPostBody>
