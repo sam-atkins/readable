@@ -6,8 +6,8 @@ import { fetchCategories } from '../actions/categoryActions';
 import { fetchPosts } from '../actions/postActions';
 import { getCategoryValues } from '../utils/selectors';
 import App from './App';
-import CategoryViewContainer from './CategoryViewContainer';
-import PostContainer from './PostContainer';
+import CategoryPostViewContainer from './CategoryPostViewContainer';
+import PostPageContainer from './PostPageContainer';
 
 class Root extends Component {
   componentWillMount() {
@@ -25,10 +25,10 @@ class Root extends Component {
             category.map((c) => {
               const routePath = `path="/${c.path}"`;
               return (
-                <Route path={routePath} component={CategoryViewContainer} />
+                <Route path={routePath} component={CategoryPostViewContainer} />
               );
             })}
-          <Route path="/post" component={PostContainer} />
+          <Route path="/post" component={PostPageContainer} />
         </div>
       </Router>
     );

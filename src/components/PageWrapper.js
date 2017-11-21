@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 // import Navbar from './Navbar';
-import CategoryViewContainer from '../containers/CategoryViewContainer';
+import CategoryPostViewContainer from '../containers/CategoryPostViewContainer';
 import Footer from './Footer';
 
 const PageWrapper = () => (
   <StyledWrapper>
     <Header />
-    <CategoryViewContainer />
+    <CategoryPostViewContainer />
     <Footer />
   </StyledWrapper>
 );

@@ -1,22 +1,56 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import VoteScore from './VoteScore';
+import PropTypes from 'prop-types';
+import FaArrowUp from 'react-icons/lib/fa/arrow-up';
+import FaArrowDown from 'react-icons/lib/fa/arrow-down';
+import moment from 'moment';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
+import { getPostErrorStatus, getPostLoadingStatus } from '../utils/selectors';
 
-const PostView = () => (
-  <PostWrapper>
-    <VoteScore />
-    <StyledPostMetaWrapper>
-      <StyledPostTitle>Post Title</StyledPostTitle>
-      <StyledPostMeta>Submitted on time/date by Author</StyledPostMeta>
-    </StyledPostMetaWrapper>
-    <StyledPostBody>Post Body</StyledPostBody>
-    <StyledCommentWrapper>
-      <StyledPostMetaBold>5 comments</StyledPostMetaBold>
-      <StyledPostMetaBold>edit</StyledPostMetaBold>
-      <StyledPostMetaBold>delete</StyledPostMetaBold>
-    </StyledCommentWrapper>
-  </PostWrapper>
-);
+const PostView = (props) => {
+  const { post, error, loading } = props;
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
+
+  return (
+    <PostWrapper>
+      <StyledVoteCount>
+        <FaArrowUp />
+        <br />
+        {post.voteScore}
+        <br />
+        <FaArrowDown />
+      </StyledVoteCount>
+      <StyledPostMetaWrapper>
+        <StyledPostTitle>{post.title}</StyledPostTitle>
+        <StyledPostMeta>
+          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}
+          {' '}by {post.author}
+        </StyledPostMeta>
+      </StyledPostMetaWrapper>
+      <StyledPostBody>{post.body}</StyledPostBody>
+      <StyledCommentWrapper>
+        <StyledPostMetaBold>{post.commentCount} comments</StyledPostMetaBold>
+        <StyledPostMetaBold>edit</StyledPostMetaBold>
+        <StyledPostMetaBold>delete</StyledPostMetaBold>
+      </StyledCommentWrapper>
+    </PostWrapper>
+  );
+};
+
+PostView.propTypes = {
+  post: PropTypes.object.isRequired,
+  error: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
 
 const PostWrapper = styled.div`
   display: grid;
@@ -24,6 +58,14 @@ const PostWrapper = styled.div`
   grid-template-rows: repeat(3, [row] 1fr);
   grid-gap: 2px;
   grid-auto-rows: minmax(200px, auto);
+`;
+
+const StyledVoteCount = styled.div`
+  grid-column-start: 1;
+  span: 1;
+  grid-row-start: 2;
+  color: #c6c6c6;
+  text-align: center;
 `;
 
 const StyledPostMetaWrapper = styled.div`
@@ -62,4 +104,9 @@ const StyledPostMetaBold = styled.span`
   padding-right: 1rem;
 `;
 
-export default PostView;
+const mapStateToProps = state => ({
+  error: getPostErrorStatus(state),
+  loading: getPostLoadingStatus(state),
+});
+
+export default connect(mapStateToProps)(PostView);
