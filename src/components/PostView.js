@@ -1,11 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
 import FaArrowDown from 'react-icons/lib/fa/arrow-down';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
+import { getPostErrorStatus, getPostLoadingStatus } from '../utils/selectors';
 
 const PostView = (props) => {
-  const { post } = props;
+  const { post, error, loading } = props;
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
+
   return (
     <PostWrapper>
       <StyledVoteCount>
@@ -32,7 +45,9 @@ const PostView = (props) => {
 };
 
 PostView.propTypes = {
-  post: PropTypes.array.isRequired,
+  post: PropTypes.object.isRequired,
+  error: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const PostWrapper = styled.div`
@@ -87,4 +102,9 @@ const StyledPostMetaBold = styled.span`
   padding-right: 1rem;
 `;
 
-export default PostView;
+const mapStateToProps = state => ({
+  error: getPostErrorStatus(state),
+  loading: getPostLoadingStatus(state),
+});
+
+export default connect(mapStateToProps)(PostView);
