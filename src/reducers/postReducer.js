@@ -24,7 +24,7 @@ const post = (state = initialState, action) => {
       };
     case FAIL_FETCH_POSTS:
       return {
-        ...post,
+        ...posts,
         postStatus: {
           error: true,
           loading: false,
