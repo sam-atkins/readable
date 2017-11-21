@@ -1,22 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
-import VoteScore from './VoteScore';
+import PropTypes from 'prop-types';
+import FaArrowUp from 'react-icons/lib/fa/arrow-up';
+import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 
-const PostView = () => (
-  <PostWrapper>
-    <VoteScore />
-    <StyledPostMetaWrapper>
-      <StyledPostTitle>Post Title</StyledPostTitle>
-      <StyledPostMeta>Submitted on time/date by Author</StyledPostMeta>
-    </StyledPostMetaWrapper>
-    <StyledPostBody>Post Body</StyledPostBody>
-    <StyledCommentWrapper>
-      <StyledPostMetaBold>5 comments</StyledPostMetaBold>
-      <StyledPostMetaBold>edit</StyledPostMetaBold>
-      <StyledPostMetaBold>delete</StyledPostMetaBold>
-    </StyledCommentWrapper>
-  </PostWrapper>
-);
+const PostView = (props) => {
+  const { post } = props;
+  return (
+    <PostWrapper>
+      <StyledVoteCount>
+        <FaArrowUp />
+        <br />
+        {post.voteScore}
+        <br />
+        <FaArrowDown />
+      </StyledVoteCount>
+      <StyledPostMetaWrapper>
+        <StyledPostTitle>{post.title}</StyledPostTitle>
+        <StyledPostMeta>
+          Submitted on {post.timestamp} by {post.author}
+        </StyledPostMeta>
+      </StyledPostMetaWrapper>
+      <StyledPostBody>{post.body}</StyledPostBody>
+      <StyledCommentWrapper>
+        <StyledPostMetaBold>{post.commentCount} comments</StyledPostMetaBold>
+        <StyledPostMetaBold>edit</StyledPostMetaBold>
+        <StyledPostMetaBold>delete</StyledPostMetaBold>
+      </StyledCommentWrapper>
+    </PostWrapper>
+  );
+};
+
+PostView.propTypes = {
+  post: PropTypes.array.isRequired,
+};
 
 const PostWrapper = styled.div`
   display: grid;
@@ -24,6 +41,14 @@ const PostWrapper = styled.div`
   grid-template-rows: repeat(3, [row] 1fr);
   grid-gap: 2px;
   grid-auto-rows: minmax(200px, auto);
+`;
+
+const StyledVoteCount = styled.div`
+  grid-column-start: 1;
+  span: 1;
+  grid-row-start: 2;
+  color: #c6c6c6;
+  text-align: center;
 `;
 
 const StyledPostMetaWrapper = styled.div`

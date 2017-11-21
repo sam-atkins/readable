@@ -7,7 +7,7 @@ import { fetchPosts } from '../actions/postActions';
 import { getCategoryValues } from '../utils/selectors';
 import App from './App';
 import CategoryViewContainer from './CategoryViewContainer';
-import PostContainer from './PostContainer';
+import PostPageContainer from './PostPageContainer';
 
 class Root extends Component {
   componentWillMount() {
@@ -28,7 +28,7 @@ class Root extends Component {
                 <Route path={routePath} component={CategoryViewContainer} />
               );
             })}
-          <Route path="/post" component={PostContainer} />
+          <Route path="/post" component={PostPageContainer} />
         </div>
       </Router>
     );

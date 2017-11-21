@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import PostView from './PostView';
+import PostViewContainer from '../containers/PostViewContainer';
 
 const CategoryView = props => (
   <ViewWrapper>
@@ -13,9 +13,13 @@ const CategoryView = props => (
         <option>Sort by comment</option>
       </SortPostsMenu>
     </CategoryContent>
-    <PostView />
+    <PostViewContainer />
   </ViewWrapper>
 );
+
+CategoryView.propTypes = {
+  category: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+};
 
 const ViewWrapper = styled.div`
   grid-column-start: 1;
@@ -37,9 +41,5 @@ const SortPostsMenu = styled.select`
   grid-row-start: 1;
   cursor: pointer;
 `;
-
-CategoryView.propTypes = {
-  category: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-};
 
 export default CategoryView;
