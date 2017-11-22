@@ -9,17 +9,34 @@ import PageWrapper from '../styles/pagewrapper';
 import PostView from '../components/PostView';
 import { filterPostsByParam } from '../selectors/postSelectors';
 
-const CategoryPageContainer = ({ match, posts }) => (
-  <StyledWrapper>
-    <Header />
-    <NavBarContainer />
-    {posts.map(post => <PostView key={post.id} post={post} />)}
-    <Footer />
-  </StyledWrapper>
-);
+const CategoryPageContainer = ({ posts }) => {
+  if (posts.length === 0) {
+    return (
+      <StyledWrapper>
+        <Header />
+        <NavBarContainer />
+        <div>Nothing to see here</div>
+        <Footer />
+      </StyledWrapper>
+    );
+  }
+
+  return (
+    <StyledWrapper>
+      <Header />
+      <NavBarContainer />
+      {posts.map(post => <PostView key={post.id} post={post} />)}
+      <Footer />
+    </StyledWrapper>
+  );
+};
 
 CategoryPageContainer.propTypes = {
-  match: PropTypes.object.isRequired,
+  posts: PropTypes.array,
+};
+
+CategoryPageContainer.defaultProps = {
+  posts: [],
 };
 
 const StyledWrapper = styled(PageWrapper)``;
