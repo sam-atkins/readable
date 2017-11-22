@@ -1,26 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-// import Navbar from './Navbar';
+import NavbarContainer from '../containers/NavBarContainer';
 import CategoryPostViewContainer from '../containers/CategoryPostViewContainer';
 import Footer from './Footer';
+import PageWrapper from '../styles/pagewrapper';
 
-const PageWrapper = () => (
+const HomePageWrapper = () => (
   <StyledWrapper>
     <Header />
+    <NavbarContainer />
     <CategoryPostViewContainer />
     <Footer />
   </StyledWrapper>
 );
 
-const StyledWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, [col] 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(200px, auto);
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-`;
+const StyledWrapper = styled(PageWrapper)``;
 
-export default PageWrapper;
+export default HomePageWrapper;

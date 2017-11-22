@@ -8,6 +8,13 @@ import moment from 'moment';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import { getPostErrorStatus, getPostLoadingStatus } from '../utils/selectors';
+import {
+  POST_BACKGROUND,
+  POST_BORDER,
+  POST_META,
+  POST_TITLE,
+  VOTE_COUNT,
+} from '../styles/colours';
 
 const PostView = (props) => {
   const { post, error, loading } = props;
@@ -32,8 +39,8 @@ const PostView = (props) => {
       <StyledPostMetaWrapper>
         <StyledPostTitle>{post.title}</StyledPostTitle>
         <StyledPostMeta>
-          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}
-          {' '}by {post.author}
+          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}{' '}
+          by {post.author}
         </StyledPostMeta>
       </StyledPostMetaWrapper>
       <StyledPostBody>{post.body}</StyledPostBody>
@@ -64,7 +71,7 @@ const StyledVoteCount = styled.div`
   grid-column-start: 1;
   span: 1;
   grid-row-start: 2;
-  color: #c6c6c6;
+  color: ${VOTE_COUNT};
   text-align: center;
 `;
 
@@ -75,11 +82,11 @@ const StyledPostMetaWrapper = styled.div`
 `;
 
 const StyledPostTitle = styled.h3`
-  color: #0000ff;
+  color: ${POST_TITLE};
 `;
 
 const StyledPostMeta = styled.div`
-  color: #888;
+  color: ${POST_META};
   font-size: x-small;
 `;
 
@@ -87,8 +94,8 @@ const StyledPostBody = styled.div`
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row: 2;
-  background-color: #fafafa;
-  border: 0.5px solid #369;
+  background-color: ${POST_BACKGROUND};
+  border: 0.5px solid ${POST_BORDER};
   padding: 0.5rem;
 `;
 
@@ -98,7 +105,7 @@ const StyledCommentWrapper = styled.div`
 `;
 
 const StyledPostMetaBold = styled.span`
-  color: #888;
+  color: ${POST_META};
   font-size: x-small;
   font-weight: bold;
   padding-right: 1rem;
