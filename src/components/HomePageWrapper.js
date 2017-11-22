@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-// import Navbar from './Navbar';
+import Navbar from './Navbar';
 import CategoryPostViewContainer from '../containers/CategoryPostViewContainer';
 import Footer from './Footer';
 
-const PageWrapper = () => (
+const HomePageWrapper = () => (
   <StyledWrapper>
     <Header />
+    <Navbar />
     <CategoryPostViewContainer />
     <Footer />
   </StyledWrapper>
@@ -23,4 +24,4 @@ const StyledWrapper = styled.div`
   font-family: sans-serif;
 `;
 
-export default PageWrapper;
+export default HomePageWrapper;
