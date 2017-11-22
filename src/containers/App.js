@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import { fetchCategories } from '../actions/categoryActions';
 import { fetchPosts } from '../actions/postActions';
 import HomePageWrapper from '../components/HomePageWrapper';
-import CategoryPageContainer from './CategoryPageContainer';
-import PostPageContainer from './PostPageContainer';
+import CategoryRoutingContainer from './CategoryRoutingContainer';
 import NoMatch from '../components/NoMatch';
 
 class App extends Component {
@@ -20,8 +19,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={HomePageWrapper} />
-          <Route path="/:category" component={CategoryPageContainer} />
-          <Route path="/:category/:post" component={PostPageContainer} />
+          <Route path="/:category" component={CategoryRoutingContainer} />
           <Route component={NoMatch} />
         </Switch>
       </BrowserRouter>
