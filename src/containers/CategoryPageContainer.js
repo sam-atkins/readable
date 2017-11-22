@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import NavBar from '../components/Navbar';
 import Footer from '../components/Footer';
+import PageWrapper from '../styles/pagewrapper';
 
 const CategoryPageContainer = ({ match }) => (
   <StyledWrapper>
@@ -18,14 +19,6 @@ CategoryPageContainer.propTypes = {
   match: PropTypes.object.isRequired,
 };
 
-const StyledWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, [col] 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(200px, auto);
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-`;
+const StyledWrapper = styled(PageWrapper)``;
 
 export default CategoryPageContainer;

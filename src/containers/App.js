@@ -34,10 +34,6 @@ App.propTypes = {
   getPosts: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = state => ({
-//   categories: getCategoryValues(state),
-// });
-
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(fetchCategories()),
   getPosts: () => dispatch(fetchPosts()),
