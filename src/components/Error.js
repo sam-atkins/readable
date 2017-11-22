@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Error = ({ type, color }) => (
+const Error = () => (
   <ErrorMessageWrapper>
     <ErrorText>Oh dear, something went wrong!</ErrorText>
   </ErrorMessageWrapper>
