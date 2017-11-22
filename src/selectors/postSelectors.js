@@ -1,9 +1,6 @@
-export const getPostLoadingStatus = ({ post }) =>
-  post.postStatus.loading;
+export const getPostLoadingStatus = ({ post }) => post.postStatus.loading;
 
-export const getPostErrorStatus = ({ post }) =>
-  post.postStatus.error;
-
+export const getPostErrorStatus = ({ post }) => post.postStatus.error;
 
 export const getPostValues = ({ post }) => {
   if (post.postStatus.error === true) {
@@ -23,4 +20,9 @@ export const getPostValues = ({ post }) => {
       deleted: post[key].deleted,
       commentCount: post[key].commentCount,
     }));
+};
+
+export const filterPostsByParam = (post, urlParam) => {
+  const postsArray = getPostValues(post);
+  return postsArray.filter(filteredPost => filteredPost.category === urlParam);
 };
