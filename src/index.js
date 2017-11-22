@@ -5,12 +5,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import storeConfig from './store/store';
 import './index.css';
-import Root from './containers/Root';
+import App from './containers/App';
 import registerServiceWorker from './utils/registerServiceWorker';
 
 ReactDOM.render(
   <Provider store={storeConfig}>
-    <Root />
+    <App />
   </Provider>,document.getElementById('root')
 );
 registerServiceWorker();
