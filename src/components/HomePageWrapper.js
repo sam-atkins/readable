@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-import Navbar from './Navbar';
+import NavbarContainer from '../containers/NavBarContainer';
 import CategoryPostViewContainer from '../containers/CategoryPostViewContainer';
 import Footer from './Footer';
 import PageWrapper from '../styles/pagewrapper';
@@ -9,7 +9,7 @@ import PageWrapper from '../styles/pagewrapper';
 const HomePageWrapper = () => (
   <StyledWrapper>
     <Header />
-    <Navbar />
+    <NavbarContainer />
     <CategoryPostViewContainer />
     <Footer />
   </StyledWrapper>
