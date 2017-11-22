@@ -9,8 +9,8 @@ import {
   getCategoryValues,
   getCategoryErrorStatus,
   getCategoryLoadingStatus,
-  getPostValues,
-} from '../utils/selectors';
+} from '../selectors/categorySelectors';
+import { getPostValues } from '../selectors/postSelectors'
 
 const CategoryPostViewContainer = ({
   categories,

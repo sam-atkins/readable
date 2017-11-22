@@ -7,7 +7,7 @@ import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import moment from 'moment';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
-import { getPostErrorStatus, getPostLoadingStatus } from '../utils/selectors';
+import { getPostErrorStatus, getPostLoadingStatus } from '../selectors/postSelectors';
 import {
   POST_BACKGROUND,
   POST_BORDER,

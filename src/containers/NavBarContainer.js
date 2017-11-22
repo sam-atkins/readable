@@ -7,7 +7,7 @@ import {
   getCategoryValues,
   getCategoryErrorStatus,
   getCategoryLoadingStatus,
-} from '../utils/selectors';
+} from '../selectors/categorySelectors';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import { NAV_ANCHOR } from '../styles/colours';
