@@ -1,16 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import NavBarContainer from './NavBarContainer';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
+import PostView from '../components/PostView';
+import { filterPostsByParam } from '../selectors/postSelectors';
 
-const CategoryPageContainer = ({ match }) => (
+const CategoryPageContainer = ({ match, posts }) => (
   <StyledWrapper>
     <Header />
     <NavBarContainer />
-    <div>This is the category page for: {match.params.category}</div>
+    {posts.map(post => <PostView key={post.id} post={post} />)}
     <Footer />
   </StyledWrapper>
 );
@@ -21,4 +24,8 @@ CategoryPageContainer.propTypes = {
 
 const StyledWrapper = styled(PageWrapper)``;
 
-export default CategoryPageContainer;
+const mapStateToProps = (state, ownProps) => ({
+  posts: filterPostsByParam(state, ownProps.match.params.category),
+});
+
+export default connect(mapStateToProps)(CategoryPageContainer);
