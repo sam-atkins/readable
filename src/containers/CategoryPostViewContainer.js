@@ -40,10 +40,7 @@ const CategoryPostViewContainer = ({
           </CategoryContent>
           {posts.reduce((postArray, post) => {
             if (post.category === cat.id) {
-              return [
-                ...postArray,
-                <PostView post={post} key={post.id} />,
-              ];
+              return [...postArray, <PostView post={post} key={post.id} />];
             }
             return postArray;
           }, [])}
@@ -59,13 +56,6 @@ CategoryPostViewContainer.propTypes = {
   categoryError: PropTypes.bool.isRequired,
   posts: PropTypes.array.isRequired,
 };
-
-const mapStateToProps = state => ({
-  categories: getCategoryValues(state),
-  categoryError: getCategoryErrorStatus(state),
-  categoryLoading: getCategoryLoadingStatus(state),
-  posts: getPostValues(state),
-});
 
 const CategoryViewWrapper = styled.div`
   grid-column-start: 1;
@@ -89,5 +79,12 @@ const SortPostsMenu = styled.select`
   grid-row-start: 1;
   cursor: pointer;
 `;
+
+const mapStateToProps = state => ({
+  categories: getCategoryValues(state),
+  categoryError: getCategoryErrorStatus(state),
+  categoryLoading: getCategoryLoadingStatus(state),
+  posts: getPostValues(state),
+});
 
 export default connect(mapStateToProps)(CategoryPostViewContainer);
