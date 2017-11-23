@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PostView from '../components/PostView';
 import NoMatch from '../components/NoMatch';
+import NoPosts from '../components/NoPosts';
 import PageWrapper from '../styles/pagewrapper';
 import { validCategoryUrl } from '../selectors/categorySelectors';
 import { filterPostsByParam } from '../selectors/postSelectors';
@@ -28,7 +29,7 @@ const CategoryPageContainer = ({ posts, validUrl }) => {
       <StyledWrapper>
         <Header />
         <NavBarContainer />
-        <div>Nothing to see here</div>
+        <NoPosts />
         <Footer />
       </StyledWrapper>
     );
