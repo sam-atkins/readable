@@ -57,8 +57,8 @@ CategoryPageContainer.defaultProps = {
 const StyledWrapper = styled(PageWrapper)``;
 
 const mapStateToProps = (state, ownProps) => ({
-  validUrl: validCategoryUrl(state, ownProps.match.params.category),
-  posts: filterPostsByParam(state, ownProps.match.params.category),
+  validUrl: validCategoryUrl(state, ownProps.match.params.categoryUrl),
+  posts: filterPostsByParam(state, ownProps.match.params.categoryUrl),
 });
 
 export default connect(mapStateToProps)(CategoryPageContainer);

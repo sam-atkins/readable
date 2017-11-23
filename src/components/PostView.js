@@ -7,7 +7,10 @@ import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import moment from 'moment';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
-import { getPostErrorStatus, getPostLoadingStatus } from '../selectors/postSelectors';
+import {
+  getPostErrorStatus,
+  getPostLoadingStatus,
+} from '../selectors/postSelectors';
 import {
   POST_BACKGROUND,
   POST_BORDER,
@@ -39,8 +42,8 @@ const PostView = (props) => {
       <StyledPostMetaWrapper>
         <StyledPostTitle>{post.title}</StyledPostTitle>
         <StyledPostMeta>
-          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}{' '}
-          by {post.author}
+          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}
+          {' '}by {post.author}
         </StyledPostMeta>
       </StyledPostMetaWrapper>
       <StyledPostBody>{post.body}</StyledPostBody>

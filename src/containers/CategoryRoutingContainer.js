@@ -5,8 +5,8 @@ import PostPageContainer from './PostPageContainer';
 
 const CategoryRoutingContainer = () => (
   <Switch>
-    <Route exact path="/:category" component={CategoryPageContainer} />
-    <Route path="/:category/:post" component={PostPageContainer} />
+    <Route exact path="/:categoryUrl" component={CategoryPageContainer} />
+    <Route path="/:category/:postId/:postSlug" component={PostPageContainer} />
   </Switch>
 );
 
