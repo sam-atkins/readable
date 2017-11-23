@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TEXT_404 } from '../styles/colours';
 
 const NoMatch = () => (
   <NoMatchWrapper>
@@ -12,7 +13,7 @@ const NoMatchWrapper = styled.div`
 `;
 
 const NoMatchText = styled.p`
-  color: #dc143c;
+  color: ${TEXT_404};
 `;
 
 export default NoMatch;
