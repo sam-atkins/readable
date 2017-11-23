@@ -2,14 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Header from '../components/Header';
 import NavBarContainer from './NavBarContainer';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
-import PageWrapper from '../styles/pagewrapper';
 import PostView from '../components/PostView';
+import NoMatch from '../components/NoMatch';
+import PageWrapper from '../styles/pagewrapper';
+import { validCategoryUrl } from '../selectors/categorySelectors';
 import { filterPostsByParam } from '../selectors/postSelectors';
 
-const CategoryPageContainer = ({ posts }) => {
+const CategoryPageContainer = ({ posts, validUrl }) => {
+  if (!validUrl) {
+    return (
+      <StyledWrapper>
+        <Header />
+        <NavBarContainer />
+        <NoMatch />
+        <Footer />
+      </StyledWrapper>
+    );
+  }
+
   if (posts.length === 0) {
     return (
       <StyledWrapper>
@@ -33,6 +46,7 @@ const CategoryPageContainer = ({ posts }) => {
 
 CategoryPageContainer.propTypes = {
   posts: PropTypes.array,
+  validUrl: PropTypes.bool.isRequired,
 };
 
 CategoryPageContainer.defaultProps = {
@@ -42,6 +56,7 @@ CategoryPageContainer.defaultProps = {
 const StyledWrapper = styled(PageWrapper)``;
 
 const mapStateToProps = (state, ownProps) => ({
+  validUrl: validCategoryUrl(state, ownProps.match.params.category),
   posts: filterPostsByParam(state, ownProps.match.params.category),
 });
 
