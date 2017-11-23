@@ -26,3 +26,28 @@ export const filterPostsByParam = (post, urlParam) => {
   const postsArray = getPostValues(post);
   return postsArray.filter(filteredPost => filteredPost.category === urlParam);
 };
+
+export const selectPostByPostId = ({ post }, postId) => {
+  if (post.postStatus.error === true) {
+    return [];
+  }
+
+  return Object.keys(post)
+    .filter(key => key === postId)
+    .map(key => ({
+      id: key,
+      timestamp: post[key].timestamp,
+      title: post[key].title,
+      body: post[key].body,
+      author: post[key].author,
+      category: post[key].category,
+      voteScore: post[key].voteScore,
+      deleted: post[key].deleted,
+      commentCount: post[key].commentCount,
+    }));
+};
+
+export const validPostUrl = ({ post }, postId) => {
+  if (post[postId] !== undefined) return true;
+  return false;
+};
