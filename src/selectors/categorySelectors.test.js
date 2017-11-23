@@ -2,6 +2,7 @@ import {
   getCategoryValues,
   getCategoryErrorStatus,
   getCategoryLoadingStatus,
+  validCategoryUrl,
 } from './categorySelectors';
 
 /* global describe, it, expect */
@@ -67,5 +68,33 @@ describe('selectors for category', () => {
     };
     const expectedShape = [];
     expect(getCategoryValues(selectedState)).toEqual(expectedShape);
+  });
+
+  it('should confirm a category url is valid', () => {
+    const selectedState = {
+      category: {
+        react: { name: 'react', path: 'react' },
+        redux: { name: 'redux', path: 'redux' },
+        udacity: { name: 'udacity', path: 'udacity' },
+        categoryStatus: { error: false, loading: false },
+      },
+    };
+    const urlParam = 'react';
+    const urlBool = true;
+    expect(validCategoryUrl(selectedState, urlParam)).toEqual(urlBool);
+  });
+
+  it('should confirm a category url is invalid', () => {
+    const selectedState = {
+      category: {
+        react: { name: 'react', path: 'react' },
+        redux: { name: 'redux', path: 'redux' },
+        udacity: { name: 'udacity', path: 'udacity' },
+        categoryStatus: { error: false, loading: false },
+      },
+    };
+    const urlParam = 'python';
+    const urlBool = false;
+    expect(validCategoryUrl(selectedState, urlParam)).toEqual(urlBool);
   });
 });

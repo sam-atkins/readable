@@ -17,3 +17,8 @@ export const getCategoryValues = ({ category }) => {
       path: category[key].path,
     }));
 };
+
+export const validCategoryUrl = ({ category }, urlParam) => {
+  if (category[urlParam] !== undefined) return true;
+  return false;
+};
