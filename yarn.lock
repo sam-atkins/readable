@@ -5920,6 +5920,10 @@ slide@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
 
+slugify@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.2.5.tgz#0ae52a92b70802036951ce6ee29bf6c60ba6676e"
+
 sntp@1.x.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/sntp/-/sntp-1.0.9.tgz#6541184cc90aeea6c6e7b35e2659082443c66198"
