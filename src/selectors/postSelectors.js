@@ -1,3 +1,5 @@
+import slugifyPostTitle from '../utils/utils';
+
 export const getPostLoadingStatus = ({ post }) => post.postStatus.loading;
 
 export const getPostErrorStatus = ({ post }) => post.postStatus.error;
@@ -32,22 +34,38 @@ export const selectPostByPostId = ({ post }, postId) => {
     return [];
   }
 
-  return Object.keys(post)
-    .filter(key => key === postId)
-    .map(key => ({
-      id: key,
-      timestamp: post[key].timestamp,
-      title: post[key].title,
-      body: post[key].body,
-      author: post[key].author,
-      category: post[key].category,
-      voteScore: post[key].voteScore,
-      deleted: post[key].deleted,
-      commentCount: post[key].commentCount,
-    }));
+  if (post[postId] !== undefined) {
+    return Object.keys(post)
+      .filter(key => key === postId)
+      .map(key => ({
+        id: key,
+        timestamp: post[key].timestamp,
+        title: post[key].title,
+        body: post[key].body,
+        author: post[key].author,
+        category: post[key].category,
+        voteScore: post[key].voteScore,
+        deleted: post[key].deleted,
+        commentCount: post[key].commentCount,
+      }));
+  }
+  return [];
 };
 
-export const validPostUrl = ({ post }, postId) => {
-  if (post[postId] !== undefined) return true;
+export const validPostUrl = (
+  { post },
+  postCategoryUrl,
+  postId,
+  postTitleSlug
+) => {
+  if (post[postId] !== undefined) {
+    const slugPostTitle = slugifyPostTitle(post[postId].title);
+    if (
+      slugPostTitle === postTitleSlug &&
+      post[postId].category === postCategoryUrl
+    ) {
+      return true;
+    }
+  }
   return false;
 };

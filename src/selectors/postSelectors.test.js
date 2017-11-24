@@ -116,8 +116,7 @@ describe('selectors for posts', () => {
         commentCount: 0,
       },
     ];
-    expect(filterPostsByParam(selectPostsInState, urlParam))
-      .toEqual(expectedShape);
+    expect(filterPostsByParam(selectPostsInState, urlParam)).toEqual(expectedShape);
   });
 
   it('should select a post by the url postId}', () => {
@@ -136,24 +135,40 @@ describe('selectors for posts', () => {
         commentCount: 0,
       },
     ];
-    expect(selectPostByPostId(selectPostsInState, postId))
-      .toEqual(expectedShape);
+    expect(selectPostByPostId(selectPostsInState, postId)).toEqual(expectedShape);
   });
 
   it('should return empty array if invalid url postId}', () => {
     const postId = 'djklsjdio3jek2391';
     const expectedShape = [];
-    expect(selectPostByPostId(selectPostsInState, postId))
-      .toEqual(expectedShape);
+    expect(selectPostByPostId(selectPostsInState, postId)).toEqual(expectedShape);
   });
 
-  it('should confirm a valid url postId', () => {
+  it('should return true for a correct post url', () => {
+    const postCategoryUrl = 'redux';
     const postId = '2v3d8ayl';
-    expect(validPostUrl(selectPostsInState, postId)).toBe(true);
+    const postTitleSlug = 'learn-redux-in-10-minutes';
+    expect(validPostUrl(selectPostsInState, postCategoryUrl, postId, postTitleSlug)).toBe(true);
   });
 
-  it('should return false on an invalid url postId', () => {
-    const postId = 'djdj23kljekl2jlk';
-    expect(validPostUrl(selectPostsInState, postId)).toBe(false);
+  it('should return false for an incorrect post categoryUrl', () => {
+    const postCategoryUrl = 'react';
+    const postId = '2v3d8ayl';
+    const postTitleSlug = 'learn-redux-in-10-minutes';
+    expect(validPostUrl(selectPostsInState, postCategoryUrl, postId, postTitleSlug)).toBe(false);
+  });
+
+  it('should return false for an incorrect postId', () => {
+    const postCategoryUrl = 'redux';
+    const postId = 'odo2010dkdie';
+    const postTitleSlug = 'learn-redux-in-10-minutes';
+    expect(validPostUrl(selectPostsInState, postCategoryUrl, postId, postTitleSlug)).toBe(false);
+  });
+
+  it('should return false for an incorrect post slug', () => {
+    const postCategoryUrl = 'redux';
+    const postId = '2v3d8ayl';
+    const postTitleSlug = 'learn-redux-in-ten-minutes';
+    expect(validPostUrl(selectPostsInState, postCategoryUrl, postId, postTitleSlug)).toBe(false);
   });
 });
