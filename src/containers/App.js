@@ -19,7 +19,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={HomePageWrapper} />
-          <Route path="/:category" component={CategoryRoutingContainer} />
+          <Route path="/:categoryUrl" component={CategoryRoutingContainer} />
           <Route component={NoMatch} />
         </Switch>
       </BrowserRouter>

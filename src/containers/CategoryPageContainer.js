@@ -15,23 +15,13 @@ import { filterPostsByParam } from '../selectors/postSelectors';
 const CategoryPageContainer = ({ posts, validUrl }) => {
   if (!validUrl) {
     return (
-      <StyledWrapper>
-        <Header />
-        <NavBarContainer />
-        <NoMatch />
-        <Footer />
-      </StyledWrapper>
+      <NoMatch />
     );
   }
 
   if (posts.length === 0) {
     return (
-      <StyledWrapper>
-        <Header />
-        <NavBarContainer />
-        <NoPosts />
-        <Footer />
-      </StyledWrapper>
+      <NoPosts />
     );
   }
 
@@ -57,8 +47,8 @@ CategoryPageContainer.defaultProps = {
 const StyledWrapper = styled(PageWrapper)``;
 
 const mapStateToProps = (state, ownProps) => ({
-  validUrl: validCategoryUrl(state, ownProps.match.params.category),
-  posts: filterPostsByParam(state, ownProps.match.params.category),
+  validUrl: validCategoryUrl(state, ownProps.match.params.categoryUrl),
+  posts: filterPostsByParam(state, ownProps.match.params.categoryUrl),
 });
 
 export default connect(mapStateToProps)(CategoryPageContainer);

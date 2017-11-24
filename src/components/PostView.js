@@ -1,13 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
 import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import moment from 'moment';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
-import { getPostErrorStatus, getPostLoadingStatus } from '../selectors/postSelectors';
+import {
+  getPostErrorStatus,
+  getPostLoadingStatus,
+} from '../selectors/postSelectors';
 import {
   POST_BACKGROUND,
   POST_BORDER,
@@ -15,10 +19,9 @@ import {
   POST_TITLE,
   VOTE_COUNT,
 } from '../styles/colours';
+import slugifyPostTitle from '../utils/utils';
 
-const PostView = (props) => {
-  const { post, error, loading } = props;
-
+const PostView = ({ post, error, loading }) => {
   if (loading) {
     return <Loading />;
   }
@@ -37,10 +40,14 @@ const PostView = (props) => {
         <FaArrowDown />
       </StyledVoteCount>
       <StyledPostMetaWrapper>
-        <StyledPostTitle>{post.title}</StyledPostTitle>
+        <PostTitleLink
+          to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
+        >
+          {post.title}
+        </PostTitleLink>
         <StyledPostMeta>
-          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}{' '}
-          by {post.author}
+          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}
+          {' '}by {post.author}
         </StyledPostMeta>
       </StyledPostMetaWrapper>
       <StyledPostBody>{post.body}</StyledPostBody>
@@ -81,7 +88,7 @@ const StyledPostMetaWrapper = styled.div`
   grid-row: 1;
 `;
 
-const StyledPostTitle = styled.h3`
+const PostTitleLink = styled(Link)`
   color: ${POST_TITLE};
 `;
 

@@ -29,7 +29,7 @@ const NavBarContainer = ({ categories, categoryError, categoryLoading }) => {
         </NavItem>
         {categories.map(category => (
           <NavItem key={category.id}>
-            <NavAnchor to={`${category.path}`}>{category.name}</NavAnchor>
+            <NavAnchor to={`/${category.path}`}>{category.name}</NavAnchor>
           </NavItem>
         ))}
       </NavList>
