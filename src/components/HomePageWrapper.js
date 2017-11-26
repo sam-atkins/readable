@@ -4,6 +4,7 @@ import Header from './Header';
 import NavbarContainer from '../containers/NavBarContainer';
 import CategoryPostViewContainer from '../containers/CategoryPostViewContainer';
 import Footer from './Footer';
+import SideBar from './SideBar';
 import PageWrapper from '../styles/pagewrapper';
 
 const HomePageWrapper = () => (
@@ -11,6 +12,7 @@ const HomePageWrapper = () => (
     <Header />
     <NavbarContainer />
     <CategoryPostViewContainer />
+    <SideBar />
     <Footer />
   </StyledWrapper>
 );

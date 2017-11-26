@@ -6,3 +6,6 @@ export const POST_META = '#888';
 export const POST_TITLE = '#0000ff';
 export const TEXT_404 = '#dc143c';
 export const VOTE_COUNT = '#c6c6c6';
+export const SIDEBAR_TEXT = '#808080';
+export const NEW_POST_BUTTON_TEXT = '#FFFFFF';
+export const NEW_POST_BUTTON_BACKGROUND = '#9CBCD9';

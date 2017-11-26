@@ -63,6 +63,7 @@ CategoryPostViewContainer.propTypes = {
 const CategoryViewWrapper = styled.div`
   grid-column-start: 1;
   grid-column-end: 4;
+  grid-row: 2;
 `;
 
 const CategoryPostWrapper = styled.div``;

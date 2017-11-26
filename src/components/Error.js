@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TEXT_404 } from '../styles/colours';
 
 const Error = () => (
   <ErrorMessageWrapper>
@@ -12,7 +13,7 @@ const ErrorMessageWrapper = styled.div`
 `;
 
 const ErrorText = styled.p`
-  color: #DC143C;
+  color: ${TEXT_404};
 `;
 
 export default Error;
