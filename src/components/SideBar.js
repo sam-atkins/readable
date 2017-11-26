@@ -14,6 +14,7 @@ const SideBarMessageWrapper = styled.div`
   grid-column: col 3;
   grid-row: 2;
   text-align: center;
+  margin-right: 20px;
 `;
 
 const SideBarText = styled.p`
