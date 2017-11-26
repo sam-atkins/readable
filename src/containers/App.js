@@ -6,7 +6,8 @@ import { fetchCategories } from '../actions/categoryActions';
 import { fetchPosts } from '../actions/postActions';
 import HomePageWrapper from '../components/HomePageWrapper';
 import CategoryRoutingContainer from './CategoryRoutingContainer';
-import NoMatch from '../components/NoMatch';
+import NewPostContainer from './NewPostContainer';
+// import NoMatch from '../components/NoMatch';
 
 class App extends Component {
   componentWillMount() {
@@ -19,8 +20,8 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={HomePageWrapper} />
+          <Route exact path="/newpost" component={NewPostContainer} />
           <Route path="/:categoryUrl" component={CategoryRoutingContainer} />
-          <Route component={NoMatch} />
         </Switch>
       </BrowserRouter>
     );

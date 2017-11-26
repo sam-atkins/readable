@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+// import NewPostContainer from '../containers/NewPostContainer';
 import {
   NEW_POST_BUTTON_BACKGROUND,
   NEW_POST_BUTTON_TEXT,
 } from '../styles/colours';
 
 const NewPostButton = () => (
-  <NewPostButtonWrapper>
+  <NewPostButtonArrow to="/newpost">
     <NewPostButtonText>Submit a new text post</NewPostButtonText>
-  </NewPostButtonWrapper>
+  </NewPostButtonArrow>
 );
 
-const NewPostButtonWrapper = styled.div`
+const NewPostButtonArrow = styled(Link)`
   grid-column: col 3;
   grid-row: 2;
   text-align: center;
@@ -20,6 +22,7 @@ const NewPostButtonWrapper = styled.div`
   position: relative;
   padding-left: 15px;
   padding-right: 15px;
+  text-decoration: none;
 
   &:after {
     content: '';
