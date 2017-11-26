@@ -14,22 +14,20 @@ import { filterPostsByParam } from '../selectors/postSelectors';
 
 const CategoryPageContainer = ({ posts, validUrl }) => {
   if (!validUrl) {
-    return (
-      <NoMatch />
-    );
+    return <NoMatch />;
   }
 
   if (posts.length === 0) {
-    return (
-      <NoPosts />
-    );
+    return <NoPosts />;
   }
 
   return (
     <StyledWrapper>
       <Header />
       <NavBarContainer />
-      {posts.map(post => <PostView key={post.id} post={post} />)}
+      {posts.map(post => (
+        <PostView key={post.id} post={post} homeFlag={false} />
+      ))}
       <Footer />
     </StyledWrapper>
   );

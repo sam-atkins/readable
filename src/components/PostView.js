@@ -21,7 +21,9 @@ import {
 } from '../styles/colours';
 import slugifyPostTitle from '../utils/utils';
 
-const PostView = ({ post, error, loading }) => {
+const PostView = ({
+  post, error, loading, homeFlag,
+}) => {
   if (loading) {
     return <Loading />;
   }
@@ -50,7 +52,7 @@ const PostView = ({ post, error, loading }) => {
           {' '}by {post.author}
         </StyledPostMeta>
       </StyledPostMetaWrapper>
-      <StyledPostBody>{post.body}</StyledPostBody>
+      {!homeFlag && <StyledPostBody>{post.body}</StyledPostBody>}
       <StyledCommentWrapper>
         <StyledPostMetaBold>{post.commentCount} comments</StyledPostMetaBold>
         <StyledPostMetaBold>edit</StyledPostMetaBold>
@@ -64,6 +66,11 @@ PostView.propTypes = {
   post: PropTypes.object.isRequired,
   error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
+  homeFlag: PropTypes.bool,
+};
+
+PostView.defaultProps = {
+  homeFlag: false,
 };
 
 const PostWrapper = styled.div`
