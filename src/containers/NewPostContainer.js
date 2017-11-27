@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import NavbarContainer from '../containers/NavBarContainer';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
+import { getCategoryValues } from '../selectors/categorySelectors';
+import {
+  FORM_INFOBAR_BORDER,
+  FORM_INFOBAR_BACKGROUND,
+  FORM_BUFFER_BACKGROUND,
+  FORM_WRAPPER_LABEL_BACKGROUND,
+} from '../styles/colours';
 
 class NewPostContainer extends Component {
   state = {};
@@ -22,32 +31,43 @@ class NewPostContainer extends Component {
           </InfoBar>
           <Buffer />
           <FormWrapperLabel>
-            <label>
-              <StyledLabelSpan>title</StyledLabelSpan>
-            </label>
+            <StyledLabel>
+              <StyledLabelSpan>*title</StyledLabelSpan>
+            </StyledLabel>
           </FormWrapperLabel>
           <FormWrapperLabel>
-            <textarea name="" id="" cols="20" rows="2" />
+            <StyledTextArea name="" id="" cols="20" rows="4" />
           </FormWrapperLabel>
+          <Buffer />
           <FormWrapperLabel />
           <FormWrapperLabel>
-            <label>
-              <StyledLabelSpan>text</StyledLabelSpan>
-            </label>
+            <StyledLabel>
+              <StyledLabelSpan>text (optional)</StyledLabelSpan>
+            </StyledLabel>
           </FormWrapperLabel>
           <FormWrapperLabel>
-            <textarea name="" id="" cols="20" rows="2" />
+            <StyledTextArea name="" id="" cols="20" rows="8" />
           </FormWrapperLabel>
+          <Buffer />
           <FormWrapperLabel />
           <FormWrapperLabel>
-            <label>
-              <StyledLabelSpan>category</StyledLabelSpan>
-            </label>
+            <StyledLabel>
+              <StyledLabelSpan>*choose a sub-readable</StyledLabelSpan>
+            </StyledLabel>
           </FormWrapperLabel>
           <FormWrapperLabel>
-            <textarea name="" id="" cols="20" rows="2" />
+            <StyledInput name="" id="" />
+            <StyledParagraph>
+              your subscribed sub-readables <br />
+              {this.props.categories.map(category => (
+                <CategoryLink to={`/${category.path}`}>
+                  {category.name}{' '}
+                </CategoryLink>
+              ))}
+            </StyledParagraph>
           </FormWrapperLabel>
-          <div style={{ backgroundColor: 'white', padding: '5px' }} />
+          <p>*required</p>
+          <Buffer />
           <div>
             <input type="submit" value="submit" />
           </div>
@@ -58,6 +78,10 @@ class NewPostContainer extends Component {
   }
 }
 
+NewPostContainer.propTypes = {
+  categories: PropTypes.array.isRequired,
+};
+
 const StyledWrapper = styled(PageWrapper)``;
 
 const FormH1 = styled.h1`
@@ -66,8 +90,8 @@ const FormH1 = styled.h1`
 `;
 
 const InfoBar = styled.div`
-  background-color: #f6e69f;
-  border-color: #ffa500;
+  background-color: ${FORM_INFOBAR_BACKGROUND};
+  border-color: ${FORM_INFOBAR_BORDER};
   border-style: solid;
   border-width: 1px;
   font-size: small;
@@ -75,20 +99,19 @@ const InfoBar = styled.div`
 `;
 
 const Buffer = styled.div`
-  background-color: 'white';
-  padding: 5px;
+  background-color: ${FORM_BUFFER_BACKGROUND};
+  padding: 7px;
 `;
 
 const FormWrapperLabel = styled.div`
-  background-color: #cee3f8;
+  padding-top: 2px;
+  background-color: ${FORM_WRAPPER_LABEL_BACKGROUND};
 `;
 
 const StyledForm = styled.form`
   margin: 0 20px;
-  /* width: 400px; */
   padding: 1em;
-  border: 1px solid #ccc;
-  border-radius: 1em;
+
   display: block;
   width: 100%;
   font-size: 14px;
@@ -96,26 +119,43 @@ const StyledForm = styled.form`
   line-height: 20px;
   padding: 6px 12px;
   background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: inset 1px 1px 2px -1px rgba(0, 0, 0, 0.15);
 `;
 
-const StyledTextArea = styled.input`
-  /* width: 494px
+const StyledTextArea = styled.textarea`
+  width: 400px;
   height: auto;
-  resize: vertical; */
+  resize: vertical;
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid gray;
 `;
 
-const StyledLabel = styled.label`
-  /* display: inline-block;
-  width: 120px;
-  text-align: right;
-  position: relative; */
-`;
+const StyledLabel = styled.label``;
 
 const StyledLabelSpan = styled.span`
-  padding: 5px;
+  padding-left: 10px;
 `;
 
-export default connect(null)(NewPostContainer);
+const StyledInput = styled.input`
+  width: 400px;
+  height: auto;
+  resize: vertical;
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid gray;
+`;
+
+const CategoryLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const StyledParagraph = styled.p`
+  padding-left: 10px;
+  padding-bottom: 7px;
+`;
+
+const mapStateToProps = state => ({
+  categories: getCategoryValues(state),
+});
+
+export default connect(mapStateToProps)(NewPostContainer);
