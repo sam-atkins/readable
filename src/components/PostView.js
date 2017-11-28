@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
 import FaArrowDown from 'react-icons/lib/fa/arrow-down';
-import moment from 'moment';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import {
@@ -48,7 +48,7 @@ const PostView = ({
           {post.title}
         </PostTitleLink>
         <StyledPostMeta>
-          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}
+          Submitted {distanceInWordsToNow(post.timestamp)} ago
           {' '}by {post.author}
         </StyledPostMeta>
       </StyledPostMetaWrapper>
