@@ -16,13 +16,32 @@ import {
 } from '../styles/colours';
 
 class NewPostContainer extends Component {
-  state = {};
+  state = {
+    title: '',
+    body: '',
+    category: '',
+    author: '',
+  };
+
   render() {
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value,
+      });
+    };
+
+    const handleFormSubmit = (event) => {
+      event.preventDefault();
+      console.log('form submitted', event);
+      // TODO action creator
+    };
+
     return (
       <StyledWrapper>
         <Header />
         <NavbarContainer />
-        <StyledForm>
+        <StyledForm onSubmit={event => handleFormSubmit(event)}>
           <FormH1>submit to readable</FormH1>
           <InfoBar>
             You are submitting a text-based post. Speak your mind. A title is
@@ -36,7 +55,13 @@ class NewPostContainer extends Component {
             </StyledLabel>
           </FormWrapperLabel>
           <FormWrapperLabel>
-            <StyledTextArea name="" id="" cols="20" rows="4" />
+            <StyledTextArea
+              name="title"
+              value={this.state.title}
+              cols="20"
+              rows="4"
+              onChange={event => handleInputChange(event)}
+            />
           </FormWrapperLabel>
           <Buffer />
           <FormWrapperLabel />
@@ -46,7 +71,13 @@ class NewPostContainer extends Component {
             </StyledLabel>
           </FormWrapperLabel>
           <FormWrapperLabel>
-            <StyledTextArea name="" id="" cols="20" rows="8" />
+            <StyledTextArea
+              name="body"
+              value={this.state.body}
+              cols="20"
+              rows="8"
+              onChange={event => handleInputChange(event)}
+            />
           </FormWrapperLabel>
           <Buffer />
           <FormWrapperLabel />
@@ -56,15 +87,31 @@ class NewPostContainer extends Component {
             </StyledLabel>
           </FormWrapperLabel>
           <FormWrapperLabel>
-            <StyledInput name="" id="" />
+            <StyledInput
+              name="category"
+              value={this.state.category}
+              onChange={event => handleInputChange(event)}
+            />
             <StyledParagraph>
               your subscribed sub-readables <br />
               {this.props.categories.map(category => (
-                <CategoryLink to={`/${category.path}`}>
+                <CategoryLink key={category.id} to={`/${category.path}`}>
                   {category.name}{' '}
                 </CategoryLink>
               ))}
             </StyledParagraph>
+          </FormWrapperLabel>
+          <FormWrapperLabel>
+            <StyledLabel>
+              <StyledLabelSpan>*username</StyledLabelSpan>
+            </StyledLabel>
+          </FormWrapperLabel>
+          <FormWrapperLabel>
+            <StyledInput
+              name="author"
+              value={this.state.author}
+              onChange={event => handleInputChange(event)}
+            />
           </FormWrapperLabel>
           <p>*required</p>
           <Buffer />
