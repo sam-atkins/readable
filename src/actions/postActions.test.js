@@ -5,6 +5,8 @@ import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import {
   fetchPosts,
+  addPost,
+  ADD_NEW_POST,
   FAIL_FETCH_POSTS,
   SUCCESS_RECEIVE_POSTS,
 } from './postActions';
@@ -82,7 +84,7 @@ describe('postActions', () => {
             },
           ],
         },
-        type: 'SUCCESS_RECEIVE_POSTS',
+        type: SUCCESS_RECEIVE_POSTS,
       },
     ];
 
@@ -109,5 +111,20 @@ describe('postActions', () => {
       const actions = store.getActions();
       expect(actions).toEqual(expectedActions);
     });
+  });
+
+  it('should send the add post action', () => {
+    const payload = {
+      title: 'test title',
+      author: 'test author',
+      body: 'this is a test body',
+      timestamp: 1511962218825,
+      category: 'react',
+    };
+    const expectedAction = {
+      type: ADD_NEW_POST,
+      payload,
+    };
+    expect(addPost(payload)).toEqual(expectedAction);
   });
 });

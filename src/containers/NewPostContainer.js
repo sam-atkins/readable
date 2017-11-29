@@ -8,6 +8,7 @@ import NavbarContainer from '../containers/NavBarContainer';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
 import { getCategoryValues } from '../selectors/categorySelectors';
+import { addPost } from '../actions/postActions';
 import {
   FORM_INFOBAR_BORDER,
   FORM_INFOBAR_BACKGROUND,
@@ -26,15 +27,21 @@ class NewPostContainer extends Component {
   render() {
     const handleInputChange = (event) => {
       const { name, value } = event.target;
+      const timestamp = Date.now();
       this.setState({
         [name]: value,
+        timestamp,
       });
+      console.log('====================================');
+      console.log(this.state);
+      console.log('====================================');
     };
 
     const handleFormSubmit = (event) => {
       event.preventDefault();
-      console.log('form submitted', event);
-      // TODO action creator
+      // TODO add uuid to new post before sending to action creator
+      addPost(this.state);
+      console.log('form submitted state:', this.state);
     };
 
     return (
@@ -87,11 +94,17 @@ class NewPostContainer extends Component {
             </StyledLabel>
           </FormWrapperLabel>
           <FormWrapperLabel>
-            <StyledInput
+            <StyledSelect
               name="category"
               value={this.state.category}
               onChange={event => handleInputChange(event)}
-            />
+            >
+              {this.props.categories.map(category => (
+                <option name="category" key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </StyledSelect>
             <StyledParagraph>
               your subscribed sub-readables <br />
               {this.props.categories.map(category => (
@@ -190,6 +203,11 @@ const StyledInput = styled.input`
   margin: 10px;
   padding: 5px;
   border: 1px solid gray;
+`;
+
+const StyledSelect = styled.select`
+  padding: 0 10px 0 10px;
+  margin-left: 10px;
 `;
 
 const CategoryLink = styled(Link)`
