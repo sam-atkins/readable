@@ -1,5 +1,7 @@
 import {
+  FAIL_ADD_NEW_POST,
   FAIL_FETCH_POSTS,
+  SUCCESS_ADD_NEW_POST,
   SUCCESS_RECEIVE_POSTS,
 } from '../actions/postActions';
 
@@ -28,6 +30,19 @@ const post = (state = initialState, action) => {
         postStatus: {
           error: true,
           loading: false,
+        },
+      };
+    case SUCCESS_ADD_NEW_POST:
+      return {
+        // spread in state or posts?
+        ...state,
+        [action.post.id]: action.post,
+      };
+    case FAIL_ADD_NEW_POST:
+      return {
+        ...state,
+        addPostStatus: {
+          error: true,
         },
       };
     default:
