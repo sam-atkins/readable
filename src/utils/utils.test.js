@@ -1,6 +1,6 @@
 /* global describe, it, expect */
 
-import slugifyPostTitle from './utils';
+import { slugifyPostTitle } from './utils';
 
 describe('slugifies a post title', () => {
   it('should lower case a capitalised post title', () => {

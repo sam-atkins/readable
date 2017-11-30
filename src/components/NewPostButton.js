@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-// import NewPostContainer from '../containers/NewPostContainer';
 import {
   NEW_POST_BUTTON_BACKGROUND,
   NEW_POST_BUTTON_TEXT,

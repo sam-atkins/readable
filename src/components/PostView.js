@@ -19,7 +19,7 @@ import {
   POST_TITLE,
   VOTE_COUNT,
 } from '../styles/colours';
-import slugifyPostTitle from '../utils/utils';
+import { slugifyPostTitle } from '../utils/utils';
 
 const PostView = ({
   post, error, loading, homeFlag,
@@ -48,8 +48,7 @@ const PostView = ({
           {post.title}
         </PostTitleLink>
         <StyledPostMeta>
-          Submitted {distanceInWordsToNow(post.timestamp)} ago
-          {' '}by {post.author}
+          Submitted {distanceInWordsToNow(post.timestamp)} ago by {post.author}
         </StyledPostMeta>
       </StyledPostMetaWrapper>
       {!homeFlag && <StyledPostBody>{post.body}</StyledPostBody>}
