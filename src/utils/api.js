@@ -39,39 +39,35 @@ export const getPosts = () =>
     .then(data => data);
 
 export const persistPost = (payload) => {
+  console.log('====================================');
+  console.log('received payload from form', payload);
+  console.log('====================================');
   const newPostId = createRandomID();
+  const newPostTimestamp = Date.now();
+  const updatedPayload = {
+    id: newPostId,
+    timestamp: newPostTimestamp,
+    title: payload.title,
+    body: payload.body,
+    author: payload.author,
+    category: payload.category,
+  };
+  console.log('====================================');
+  console.log('updatedPayload', updatedPayload);
+  console.log('====================================');
 
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'cache-control': 'no-cache',
-      token: '8b4354ac-d7a3-46cf-2418-c8b91e17cd14',
     },
-    // body: payload,
-    // body: JSON.stringify(payload),
-    // body: JSON.stringify({
-    //   [newPostId]: {
-    //     id: newPostId,
-    //     category: 'udacity',
-    //     title: 'hello world',
-    //     body: 'this is a thought',
-    //     author: 'mary',
-    //     timestamp: 1467166872634,
-    //   },
-    body: JSON.stringify({
-      [newPostId]: {
-        id: newPostId,
-        timestamp: payload.timestamp,
-        title: payload.title,
-        body: payload.body,
-        author: payload.author,
-        category: payload.category,
-      },
-    }),
+    // body: updatedPayload,
+    body: JSON.stringify(updatedPayload),
   })
-    .then(res => res.json())
-    .then(res => console.log(res));
+    .then((data) => {
+      console.log('Request success:', data);
+    })
+    .catch((error) => {
+      console.log('Request failure:', error);
+    });
 };

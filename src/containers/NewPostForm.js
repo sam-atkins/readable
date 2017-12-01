@@ -28,12 +28,8 @@ class NewPostForm extends Component {
     const handleInputChange = (event) => {
       const { name, value } = event.target;
 
-      // TODO move below to action
-      const timestamp = Date.now();
-
       this.setState({
         [name]: value,
-        timestamp,
       });
       console.log('====================================');
       console.log(this.state);
