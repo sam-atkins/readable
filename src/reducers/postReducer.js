@@ -1,6 +1,7 @@
 import {
   FAIL_ADD_NEW_POST,
   FAIL_FETCH_POSTS,
+  REQUEST_ADD_NEW_POST,
   SUCCESS_ADD_NEW_POST,
   SUCCESS_RECEIVE_POSTS,
 } from '../actions/postActions';
@@ -32,11 +33,17 @@ const post = (state = initialState, action) => {
           loading: false,
         },
       };
+    case REQUEST_ADD_NEW_POST:
+      return {
+        addPostStatus: {
+          isFetching: true,
+        },
+      };
     case SUCCESS_ADD_NEW_POST:
       return {
         // spread in state or posts?
         ...state,
-        [action.post.id]: action.post,
+        [posts.id]: posts,
       };
     case FAIL_ADD_NEW_POST:
       return {
