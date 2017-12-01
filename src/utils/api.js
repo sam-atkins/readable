@@ -60,6 +60,9 @@ export const persistPost = (payload) => {
     method: 'POST',
     headers: {
       ...headers,
+      'content-type': 'application/json',
+      'cache-control': 'no-cache',
+      token: '15179515-e0b0-d003-6541-02e48033fffc',
     },
     // body: updatedPayload,
     body: JSON.stringify(updatedPayload),
