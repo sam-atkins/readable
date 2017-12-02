@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import PostView from '../components/PostView';
 import NoMatch from '../components/NoMatch';
 import NoPosts from '../components/NoPosts';
+import SideBar from '../components/SideBar';
 import PageWrapper from '../styles/pagewrapper';
 import { validCategoryUrl } from '../selectors/categorySelectors';
 import { filterPostsByParam } from '../selectors/postSelectors';
@@ -25,6 +26,7 @@ const CategoryPageContainer = ({ posts, validUrl }) => {
     <StyledWrapper>
       <Header />
       <NavBarContainer />
+      <SideBar />
       {posts.map(post => (
         <PostView key={post.id} post={post} homeFlag={false} />
       ))}
