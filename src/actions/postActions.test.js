@@ -6,9 +6,9 @@ import fetchMock from 'fetch-mock';
 import {
   fetchPosts,
   addPostSuccess,
-  SUCCESS_ADD_NEW_POST,
-  FAIL_FETCH_POSTS,
-  SUCCESS_RECEIVE_POSTS,
+  ADD_NEW_POST_SUCCESS,
+  RECEIVE_POSTS_FAILURE,
+  RECEIVE_POSTS_SUCCESS,
 } from './postActions';
 
 const middlewares = [thunk];
@@ -84,7 +84,7 @@ describe('postActions', () => {
             },
           ],
         },
-        type: SUCCESS_RECEIVE_POSTS,
+        type: RECEIVE_POSTS_SUCCESS,
       },
     ];
 
@@ -101,7 +101,7 @@ describe('postActions', () => {
 
     const expectedActions = [
       {
-        type: FAIL_FETCH_POSTS,
+        type: RECEIVE_POSTS_FAILURE,
       },
     ];
 
@@ -114,7 +114,7 @@ describe('postActions', () => {
   });
 
   it('should send the add post action', () => {
-    const post = {
+    const posts = {
       title: 'test title',
       author: 'test author',
       body: 'this is a test body',
@@ -122,9 +122,9 @@ describe('postActions', () => {
       category: 'react',
     };
     const expectedAction = {
-      type: SUCCESS_ADD_NEW_POST,
-      post,
+      type: ADD_NEW_POST_SUCCESS,
+      posts,
     };
-    expect(addPostSuccess(post)).toEqual(expectedAction);
+    expect(addPostSuccess(posts)).toEqual(expectedAction);
   });
 });

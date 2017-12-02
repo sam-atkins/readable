@@ -1,9 +1,9 @@
 import {
-  FAIL_ADD_NEW_POST,
-  FAIL_FETCH_POSTS,
+  ADD_NEW_POST_FAILURE,
+  ADD_NEW_POST_SUCCESS,
   REQUEST_ADD_NEW_POST,
-  SUCCESS_ADD_NEW_POST,
-  SUCCESS_RECEIVE_POSTS,
+  RECEIVE_POSTS_FAILURE,
+  RECEIVE_POSTS_SUCCESS,
 } from '../actions/postActions';
 
 const initialState = {
@@ -17,7 +17,7 @@ const post = (state = initialState, action) => {
   const { posts } = action;
 
   switch (action.type) {
-    case SUCCESS_RECEIVE_POSTS:
+    case RECEIVE_POSTS_SUCCESS:
       return {
         ...posts.reduce((newObj, p) => ({ ...newObj, [p.id]: p }), {}),
         postStatus: {
@@ -25,7 +25,7 @@ const post = (state = initialState, action) => {
           loading: false,
         },
       };
-    case FAIL_FETCH_POSTS:
+    case RECEIVE_POSTS_FAILURE:
       return {
         ...posts,
         postStatus: {
@@ -35,21 +35,27 @@ const post = (state = initialState, action) => {
       };
     case REQUEST_ADD_NEW_POST:
       return {
-        addPostStatus: {
-          isFetching: true,
+        ...posts,
+        postStatus: {
+          error: false,
+          loading: true,
         },
       };
-    case SUCCESS_ADD_NEW_POST:
+    case ADD_NEW_POST_SUCCESS:
       return {
-        // spread in state or posts?
-        ...state,
+        ...posts,
         [posts.id]: posts,
+        postStatus: {
+          error: false,
+          loading: false,
+        },
       };
-    case FAIL_ADD_NEW_POST:
+    case ADD_NEW_POST_FAILURE:
       return {
-        ...state,
-        addPostStatus: {
+        ...posts,
+        postStatus: {
           error: true,
+          loading: false,
         },
       };
     default:

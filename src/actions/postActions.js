@@ -1,15 +1,14 @@
 import { getPosts, persistPost } from '../utils/api';
-// import { createRandomID } from '../utils/utils';
 
-export const SUCCESS_RECEIVE_POSTS = 'SUCCESS_RECEIVE_POSTS';
+export const RECEIVE_POSTS_SUCCESS = 'RECEIVE_POSTS_SUCCESS';
 export const receivePosts = posts => ({
-  type: SUCCESS_RECEIVE_POSTS,
+  type: RECEIVE_POSTS_SUCCESS,
   posts,
 });
 
-export const FAIL_FETCH_POSTS = 'FAIL_FETCH_POSTS';
+export const RECEIVE_POSTS_FAILURE = 'RECEIVE_POSTS_FAILURE';
 export const errorReceivingPosts = () => ({
-  type: FAIL_FETCH_POSTS,
+  type: RECEIVE_POSTS_FAILURE,
 });
 
 export const fetchPosts = () => dispatch =>
@@ -17,20 +16,20 @@ export const fetchPosts = () => dispatch =>
     .then(posts => dispatch(receivePosts(posts)))
     .catch(error => dispatch(errorReceivingPosts(error)));
 
-export const REQUEST_ADD_NEW_POST = 'REQUEST_ADD_NEW_POST';
+export const ADD_NEW_POST_REQUEST = 'ADD_NEW_POST_REQUEST';
 export const requestAddPost = () => ({
-  type: REQUEST_ADD_NEW_POST,
+  type: ADD_NEW_POST_REQUEST,
 });
 
-export const SUCCESS_ADD_NEW_POST = 'SUCCESS_ADD_NEW_POST';
+export const ADD_NEW_POST_SUCCESS = 'ADD_NEW_POST_SUCCESS';
 export const addPostSuccess = posts => ({
-  type: SUCCESS_ADD_NEW_POST,
+  type: ADD_NEW_POST_SUCCESS,
   posts,
 });
 
-export const FAIL_ADD_NEW_POST = 'FAIL_ADD_NEW_POST';
+export const ADD_NEW_POST_FAILURE = 'ADD_NEW_POST_FAILURE';
 export const addPostError = () => ({
-  type: FAIL_ADD_NEW_POST,
+  type: ADD_NEW_POST_FAILURE,
 });
 
 export const addNewPost = payload => dispatch => (

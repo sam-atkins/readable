@@ -3,8 +3,8 @@
 import deepFreeze from 'deep-freeze';
 import post from './postReducer';
 import {
-  FAIL_FETCH_POSTS,
-  SUCCESS_RECEIVE_POSTS,
+  RECEIVE_POSTS_FAILURE,
+  RECEIVE_POSTS_SUCCESS,
 } from '../actions/postActions';
 
 describe('post reducer', () => {
@@ -34,7 +34,7 @@ describe('post reducer', () => {
       },
     };
     const action = {
-      type: 'SUCCESS_RECEIVE_POSTS',
+      type: 'RECEIVE_POSTS_SUCCESS',
       posts: [
         {
           id: '8xf0y6ziyjabvozdd253nd',
@@ -101,7 +101,7 @@ describe('post reducer', () => {
       },
     };
     const action = {
-      type: FAIL_FETCH_POSTS,
+      type: RECEIVE_POSTS_FAILURE,
     };
     const expectedState = {
       postStatus: {
