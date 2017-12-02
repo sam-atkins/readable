@@ -31,15 +31,11 @@ class NewPostForm extends Component {
       this.setState({
         [name]: value,
       });
-      console.log('====================================');
-      console.log(this.state);
-      console.log('====================================');
     };
 
     const handleFormSubmit = (event) => {
-      // event.preventDefault();
+      event.preventDefault();
       this.props.submitFormToAddPost(this.state);
-      console.log('form submitted state:', this.state);
     };
 
     return (
@@ -138,6 +134,7 @@ class NewPostForm extends Component {
 
 NewPostForm.propTypes = {
   categories: PropTypes.array.isRequired,
+  submitFormToAddPost: PropTypes.func.isRequired,
 };
 
 const StyledWrapper = styled(PageWrapper)``;

@@ -39,10 +39,7 @@ export const getPosts = () =>
     .then(data => data);
 
 export const persistPost = (payload) => {
-  console.log('====================================');
-  console.log('received payload from form', payload);
-  console.log('====================================');
-  const newPostId = createRandomID();
+  const newPostId = createRandomID(8);
   const newPostTimestamp = Date.now();
   const updatedPayload = {
     id: newPostId,
@@ -52,19 +49,15 @@ export const persistPost = (payload) => {
     author: payload.author,
     category: payload.category,
   };
-  console.log('====================================');
-  console.log('updatedPayload', updatedPayload);
-  console.log('====================================');
-
+  const newToken = createRandomID(20);
   fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
       'content-type': 'application/json',
       'cache-control': 'no-cache',
-      token: '15179515-e0b0-d003-6541-02e48033fffc',
+      token: newToken,
     },
-    // body: updatedPayload,
     body: JSON.stringify(updatedPayload),
   })
     .then((data) => {

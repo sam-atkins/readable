@@ -6,4 +6,4 @@ export const slugifyPostTitle = postTitle =>
 
 const char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-export const createRandomID = () => (_.sampleSize(char, 8).join(''));
+export const createRandomID = number => (_.sampleSize(char, number).join(''));
