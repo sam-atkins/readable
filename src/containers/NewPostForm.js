@@ -20,7 +20,7 @@ class NewPostForm extends Component {
   state = {
     title: '',
     body: '',
-    category: '',
+    category: 'react',
     author: '',
   };
 
@@ -34,7 +34,7 @@ class NewPostForm extends Component {
     };
 
     const handleFormSubmit = (event) => {
-      event.preventDefault();
+      // event.preventDefault();
       this.props.submitFormToAddPost(this.state);
     };
 
@@ -93,6 +93,7 @@ class NewPostForm extends Component {
               value={this.state.category}
               onChange={event => handleInputChange(event)}
             >
+              <option disabled>Choose a sub-readable:</option>
               {this.props.categories.map(category => (
                 <option name="category" key={category.id} value={category.name}>
                   {category.name}
