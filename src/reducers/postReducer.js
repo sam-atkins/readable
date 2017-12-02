@@ -1,7 +1,7 @@
 import {
   ADD_NEW_POST_FAILURE,
   ADD_NEW_POST_SUCCESS,
-  REQUEST_ADD_NEW_POST,
+  ADD_NEW_POST_REQUEST,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
 } from '../actions/postActions';
@@ -33,7 +33,7 @@ const post = (state = initialState, action) => {
           loading: false,
         },
       };
-    case REQUEST_ADD_NEW_POST:
+    case ADD_NEW_POST_REQUEST:
       return {
         ...posts,
         postStatus: {
