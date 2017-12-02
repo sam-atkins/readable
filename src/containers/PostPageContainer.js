@@ -19,7 +19,9 @@ const PostPageContainer = ({ selectedPost, validPostUrlSlug }) => {
     <StyledWrapper>
       <Header />
       <NavBarContainer />
-      {selectedPost.map(post => <PostView post={post} homeFlag={false} />)}
+      {selectedPost.map(post => (
+        <PostView key={post.id} post={post} homeFlag={false} />
+      ))}
       <Footer />
     </StyledWrapper>
   );
