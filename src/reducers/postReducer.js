@@ -19,7 +19,7 @@ const post = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_POSTS_SUCCESS:
       return {
-        ...posts.reduce((newObj, p) => ({ ...newObj, [p.id]: p }), {}),
+        ...posts.reduce((newObj, pst) => ({ ...newObj, [pst.id]: pst }), {}),
         postStatus: {
           error: false,
           loading: false,
@@ -35,7 +35,6 @@ const post = (state = initialState, action) => {
       };
     case ADD_NEW_POST_REQUEST:
       return {
-        ...posts,
         postStatus: {
           error: false,
           loading: true,
@@ -43,8 +42,7 @@ const post = (state = initialState, action) => {
       };
     case ADD_NEW_POST_SUCCESS:
       return {
-        ...posts,
-        [posts.id]: posts,
+        [action.payload.id]: { ...action.payload },
         postStatus: {
           error: false,
           loading: false,
@@ -52,7 +50,6 @@ const post = (state = initialState, action) => {
       };
     case ADD_NEW_POST_FAILURE:
       return {
-        ...posts,
         postStatus: {
           error: true,
           loading: false,

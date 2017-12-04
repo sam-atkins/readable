@@ -34,8 +34,8 @@ class NewPostForm extends Component {
     };
 
     const handleFormSubmit = (event) => {
-      // event.preventDefault();
       this.props.submitFormToAddPost(this.state);
+      // event.preventDefault();
     };
 
     return (

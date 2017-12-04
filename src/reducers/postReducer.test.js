@@ -3,6 +3,7 @@
 import deepFreeze from 'deep-freeze';
 import post from './postReducer';
 import {
+  ADD_NEW_POST_SUCCESS,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
 } from '../actions/postActions';
@@ -34,7 +35,7 @@ describe('post reducer', () => {
       },
     };
     const action = {
-      type: 'RECEIVE_POSTS_SUCCESS',
+      type: RECEIVE_POSTS_SUCCESS,
       posts: [
         {
           id: '8xf0y6ziyjabvozdd253nd',
@@ -111,5 +112,46 @@ describe('post reducer', () => {
     };
     deepFreeze(initialState);
     expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should add a new post to the global store', () => {
+    const state = {
+      postStatus: {
+        error: false,
+        loading: false,
+      },
+    };
+    const action = {
+      type: ADD_NEW_POST_SUCCESS,
+      payload: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: false,
+        commentCount: 0,
+      },
+    };
+    const expectedState = {
+      Qzh7pWU9: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        error: false,
+        loading: false,
+      },
+    };
+    expect(post(state, action)).toEqual(expectedState);
   });
 });

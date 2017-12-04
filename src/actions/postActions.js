@@ -1,4 +1,13 @@
-import { getPosts, persistPost } from '../utils/api';
+/* global fetch */
+import { getPosts } from '../utils/api';
+import { createRandomID } from '../utils/utils';
+
+const api = 'http://localhost:3001';
+const headers = {
+  Authorization: 'some-token',
+  'content-type': 'application/json',
+  'cache-control': 'no-cache',
+};
 
 export const RECEIVE_POSTS_SUCCESS = 'RECEIVE_POSTS_SUCCESS';
 export const receivePosts = posts => ({
@@ -22,9 +31,9 @@ export const requestAddPost = () => ({
 });
 
 export const ADD_NEW_POST_SUCCESS = 'ADD_NEW_POST_SUCCESS';
-export const addPostSuccess = posts => ({
+export const addPostSuccess = payload => ({
   type: ADD_NEW_POST_SUCCESS,
-  posts,
+  payload,
 });
 
 export const ADD_NEW_POST_FAILURE = 'ADD_NEW_POST_FAILURE';
@@ -32,7 +41,42 @@ export const addPostError = () => ({
   type: ADD_NEW_POST_FAILURE,
 });
 
-export const addNewPost = payload => dispatch => (
-  persistPost(payload)
-    .then(response => dispatch(addPostSuccess(response)))
-);
+export const addNewPost = payload => (dispatch) => {
+  const newPostId = createRandomID(8);
+  const newPostTimestamp = Date.now();
+  const updatedPayload = {
+    id: newPostId,
+    timestamp: newPostTimestamp,
+    title: payload.title,
+    body: payload.body,
+    author: payload.author,
+    category: payload.category,
+  };
+  const newToken = createRandomID(20);
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      token: newToken,
+    },
+    body: JSON.stringify(updatedPayload),
+  })
+    .then((response) => {
+      console.log('Request success:', response);
+      console.log('====================================');
+      console.log('payload sent to api', updatedPayload);
+      console.log('====================================');
+      return response.json();
+    })
+    .then((data) => {
+      console.log('====================================');
+      console.log('data object:', data);
+      console.log('====================================');
+      return data;
+    })
+    // .then(response => response.json())
+    // .then(data => data)
+    .then(posts => dispatch(addPostSuccess(posts)))
+    .catch(error => console.log(error))
+    .catch(error => dispatch(addPostError(error)));
+};

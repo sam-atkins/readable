@@ -114,7 +114,7 @@ describe('postActions', () => {
   });
 
   it('should send the add post action', () => {
-    const posts = {
+    const payload = {
       title: 'test title',
       author: 'test author',
       body: 'this is a test body',
@@ -123,8 +123,8 @@ describe('postActions', () => {
     };
     const expectedAction = {
       type: ADD_NEW_POST_SUCCESS,
-      posts,
+      payload,
     };
-    expect(addPostSuccess(posts)).toEqual(expectedAction);
+    expect(addPostSuccess(payload)).toEqual(expectedAction);
   });
 });
