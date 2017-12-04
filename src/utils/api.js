@@ -14,6 +14,8 @@ const api = 'http://localhost:3001';
 
 const headers = {
   Authorization: 'some-token',
+  'content-type': 'application/json',
+  'cache-control': 'no-cache',
 };
 
 export const getCategories = () =>
@@ -32,7 +34,6 @@ export const getPosts = () =>
     method: 'GET',
     headers: {
       ...headers,
-      'Content-Type': 'application/json',
     },
   })
     .then(res => res.json())
@@ -50,20 +51,14 @@ export const persistPost = (payload) => {
     category: payload.category,
   };
   const newToken = createRandomID(20);
-  fetch(`${api}/posts`, {
+  return fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
-      'content-type': 'application/json',
-      'cache-control': 'no-cache',
       token: newToken,
     },
     body: JSON.stringify(updatedPayload),
   })
-    .then((data) => {
-      console.log('Request success:', data);
-    })
-    .catch((error) => {
-      console.log('Request failure:', error);
-    });
+    .then(response => response.json())
+    .then(data => data);
 };
