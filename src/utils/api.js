@@ -40,6 +40,8 @@ export const getPosts = () =>
     .then(data => data);
 
 export const persistPost = (payload) => {
+  // Below is for the purposes of the project but creating an ID and timestamp
+  // should be done server side, not on the client.
   const newPostId = createRandomID(8);
   const newPostTimestamp = Date.now();
   const updatedPayload = {
@@ -50,12 +52,10 @@ export const persistPost = (payload) => {
     author: payload.author,
     category: payload.category,
   };
-  const newToken = createRandomID(20);
   return fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
-      token: newToken,
     },
     body: JSON.stringify(updatedPayload),
   })
