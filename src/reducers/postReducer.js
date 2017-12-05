@@ -35,6 +35,7 @@ const post = (state = initialState, action) => {
       };
     case ADD_NEW_POST_REQUEST:
       return {
+        ...state,
         postStatus: {
           error: false,
           loading: true,
@@ -42,6 +43,7 @@ const post = (state = initialState, action) => {
       };
     case ADD_NEW_POST_SUCCESS:
       return {
+        ...state,
         [action.payload.id]: { ...action.payload },
         postStatus: {
           error: false,
@@ -50,6 +52,7 @@ const post = (state = initialState, action) => {
       };
     case ADD_NEW_POST_FAILURE:
       return {
+        ...state,
         postStatus: {
           error: true,
           loading: false,
