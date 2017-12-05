@@ -15,6 +15,7 @@ import {
   FORM_BUFFER_BACKGROUND,
   FORM_WRAPPER_LABEL_BACKGROUND,
 } from '../styles/colours';
+import { userInputIsValid } from '../utils/utils';
 
 class NewPostForm extends Component {
   state = {
@@ -34,8 +35,31 @@ class NewPostForm extends Component {
     };
 
     const handleFormSubmit = (event) => {
-      this.props.submitFormToAddPost(this.state);
-      // event.preventDefault();
+      event.preventDefault();
+      this.setState({
+        titleInputError: false,
+        authorInputError: false,
+      });
+
+      if (
+        !userInputIsValid(this.state.title, 0, 'greater') &&
+        !userInputIsValid(this.state.author, 0, 'greater')
+      ) {
+        this.setState({
+          titleInputError: true,
+          authorInputError: true,
+        });
+      } else if (!userInputIsValid(this.state.title, 0, 'greater')) {
+        this.setState({
+          titleInputError: true,
+        });
+      } else if (!userInputIsValid(this.state.author, 0, 'greater')) {
+        this.setState({
+          authorInputError: true,
+        });
+      } else {
+        this.props.submitFormToAddPost(this.state);
+      }
     };
 
     return (
@@ -63,6 +87,7 @@ class NewPostForm extends Component {
               rows="4"
               onChange={event => handleInputChange(event)}
             />
+            {this.state.titleInputError && <div>Error</div>}
           </FormWrapperLabel>
           <Buffer />
           <FormWrapperLabel />
@@ -120,6 +145,7 @@ class NewPostForm extends Component {
               value={this.state.author}
               onChange={event => handleInputChange(event)}
             />
+            {this.state.authorInputError && <div>Error</div>}
           </FormWrapperLabel>
           <p>*required</p>
           <Buffer />
