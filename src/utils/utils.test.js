@@ -29,38 +29,35 @@ describe('slugifies a post title', () => {
 });
 
 describe('validates user input', () => {
-  it('should return true if string is greater than 0', () => {
+  it('should return true if title string is > 0, less than 100', () => {
+    const type = 'title';
     const fieldInput = 'a';
-    const num = 0;
-    const type = 'greater';
-    expect(userInputIsValid(fieldInput, num, type)).toBeTruthy();
+    expect(userInputIsValid(type, fieldInput)).toBeTruthy();
   });
 
-  it('should return true if string is greater than 0', () => {
-    const fieldInput = 'hello';
-    const num = 0;
-    const type = 'greater';
-    expect(userInputIsValid(fieldInput, num, type)).toBeTruthy();
-  });
-
-  it('should return false if string is empty', () => {
+  it('should return false if title string is empty', () => {
+    const type = 'title';
     const fieldInput = '';
-    const num = 0;
-    const type = 'greater';
-    expect(userInputIsValid(fieldInput, num, type)).toBeFalsy();
-  });
-
-  it('should return true if string is less than 12', () => {
-    const fieldInput = 'hello world';
-    const num = 12;
-    const type = 'less';
-    expect(userInputIsValid(fieldInput, num, type)).toBeTruthy();
+    expect(userInputIsValid(type, fieldInput)).toBeFalsy();
   });
 
   it('should return false if string is greater than 10', () => {
-    const fieldInput = 'hello world';
-    const num = 10;
-    const type = 'less';
-    expect(userInputIsValid(fieldInput, num, type)).toBeFalsy();
+    const type = 'title';
+    const fieldInput = '';
+    expect(userInputIsValid(type, fieldInput)).toBeFalsy();
   });
+
+  // it('should return true if string is greater than 0', () => {
+  //   const fieldInput = 'hello';
+  //   const num = 0;
+  //   const type = 'greater';
+  //   expect(userInputIsValid(fieldInput, num, type)).toBeTruthy();
+  // });
+
+  // it('should return true if string is less than 12', () => {
+  //   const fieldInput = 'hello world';
+  //   const num = 12;
+  //   const type = 'less';
+  //   expect(userInputIsValid(fieldInput, num, type)).toBeTruthy();
+  // });
 });
