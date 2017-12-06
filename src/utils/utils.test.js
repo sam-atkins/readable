@@ -29,7 +29,7 @@ describe('slugifies a post title', () => {
 });
 
 describe('validates user input', () => {
-  it('should return true if title string is > 0, less than 100', () => {
+  it('should return true if title string is greater than 0, less than 100', () => {
     const type = 'title';
     const fieldInput = 'a';
     expect(userInputIsValid(type, fieldInput)).toBeTruthy();
@@ -41,23 +41,40 @@ describe('validates user input', () => {
     expect(userInputIsValid(type, fieldInput)).toBeFalsy();
   });
 
-  it('should return false if string is greater than 10', () => {
+  it('should return false if title string is greater than 100', () => {
     const type = 'title';
+    const fieldInput =
+      'This is a really long title which needs to be over 100 characters. I think it needs to be even longer than that.';
+    expect(userInputIsValid(type, fieldInput)).toBeFalsy();
+  });
+
+  it('should return true if author string is greater than 0, less than 20', () => {
+    const type = 'author';
+    const fieldInput = 'sam';
+    expect(userInputIsValid(type, fieldInput)).toBeTruthy();
+  });
+
+  it('should return false if author string is empty', () => {
+    const type = 'author';
     const fieldInput = '';
     expect(userInputIsValid(type, fieldInput)).toBeFalsy();
   });
 
-  // it('should return true if string is greater than 0', () => {
-  //   const fieldInput = 'hello';
-  //   const num = 0;
-  //   const type = 'greater';
-  //   expect(userInputIsValid(fieldInput, num, type)).toBeTruthy();
-  // });
+  it('should return false if author string is greater than 20', () => {
+    const type = 'author';
+    const fieldInput = 'I have a really long name';
+    expect(userInputIsValid(type, fieldInput)).toBeFalsy();
+  });
 
-  // it('should return true if string is less than 12', () => {
-  //   const fieldInput = 'hello world';
-  //   const num = 12;
-  //   const type = 'less';
-  //   expect(userInputIsValid(fieldInput, num, type)).toBeTruthy();
-  // });
+  it('should return true if body string is 0', () => {
+    const type = 'body';
+    const fieldInput = '';
+    expect(userInputIsValid(type, fieldInput)).toBeTruthy();
+  });
+
+  it('should return true if body string is 1', () => {
+    const type = 'body';
+    const fieldInput = 'a';
+    expect(userInputIsValid(type, fieldInput)).toBeTruthy();
+  });
 });

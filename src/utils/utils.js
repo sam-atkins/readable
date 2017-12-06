@@ -23,18 +23,18 @@ export const createRandomID = number => _.sampleSize(char, number).join('');
 //   return false;
 // };
 
-// TODO test
 export const userInputIsValid = (type, fieldInput) => {
 
   const formMaxLengths = {
     title: 100,
     author: 20,
-    body: 99500,
+    body: 3000,
   };
 
   const formMinLengths = {
-    title: 0,
-    author: 0,
+    title: 1,
+    author: 1,
+    body: 0,
   };
 
   const input = fieldInput.trim();
@@ -43,7 +43,7 @@ export const userInputIsValid = (type, fieldInput) => {
   const minLength = formMinLengths[type];
 
 
-  if (input.length > minLength && input.length < maxLength) {
+  if (input.length >= minLength && input.length < maxLength) {
     return true;
   }
 

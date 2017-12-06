@@ -41,23 +41,27 @@ class NewPostForm extends Component {
         authorInputError: false,
       });
 
-      const { title, author } = this.state;
+      const { author, body, title } = this.state;
 
       if (
-        !userInputIsValid(title, 0, 'greater') &&
-        !userInputIsValid(author, 0, 'greater')
+        !userInputIsValid('title', title) &&
+        !userInputIsValid('author', author)
       ) {
         this.setState({
           titleInputError: true,
           authorInputError: true,
         });
-      } else if (!userInputIsValid(title, 0, 'greater')) {
+      } else if (!userInputIsValid('title', title)) {
         this.setState({
           titleInputError: true,
         });
-      } else if (!userInputIsValid(author, 0, 'greater')) {
+      } else if (!userInputIsValid('author', author)) {
         this.setState({
           authorInputError: true,
+        });
+      } else if (!userInputIsValid('body', body)) {
+        this.setState({
+          bodyInputError: true,
         });
       } else {
         this.props.submitFormToAddPost(this.state);
@@ -106,6 +110,7 @@ class NewPostForm extends Component {
               rows="8"
               onChange={event => handleInputChange(event)}
             />
+            {this.state.bodyInputError && <div>Error</div>}
           </FormWrapperLabel>
           <Buffer />
           <FormWrapperLabel />
