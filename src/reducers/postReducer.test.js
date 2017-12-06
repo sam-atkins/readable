@@ -6,6 +6,7 @@ import {
   ADD_NEW_POST_SUCCESS,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
+  TOGGLE_FORM_REDIRECT,
 } from '../actions/postActions';
 
 describe('post reducer', () => {
@@ -32,6 +33,7 @@ describe('post reducer', () => {
       postStatus: {
         error: false,
         loading: true,
+        redirect: false,
       },
     };
     const action = {
@@ -89,6 +91,7 @@ describe('post reducer', () => {
       postStatus: {
         error: false,
         loading: false,
+        redirect: false,
       },
     };
     expect(post(initialState, action)).toEqual(expectedState);
@@ -99,6 +102,7 @@ describe('post reducer', () => {
       postStatus: {
         error: false,
         loading: true,
+        redirect: false,
       },
     };
     const action = {
@@ -108,6 +112,7 @@ describe('post reducer', () => {
       postStatus: {
         error: true,
         loading: false,
+        redirect: false,
       },
     };
     deepFreeze(initialState);
@@ -116,6 +121,18 @@ describe('post reducer', () => {
 
   it('should add a new post to the global store', () => {
     const state = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
       postStatus: {
         error: false,
         loading: false,
@@ -136,6 +153,18 @@ describe('post reducer', () => {
       },
     };
     const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
       Qzh7pWU9: {
         id: 'Qzh7pWU9',
         timestamp: 1512330673632,
@@ -150,8 +179,30 @@ describe('post reducer', () => {
       postStatus: {
         error: false,
         loading: false,
+        redirect: true,
       },
     };
     expect(post(state, action)).toEqual(expectedState);
+  });
+
+  it('should toggle redirect to false', () => {
+    const initialState = {
+      postStatus: {
+        error: false,
+        loading: false,
+        redirect: true,
+      },
+    };
+    const action = {
+      type: TOGGLE_FORM_REDIRECT,
+    };
+    const expectedState = {
+      postStatus: {
+        error: false,
+        loading: false,
+        redirect: false,
+      },
+    };
+    expect(post(initialState, action)).toEqual(expectedState);
   });
 });

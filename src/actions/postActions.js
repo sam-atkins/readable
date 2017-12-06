@@ -16,6 +16,11 @@ export const fetchPosts = () => dispatch =>
     .then(posts => dispatch(receivePosts(posts)))
     .catch(error => dispatch(errorReceivingPosts(error)));
 
+export const TOGGLE_FORM_REDIRECT = 'TOGGLE_FORM_REDIRECT';
+export const toggleRedirect = () => ({
+  type: TOGGLE_FORM_REDIRECT,
+});
+
 export const ADD_NEW_POST_REQUEST = 'ADD_NEW_POST_REQUEST';
 export const requestAddPost = () => ({
   type: ADD_NEW_POST_REQUEST,

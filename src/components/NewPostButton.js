@@ -1,13 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { toggleRedirect } from '../actions/postActions';
 import {
   NEW_POST_BUTTON_BACKGROUND,
   NEW_POST_BUTTON_TEXT,
 } from '../styles/colours';
 
 const NewPostButton = () => (
-  <NewPostButtonArrow to="/newpost">
+  <NewPostButtonArrow to="/newpost" onClick={toggleRedirect()}>
     <NewPostButtonText>Submit a new text post</NewPostButtonText>
   </NewPostButtonArrow>
 );
@@ -43,4 +45,8 @@ const NewPostButtonText = styled.p`
   color: ${NEW_POST_BUTTON_TEXT};
 `;
 
-export default NewPostButton;
+const mapDispatchToProps = dispatch => ({
+  resetRedirect: () => dispatch(toggleRedirect()),
+});
+
+export default connect(null, mapDispatchToProps)(NewPostButton);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import FormErrorMessage from '../components/FormErrorMessage';
@@ -70,105 +71,113 @@ class NewPostForm extends Component {
     };
 
     return (
-      <StyledWrapper>
-        <Header />
-        <NavbarContainer />
-        <StyledForm onSubmit={event => handleFormSubmit(event)}>
-          <FormH1>submit to readable</FormH1>
-          <InfoBar>
-            You are submitting a text-based post. Speak your mind. A title is
-            required, but expanding further in the text field is not. Beginning
-            your title with "vote up if" is violation of intergalactic law.
-          </InfoBar>
-          <Buffer />
-          <FormWrapperLabel>
-            <StyledLabel>
-              <StyledLabelSpan>*title</StyledLabelSpan>
-            </StyledLabel>
-          </FormWrapperLabel>
-          <FormWrapperLabel>
-            <StyledTextArea
-              name="title"
-              value={this.state.title}
-              cols="20"
-              rows="4"
-              onChange={event => handleInputChange(event)}
-            />
-            {this.state.titleInputError && (
-              <FormErrorMessage titleErrorMessage min={1} max={100} />
-            )}
-          </FormWrapperLabel>
-          <Buffer />
-          <FormWrapperLabel />
-          <FormWrapperLabel>
-            <StyledLabel>
-              <StyledLabelSpan>text (optional)</StyledLabelSpan>
-            </StyledLabel>
-          </FormWrapperLabel>
-          <FormWrapperLabel>
-            <StyledTextArea
-              name="body"
-              value={this.state.body}
-              cols="20"
-              rows="8"
-              onChange={event => handleInputChange(event)}
-            />
-            {this.state.bodyInputError && (
-              <FormErrorMessage bodyErrorMessage min={0} max={2000} />
-            )}
-          </FormWrapperLabel>
-          <Buffer />
-          <FormWrapperLabel />
-          <FormWrapperLabel>
-            <StyledLabel>
-              <StyledLabelSpan>*choose a sub-readable</StyledLabelSpan>
-            </StyledLabel>
-          </FormWrapperLabel>
-          <FormWrapperLabel>
-            <StyledSelect
-              name="category"
-              value={this.state.category}
-              onChange={event => handleInputChange(event)}
-            >
-              <option disabled>Choose a sub-readable:</option>
-              {this.props.categories.map(category => (
-                <option name="category" key={category.id} value={category.name}>
-                  {category.name}
-                </option>
-              ))}
-            </StyledSelect>
-            <StyledParagraph>
-              your subscribed sub-readables <br />
-              {this.props.categories.map(category => (
-                <CategoryLink key={category.id} to={`/${category.path}`}>
-                  {category.name}{' '}
-                </CategoryLink>
-              ))}
-            </StyledParagraph>
-          </FormWrapperLabel>
-          <FormWrapperLabel>
-            <StyledLabel>
-              <StyledLabelSpan>*username</StyledLabelSpan>
-            </StyledLabel>
-          </FormWrapperLabel>
-          <FormWrapperLabel>
-            <StyledInput
-              name="author"
-              value={this.state.author}
-              onChange={event => handleInputChange(event)}
-            />
-            {this.state.authorInputError && (
-              <FormErrorMessage authorErrorMessage min={1} max={20} />
-            )}
-          </FormWrapperLabel>
-          <p>*required</p>
-          <Buffer />
-          <div>
-            <input type="submit" value="submit" />
-          </div>
-        </StyledForm>
-        <Footer />
-      </StyledWrapper>
+      <div>
+        {this.props.redirect && <Redirect to={`/${this.state.category}`} />}
+        <StyledWrapper>
+          <Header />
+          <NavbarContainer />
+          <StyledForm onSubmit={event => handleFormSubmit(event)}>
+            <FormH1>submit to readable</FormH1>
+            <InfoBar>
+              You are submitting a text-based post. Speak your mind. A title is
+              required, but expanding further in the text field is not.
+              Beginning your title with "vote up if" is violation of
+              intergalactic law.
+            </InfoBar>
+            <Buffer />
+            <FormWrapperLabel>
+              <StyledLabel>
+                <StyledLabelSpan>*title</StyledLabelSpan>
+              </StyledLabel>
+            </FormWrapperLabel>
+            <FormWrapperLabel>
+              <StyledTextArea
+                name="title"
+                value={this.state.title}
+                cols="20"
+                rows="4"
+                onChange={event => handleInputChange(event)}
+              />
+              {this.state.titleInputError && (
+                <FormErrorMessage titleErrorMessage min={1} max={100} />
+              )}
+            </FormWrapperLabel>
+            <Buffer />
+            <FormWrapperLabel />
+            <FormWrapperLabel>
+              <StyledLabel>
+                <StyledLabelSpan>text (optional)</StyledLabelSpan>
+              </StyledLabel>
+            </FormWrapperLabel>
+            <FormWrapperLabel>
+              <StyledTextArea
+                name="body"
+                value={this.state.body}
+                cols="20"
+                rows="8"
+                onChange={event => handleInputChange(event)}
+              />
+              {this.state.bodyInputError && (
+                <FormErrorMessage bodyErrorMessage min={0} max={2000} />
+              )}
+            </FormWrapperLabel>
+            <Buffer />
+            <FormWrapperLabel />
+            <FormWrapperLabel>
+              <StyledLabel>
+                <StyledLabelSpan>*choose a sub-readable</StyledLabelSpan>
+              </StyledLabel>
+            </FormWrapperLabel>
+            <FormWrapperLabel>
+              <StyledSelect
+                name="category"
+                value={this.state.category}
+                onChange={event => handleInputChange(event)}
+              >
+                <option disabled>Choose a sub-readable:</option>
+                {this.props.categories.map(category => (
+                  <option
+                    name="category"
+                    key={category.id}
+                    value={category.name}
+                  >
+                    {category.name}
+                  </option>
+                ))}
+              </StyledSelect>
+              <StyledParagraph>
+                your subscribed sub-readables <br />
+                {this.props.categories.map(category => (
+                  <CategoryLink key={category.id} to={`/${category.path}`}>
+                    {category.name}{' '}
+                  </CategoryLink>
+                ))}
+              </StyledParagraph>
+            </FormWrapperLabel>
+            <FormWrapperLabel>
+              <StyledLabel>
+                <StyledLabelSpan>*username</StyledLabelSpan>
+              </StyledLabel>
+            </FormWrapperLabel>
+            <FormWrapperLabel>
+              <StyledInput
+                name="author"
+                value={this.state.author}
+                onChange={event => handleInputChange(event)}
+              />
+              {this.state.authorInputError && (
+                <FormErrorMessage authorErrorMessage min={1} max={20} />
+              )}
+            </FormWrapperLabel>
+            <p>*required</p>
+            <Buffer />
+            <div>
+              <input type="submit" value="submit" />
+            </div>
+          </StyledForm>
+          <Footer />
+        </StyledWrapper>
+      </div>
     );
   }
 }
@@ -176,6 +185,11 @@ class NewPostForm extends Component {
 NewPostForm.propTypes = {
   categories: PropTypes.array.isRequired,
   submitFormToAddPost: PropTypes.func.isRequired,
+  redirect: PropTypes.bool,
+};
+
+NewPostForm.defaultProps = {
+  redirect: false,
 };
 
 const StyledWrapper = styled(PageWrapper)``;
@@ -257,6 +271,7 @@ const StyledParagraph = styled.p`
 
 const mapStateToProps = state => ({
   categories: getCategoryValues(state),
+  redirect: state.post.postStatus.redirect,
 });
 
 const mapDispatchToProps = dispatch => ({

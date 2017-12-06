@@ -4,12 +4,14 @@ import {
   ADD_NEW_POST_REQUEST,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
+  TOGGLE_FORM_REDIRECT,
 } from '../actions/postActions';
 
 const initialState = {
   postStatus: {
     error: false,
     loading: true,
+    redirect: false,
   },
 };
 
@@ -23,6 +25,7 @@ const post = (state = initialState, action) => {
         postStatus: {
           error: false,
           loading: false,
+          redirect: false,
         },
       };
     case RECEIVE_POSTS_FAILURE:
@@ -31,6 +34,7 @@ const post = (state = initialState, action) => {
         postStatus: {
           error: true,
           loading: false,
+          redirect: false,
         },
       };
     case ADD_NEW_POST_REQUEST:
@@ -39,6 +43,7 @@ const post = (state = initialState, action) => {
         postStatus: {
           error: false,
           loading: true,
+          redirect: false,
         },
       };
     case ADD_NEW_POST_SUCCESS:
@@ -48,6 +53,7 @@ const post = (state = initialState, action) => {
         postStatus: {
           error: false,
           loading: false,
+          redirect: true,
         },
       };
     case ADD_NEW_POST_FAILURE:
@@ -56,6 +62,16 @@ const post = (state = initialState, action) => {
         postStatus: {
           error: true,
           loading: false,
+          redirect: false,
+        },
+      };
+    case TOGGLE_FORM_REDIRECT:
+      return {
+        ...state,
+        postStatus: {
+          error: false,
+          loading: false,
+          redirect: false,
         },
       };
     default:
