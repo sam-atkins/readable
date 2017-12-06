@@ -4,7 +4,7 @@ import NavBarContainer from '../containers/NavBarContainer';
 import Header from './Header';
 import Footer from './Footer';
 import PageWrapper from '../styles/pagewrapper';
-import { TEXT_404 } from '../styles/colours';
+import { TEXT_WARNING } from '../styles/colours';
 
 const NoMatch = () => (
   <StyledWrapper>
@@ -24,7 +24,7 @@ const NoMatchWrapper = styled.div`
 `;
 
 const NoMatchText = styled.p`
-  color: ${TEXT_404};
+  color: ${TEXT_WARNING};
 `;
 
 export default NoMatch;
