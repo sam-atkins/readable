@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
+import FormErrorMessage from '../components/FormErrorMessage';
 import NavbarContainer from '../containers/NavBarContainer';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
@@ -93,7 +94,9 @@ class NewPostForm extends Component {
               rows="4"
               onChange={event => handleInputChange(event)}
             />
-            {this.state.titleInputError && <div>Error</div>}
+            {this.state.titleInputError && (
+              <FormErrorMessage titleErrorMessage min={1} max={100} />
+            )}
           </FormWrapperLabel>
           <Buffer />
           <FormWrapperLabel />
@@ -110,7 +113,9 @@ class NewPostForm extends Component {
               rows="8"
               onChange={event => handleInputChange(event)}
             />
-            {this.state.bodyInputError && <div>Error</div>}
+            {this.state.bodyInputError && (
+              <FormErrorMessage bodyErrorMessage min={0} max={2000} />
+            )}
           </FormWrapperLabel>
           <Buffer />
           <FormWrapperLabel />
@@ -152,7 +157,9 @@ class NewPostForm extends Component {
               value={this.state.author}
               onChange={event => handleInputChange(event)}
             />
-            {this.state.authorInputError && <div>Error</div>}
+            {this.state.authorInputError && (
+              <FormErrorMessage authorErrorMessage min={1} max={20} />
+            )}
           </FormWrapperLabel>
           <p>*required</p>
           <Buffer />
