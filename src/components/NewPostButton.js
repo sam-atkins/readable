@@ -11,7 +11,7 @@ import {
 
 const NewPostButton = props => (
   <NewPostButtonArrow to="/newpost">
-    <NewPostButtonText onClick={props.resetRedirect()}>
+    <NewPostButtonText onClick={() => props.resetRedirect()}>
       Submit a new text post
     </NewPostButtonText>
   </NewPostButtonArrow>
