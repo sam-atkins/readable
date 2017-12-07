@@ -54,7 +54,12 @@ const PostView = ({
       {!homeFlag && <StyledPostBody>{post.body}</StyledPostBody>}
       <StyledCommentWrapper>
         <StyledPostMetaBold>{post.commentCount} comments</StyledPostMetaBold>
-        <StyledPostMetaBold>edit</StyledPostMetaBold>
+        <StyledPostMetaBoldLink
+          to="/newpost"
+          onClick={() => console.log('edit', post.id)}
+        >
+          edit
+        </StyledPostMetaBoldLink>
         <StyledPostMetaBold>delete</StyledPostMetaBold>
       </StyledCommentWrapper>
     </PostWrapper>
@@ -115,6 +120,14 @@ const StyledPostBody = styled.div`
 const StyledCommentWrapper = styled.div`
   grid-column-start: 2;
   grid-row: 3;
+`;
+
+const StyledPostMetaBoldLink = styled(Link)`
+  color: ${POST_META};
+  font-size: x-small;
+  font-weight: bold;
+  padding-right: 1rem;
+  text-decoration: none;
 `;
 
 const StyledPostMetaBold = styled.span`
