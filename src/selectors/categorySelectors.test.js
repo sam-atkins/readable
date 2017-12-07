@@ -80,8 +80,7 @@ describe('selectors for category', () => {
       },
     };
     const urlParam = 'react';
-    const urlBool = true;
-    expect(validCategoryUrl(selectedState, urlParam)).toEqual(urlBool);
+    expect(validCategoryUrl(selectedState, urlParam)).toBeTruthy();
   });
 
   it('should confirm a category url is invalid', () => {
@@ -94,7 +93,6 @@ describe('selectors for category', () => {
       },
     };
     const urlParam = 'python';
-    const urlBool = false;
-    expect(validCategoryUrl(selectedState, urlParam)).toEqual(urlBool);
+    expect(validCategoryUrl(selectedState, urlParam)).toBeFalsy();
   });
 });

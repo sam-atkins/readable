@@ -3,8 +3,10 @@
 import deepFreeze from 'deep-freeze';
 import post from './postReducer';
 import {
-  FAIL_FETCH_POSTS,
-  SUCCESS_RECEIVE_POSTS,
+  ADD_NEW_POST_SUCCESS,
+  RECEIVE_POSTS_FAILURE,
+  RECEIVE_POSTS_SUCCESS,
+  TOGGLE_FORM_REDIRECT,
 } from '../actions/postActions';
 
 describe('post reducer', () => {
@@ -31,10 +33,11 @@ describe('post reducer', () => {
       postStatus: {
         error: false,
         loading: true,
+        redirect: false,
       },
     };
     const action = {
-      type: 'SUCCESS_RECEIVE_POSTS',
+      type: RECEIVE_POSTS_SUCCESS,
       posts: [
         {
           id: '8xf0y6ziyjabvozdd253nd',
@@ -88,6 +91,7 @@ describe('post reducer', () => {
       postStatus: {
         error: false,
         loading: false,
+        redirect: false,
       },
     };
     expect(post(initialState, action)).toEqual(expectedState);
@@ -98,18 +102,107 @@ describe('post reducer', () => {
       postStatus: {
         error: false,
         loading: true,
+        redirect: false,
       },
     };
     const action = {
-      type: FAIL_FETCH_POSTS,
+      type: RECEIVE_POSTS_FAILURE,
     };
     const expectedState = {
       postStatus: {
         error: true,
         loading: false,
+        redirect: false,
       },
     };
     deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should add a new post to the global store', () => {
+    const state = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        error: false,
+        loading: false,
+      },
+    };
+    const action = {
+      type: ADD_NEW_POST_SUCCESS,
+      payload: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: false,
+        commentCount: 0,
+      },
+    };
+    const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      Qzh7pWU9: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        error: false,
+        loading: false,
+        redirect: true,
+      },
+    };
+    expect(post(state, action)).toEqual(expectedState);
+  });
+
+  it('should toggle redirect to false', () => {
+    const initialState = {
+      postStatus: {
+        error: false,
+        loading: false,
+        redirect: true,
+      },
+    };
+    const action = {
+      type: TOGGLE_FORM_REDIRECT,
+    };
+    const expectedState = {
+      postStatus: {
+        error: false,
+        loading: false,
+        redirect: false,
+      },
+    };
     expect(post(initialState, action)).toEqual(expectedState);
   });
 });

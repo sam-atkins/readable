@@ -6,6 +6,7 @@ import NavBarContainer from './NavBarContainer';
 import Header from '../components/Header';
 import PostView from '../components/PostView';
 import NoMatch from '../components/NoMatch';
+import SideBar from '../components/SideBar';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
 import { selectPostByPostId, validPostUrl } from '../selectors/postSelectors';
@@ -19,7 +20,10 @@ const PostPageContainer = ({ selectedPost, validPostUrlSlug }) => {
     <StyledWrapper>
       <Header />
       <NavBarContainer />
-      {selectedPost.map(post => <PostView post={post} />)}
+      <SideBar />
+      {selectedPost.map(post => (
+        <PostView key={post.id} post={post} homeFlag={false} />
+      ))}
       <Footer />
     </StyledWrapper>
   );

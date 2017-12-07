@@ -1,8 +1,9 @@
 /* global fetch */
+import { createRandomID } from '../utils/utils';
 
 const api = 'http://localhost:3001';
 
-// Generates a unique token; removed as in order to test components using
+// Generates a unique token; removed because in order to test components using
 // localStorage need to eject from `create-react-app`
 // let { token } = localStorage;
 // if (!token) {
@@ -13,6 +14,8 @@ const api = 'http://localhost:3001';
 
 const headers = {
   Authorization: 'some-token',
+  'content-type': 'application/json',
+  'cache-control': 'no-cache',
 };
 
 export const getCategories = () =>
@@ -31,8 +34,31 @@ export const getPosts = () =>
     method: 'GET',
     headers: {
       ...headers,
-      'Content-Type': 'application/json',
     },
   })
     .then(res => res.json())
     .then(data => data);
+
+export const persistPost = (payload) => {
+  // Below is for the purposes of the project but creating an ID and timestamp
+  // should be done server side, not on the client.
+  const newPostId = createRandomID(8);
+  const newPostTimestamp = Date.now();
+  const updatedPayload = {
+    id: newPostId,
+    timestamp: newPostTimestamp,
+    title: payload.title,
+    body: payload.body,
+    author: payload.author,
+    category: payload.category,
+  };
+  return fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+    },
+    body: JSON.stringify(updatedPayload),
+  })
+    .then(response => response.json())
+    .then(data => data);
+};

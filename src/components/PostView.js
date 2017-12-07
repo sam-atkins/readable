@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
 import FaArrowDown from 'react-icons/lib/fa/arrow-down';
-import moment from 'moment';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import {
@@ -19,9 +19,11 @@ import {
   POST_TITLE,
   VOTE_COUNT,
 } from '../styles/colours';
-import slugifyPostTitle from '../utils/utils';
+import { slugifyPostTitle } from '../utils/utils';
 
-const PostView = ({ post, error, loading }) => {
+const PostView = ({
+  post, error, loading, homeFlag,
+}) => {
   if (loading) {
     return <Loading />;
   }
@@ -46,11 +48,10 @@ const PostView = ({ post, error, loading }) => {
           {post.title}
         </PostTitleLink>
         <StyledPostMeta>
-          Submitted on {moment(post.timestamp).format('MMMM Do YYYY, h:mm a')}
-          {' '}by {post.author}
+          Submitted {distanceInWordsToNow(post.timestamp)} ago by {post.author}
         </StyledPostMeta>
       </StyledPostMetaWrapper>
-      <StyledPostBody>{post.body}</StyledPostBody>
+      {!homeFlag && <StyledPostBody>{post.body}</StyledPostBody>}
       <StyledCommentWrapper>
         <StyledPostMetaBold>{post.commentCount} comments</StyledPostMetaBold>
         <StyledPostMetaBold>edit</StyledPostMetaBold>
@@ -64,6 +65,11 @@ PostView.propTypes = {
   post: PropTypes.object.isRequired,
   error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
+  homeFlag: PropTypes.bool,
+};
+
+PostView.defaultProps = {
+  homeFlag: false,
 };
 
 const PostWrapper = styled.div`

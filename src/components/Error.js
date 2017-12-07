@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TEXT_WARNING } from '../styles/colours';
 
 const Error = () => (
   <ErrorMessageWrapper>
@@ -12,7 +13,7 @@ const ErrorMessageWrapper = styled.div`
 `;
 
 const ErrorText = styled.p`
-  color: #DC143C;
+  color: ${TEXT_WARNING};
 `;
 
 export default Error;

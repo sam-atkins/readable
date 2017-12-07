@@ -10,7 +10,7 @@ import {
   getCategoryErrorStatus,
   getCategoryLoadingStatus,
 } from '../selectors/categorySelectors';
-import { getPostValues } from '../selectors/postSelectors'
+import { getPostValues } from '../selectors/postSelectors';
 
 const CategoryPostViewContainer = ({
   categories,
@@ -40,7 +40,10 @@ const CategoryPostViewContainer = ({
           </CategoryContent>
           {posts.reduce((postArray, post) => {
             if (post.category === cat.id) {
-              return [...postArray, <PostView post={post} key={post.id} />];
+              return [
+                ...postArray,
+                <PostView post={post} key={post.id} homeFlag />,
+              ];
             }
             return postArray;
           }, [])}
@@ -60,6 +63,7 @@ CategoryPostViewContainer.propTypes = {
 const CategoryViewWrapper = styled.div`
   grid-column-start: 1;
   grid-column-end: 4;
+  grid-row: 2;
 `;
 
 const CategoryPostWrapper = styled.div``;

@@ -8,28 +8,28 @@ import Footer from '../components/Footer';
 import PostView from '../components/PostView';
 import NoMatch from '../components/NoMatch';
 import NoPosts from '../components/NoPosts';
+import SideBar from '../components/SideBar';
 import PageWrapper from '../styles/pagewrapper';
 import { validCategoryUrl } from '../selectors/categorySelectors';
 import { filterPostsByParam } from '../selectors/postSelectors';
 
 const CategoryPageContainer = ({ posts, validUrl }) => {
   if (!validUrl) {
-    return (
-      <NoMatch />
-    );
+    return <NoMatch />;
   }
 
   if (posts.length === 0) {
-    return (
-      <NoPosts />
-    );
+    return <NoPosts />;
   }
 
   return (
     <StyledWrapper>
       <Header />
       <NavBarContainer />
-      {posts.map(post => <PostView key={post.id} post={post} />)}
+      <SideBar />
+      {posts.map(post => (
+        <PostView key={post.id} post={post} homeFlag={false} />
+      ))}
       <Footer />
     </StyledWrapper>
   );

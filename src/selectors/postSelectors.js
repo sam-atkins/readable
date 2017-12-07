@@ -1,4 +1,4 @@
-import slugifyPostTitle from '../utils/utils';
+import { slugifyPostTitle } from '../utils/utils';
 
 export const getPostLoadingStatus = ({ post }) => post.postStatus.loading;
 
