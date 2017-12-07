@@ -20,10 +20,10 @@ import { userInputIsValid } from '../utils/utils';
 
 class NewPostForm extends Component {
   state = {
-    title: '',
-    body: '',
-    category: 'react',
-    author: '',
+    title: this.props.title,
+    body: this.props.body,
+    category: this.props.category,
+    author: this.props.author,
   };
 
   render() {
@@ -178,10 +178,18 @@ class NewPostForm extends Component {
 NewPostForm.propTypes = {
   categories: PropTypes.array.isRequired,
   submitFormToAddPost: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  category: PropTypes.string,
+  author: PropTypes.string,
   redirect: PropTypes.bool,
 };
 
 NewPostForm.defaultProps = {
+  title: '',
+  body: '',
+  category: 'react',
+  author: '',
   redirect: false,
 };
 
