@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { toggleRedirect } from '../actions/postActions';
@@ -8,9 +9,11 @@ import {
   NEW_POST_BUTTON_TEXT,
 } from '../styles/colours';
 
-const NewPostButton = () => (
-  <NewPostButtonArrow to="/newpost" onClick={toggleRedirect()}>
-    <NewPostButtonText>Submit a new text post</NewPostButtonText>
+const NewPostButton = props => (
+  <NewPostButtonArrow to="/newpost">
+    <NewPostButtonText onClick={props.resetRedirect()}>
+      Submit a new text post
+    </NewPostButtonText>
   </NewPostButtonArrow>
 );
 
@@ -44,6 +47,11 @@ const NewPostButtonArrow = styled(Link)`
 const NewPostButtonText = styled.p`
   color: ${NEW_POST_BUTTON_TEXT};
 `;
+
+NewPostButton.propTypes = {
+  resetRedirect: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+    .isRequired,
+};
 
 const mapDispatchToProps = dispatch => ({
   resetRedirect: () => dispatch(toggleRedirect()),
