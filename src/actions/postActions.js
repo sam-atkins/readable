@@ -42,3 +42,9 @@ export const addNewPost = payload => (dispatch) => {
     .then(data => dispatch(addPostSuccess(data)))
     .catch(error => dispatch(addPostError(error)));
 };
+
+export const SELECT_POST_TO_EDIT = 'SELECT_POST_TO_EDIT';
+export const selectPostToEdit = payload => ({
+  type: SELECT_POST_TO_EDIT,
+  payload,
+});
