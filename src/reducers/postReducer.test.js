@@ -222,9 +222,7 @@ describe('post reducer', () => {
         redirect: true,
       },
     };
-    const payload = {
-      id: '6ni6ok3ym7mf1p33lnez',
-    };
+    const payload = '6ni6ok3ym7mf1p33lnez';
     const action = {
       type: SELECT_POST_TO_EDIT,
       payload,

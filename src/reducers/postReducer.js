@@ -80,7 +80,7 @@ const post = (state = initialState, action) => {
           error: false,
           loading: false,
           redirect: false,
-          postIdForEditing: action.payload.id,
+          postIdForEditing: action.payload,
         },
       };
     case TOGGLE_FORM_REDIRECT:

@@ -12,6 +12,7 @@ import {
   getPostErrorStatus,
   getPostLoadingStatus,
 } from '../selectors/postSelectors';
+import { selectPostToEdit } from '../actions/postActions';
 import {
   POST_BACKGROUND,
   POST_BORDER,
@@ -22,7 +23,7 @@ import {
 import { slugifyPostTitle } from '../utils/utils';
 
 const PostView = ({
-  post, error, loading, homeFlag,
+  post, error, loading, homeFlag, submitPostToEdit,
 }) => {
   if (loading) {
     return <Loading />;
@@ -56,7 +57,7 @@ const PostView = ({
         <StyledPostMetaBold>{post.commentCount} comments</StyledPostMetaBold>
         <StyledPostMetaBoldLink
           to="/newpost"
-          onClick={() => console.log('edit', post.id)}
+          onClick={() => submitPostToEdit(post.id)}
         >
           edit
         </StyledPostMetaBoldLink>
@@ -71,6 +72,7 @@ PostView.propTypes = {
   error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   homeFlag: PropTypes.bool,
+  submitPostToEdit: PropTypes.func.isRequired,
 };
 
 PostView.defaultProps = {
@@ -142,4 +144,10 @@ const mapStateToProps = state => ({
   loading: getPostLoadingStatus(state),
 });
 
-export default connect(mapStateToProps)(PostView);
+const mapDispatchToProps = dispatch => ({
+  submitPostToEdit: (payload) => {
+    dispatch(selectPostToEdit(payload));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostView);

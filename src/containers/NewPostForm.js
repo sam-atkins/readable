@@ -20,10 +20,10 @@ import { userInputIsValid } from '../utils/utils';
 
 class NewPostForm extends Component {
   state = {
-    title: this.props.title,
-    body: this.props.body,
-    category: this.props.category,
-    author: this.props.author,
+    title: this.props.postToEdit.title,
+    body: this.props.postToEdit.body,
+    category: this.props.postToEdit.category,
+    author: this.props.postToEdit.author,
   };
 
   render() {
@@ -147,21 +147,25 @@ class NewPostForm extends Component {
                 ))}
               </StyledParagraph>
             </FormWrapperLabel>
-            <FormWrapperLabel>
-              <StyledLabel>
-                <StyledLabelSpan>*username</StyledLabelSpan>
-              </StyledLabel>
-            </FormWrapperLabel>
-            <FormWrapperLabel>
-              <StyledInput
-                name="author"
-                value={this.state.author}
-                onChange={event => handleInputChange(event)}
-              />
-              {this.state.authorInputError && (
-                <FormErrorMessage authorErrorMessage min={1} max={20} />
-              )}
-            </FormWrapperLabel>
+            {!this.props.edit && (
+              <div>
+                <FormWrapperLabel>
+                  <StyledLabel>
+                    <StyledLabelSpan>*username</StyledLabelSpan>
+                  </StyledLabel>
+                </FormWrapperLabel>
+                <FormWrapperLabel>
+                  <StyledInput
+                    name="author"
+                    value={this.state.author}
+                    onChange={event => handleInputChange(event)}
+                  />
+                  {this.state.authorInputError && (
+                    <FormErrorMessage authorErrorMessage min={1} max={20} />
+                  )}
+                </FormWrapperLabel>
+              </div>
+            )}
             <p>*required</p>
             <Buffer />
             <div>
@@ -178,20 +182,38 @@ class NewPostForm extends Component {
 NewPostForm.propTypes = {
   categories: PropTypes.array.isRequired,
   submitFormToAddPost: PropTypes.func.isRequired,
-  title: PropTypes.string,
-  body: PropTypes.string,
-  category: PropTypes.string,
-  author: PropTypes.string,
+  postToEdit: PropTypes.shape({
+    title: PropTypes.string,
+    body: PropTypes.string,
+    category: PropTypes.string,
+    author: PropTypes.string,
+  }),
   redirect: PropTypes.bool,
+  edit: PropTypes.bool.isRequired,
 };
 
 NewPostForm.defaultProps = {
-  title: '',
-  body: '',
-  category: 'react',
-  author: '',
+  postToEdit: {
+    title: '',
+    body: '',
+    category: 'react',
+    author: '',
+  },
   redirect: false,
 };
+
+const mapStateToProps = state => ({
+  categories: getCategoryValues(state),
+  redirect: state.post.postStatus.redirect,
+  edit: state.post.postStatus.edit,
+  postToEdit: state.post[state.post.postStatus.postIdForEditing],
+});
+
+const mapDispatchToProps = dispatch => ({
+  submitFormToAddPost: (payload) => {
+    dispatch(addNewPost(payload));
+  },
+});
 
 const StyledWrapper = styled(PageWrapper)``;
 
@@ -255,16 +277,5 @@ const StyledParagraph = styled.p`
   padding-left: 10px;
   padding-bottom: 7px;
 `;
-
-const mapStateToProps = state => ({
-  categories: getCategoryValues(state),
-  redirect: state.post.postStatus.redirect,
-});
-
-const mapDispatchToProps = dispatch => ({
-  submitFormToAddPost: (payload) => {
-    dispatch(addNewPost(payload));
-  },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewPostForm);
