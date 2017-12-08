@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import NavBarContainer from './NavBarContainer';
 import Header from '../components/Header';
 import PostView from '../components/PostView';
-import NoMatch from '../components/NoMatch';
+import NoMatchWrapper from '../components/NoMatchWrapper';
 import SideBar from '../components/SideBar';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
@@ -13,7 +13,11 @@ import { selectPostByPostId, validPostUrl } from '../selectors/postSelectors';
 
 const PostPageContainer = ({ selectedPost, validPostUrlSlug }) => {
   if (!validPostUrlSlug) {
-    return <NoMatch />;
+    return <NoMatchWrapper />;
+  }
+
+  if (selectedPost.deleted === true) {
+    return <NoMatchWrapper />;
   }
 
   return (
@@ -22,7 +26,7 @@ const PostPageContainer = ({ selectedPost, validPostUrlSlug }) => {
       <NavBarContainer />
       <SideBar />
       {selectedPost.map(post => (
-        <PostView key={post.id} post={post} homeFlag={false} />
+        <PostView key={post.id} post={post} homeFlag={false} postPage />
       ))}
       <Footer />
     </StyledWrapper>

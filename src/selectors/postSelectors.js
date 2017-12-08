@@ -26,7 +26,8 @@ export const getPostValues = ({ post }) => {
 
 export const filterPostsByParam = (post, urlParam) => {
   const postsArray = getPostValues(post);
-  return postsArray.filter(filteredPost => filteredPost.category === urlParam);
+  return postsArray.filter(filteredPost =>
+    filteredPost.category === urlParam && filteredPost.deleted === false);
 };
 
 export const selectPostByPostId = ({ post }, postId) => {

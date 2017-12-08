@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
 import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
-import Loading from '../components/Loading';
-import Error from '../components/Error';
+import Loading from './Loading';
+import Error from './Error';
+import NoMatchText from './NoMatchText';
 import {
   getPostErrorStatus,
   getPostLoadingStatus,
@@ -27,6 +28,7 @@ const PostView = ({
   error,
   loading,
   homeFlag,
+  postPage,
   confirmedDeletePostRequest,
   submitPostToEdit,
 }) => {
@@ -36,6 +38,10 @@ const PostView = ({
 
   if (error) {
     return <Error />;
+  }
+
+  if (postPage && post.deleted === true) {
+    return <NoMatchText />;
   }
 
   return (
@@ -79,12 +85,14 @@ PostView.propTypes = {
   error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   homeFlag: PropTypes.bool,
+  postPage: PropTypes.bool,
   confirmedDeletePostRequest: PropTypes.func.isRequired,
   submitPostToEdit: PropTypes.func.isRequired,
 };
 
 PostView.defaultProps = {
   homeFlag: false,
+  postPage: false,
 };
 
 const mapStateToProps = state => ({

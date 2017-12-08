@@ -39,7 +39,7 @@ const CategoryPostViewContainer = ({
             </SortPostsMenu>
           </CategoryContent>
           {posts.reduce((postArray, post) => {
-            if (post.category === cat.id) {
+            if (post.category === cat.id && post.deleted === false) {
               return [
                 ...postArray,
                 <PostView post={post} key={post.id} homeFlag />,
