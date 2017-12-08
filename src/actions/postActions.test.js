@@ -6,9 +6,11 @@ import fetchMock from 'fetch-mock';
 import {
   fetchPosts,
   addPostSuccess,
+  selectPostToEdit,
   ADD_NEW_POST_SUCCESS,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
+  SELECT_POST_TO_EDIT,
 } from './postActions';
 
 const middlewares = [thunk];
@@ -126,5 +128,16 @@ describe('postActions', () => {
       payload,
     };
     expect(addPostSuccess(payload)).toEqual(expectedAction);
+  });
+
+  it('should provide a payload for the post to be edited', () => {
+    const payload = {
+      id: '6ni6ok3ym7mf1p33lnez',
+    };
+    const expectedAction = {
+      type: SELECT_POST_TO_EDIT,
+      payload,
+    };
+    expect(selectPostToEdit(payload)).toEqual(expectedAction);
   });
 });

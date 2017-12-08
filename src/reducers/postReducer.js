@@ -4,11 +4,13 @@ import {
   ADD_NEW_POST_REQUEST,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
+  SELECT_POST_TO_EDIT,
   TOGGLE_FORM_REDIRECT,
 } from '../actions/postActions';
 
 const initialState = {
   postStatus: {
+    edit: false,
     error: false,
     loading: true,
     redirect: false,
@@ -23,6 +25,7 @@ const post = (state = initialState, action) => {
       return {
         ...posts.reduce((newObj, pst) => ({ ...newObj, [pst.id]: pst }), {}),
         postStatus: {
+          edit: false,
           error: false,
           loading: false,
           redirect: false,
@@ -32,6 +35,7 @@ const post = (state = initialState, action) => {
       return {
         ...posts,
         postStatus: {
+          edit: false,
           error: true,
           loading: false,
           redirect: false,
@@ -41,6 +45,7 @@ const post = (state = initialState, action) => {
       return {
         ...state,
         postStatus: {
+          edit: false,
           error: false,
           loading: true,
           redirect: false,
@@ -51,6 +56,7 @@ const post = (state = initialState, action) => {
         ...state,
         [action.payload.id]: { ...action.payload },
         postStatus: {
+          edit: false,
           error: false,
           loading: false,
           redirect: true,
@@ -60,15 +66,28 @@ const post = (state = initialState, action) => {
       return {
         ...state,
         postStatus: {
+          edit: false,
           error: true,
           loading: false,
           redirect: false,
+        },
+      };
+    case SELECT_POST_TO_EDIT:
+      return {
+        ...state,
+        postStatus: {
+          edit: true,
+          error: false,
+          loading: false,
+          redirect: false,
+          postIdForEditing: action.payload,
         },
       };
     case TOGGLE_FORM_REDIRECT:
       return {
         ...state,
         postStatus: {
+          edit: false,
           error: false,
           loading: false,
           redirect: false,

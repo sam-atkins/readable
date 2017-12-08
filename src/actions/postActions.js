@@ -1,4 +1,4 @@
-import { getPosts, persistPost } from '../utils/api';
+import { editAndPersistPost, getPosts, persistPost } from '../utils/api';
 
 export const RECEIVE_POSTS_SUCCESS = 'RECEIVE_POSTS_SUCCESS';
 export const receivePosts = posts => ({
@@ -39,6 +39,18 @@ export const addPostError = () => ({
 
 export const addNewPost = payload => (dispatch) => {
   persistPost(payload)
+    .then(data => dispatch(addPostSuccess(data)))
+    .catch(error => dispatch(addPostError(error)));
+};
+
+export const SELECT_POST_TO_EDIT = 'SELECT_POST_TO_EDIT';
+export const selectPostToEdit = payload => ({
+  type: SELECT_POST_TO_EDIT,
+  payload,
+});
+
+export const editExistingPost = payload => (dispatch) => {
+  editAndPersistPost(payload)
     .then(data => dispatch(addPostSuccess(data)))
     .catch(error => dispatch(addPostError(error)));
 };

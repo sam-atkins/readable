@@ -6,6 +6,7 @@ import {
   ADD_NEW_POST_SUCCESS,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
+  SELECT_POST_TO_EDIT,
   TOGGLE_FORM_REDIRECT,
 } from '../actions/postActions';
 
@@ -31,6 +32,7 @@ describe('post reducer', () => {
   it('should add posts to the global store', () => {
     const initialState = {
       postStatus: {
+        edit: false,
         error: false,
         loading: true,
         redirect: false,
@@ -89,6 +91,7 @@ describe('post reducer', () => {
         commentCount: 0,
       },
       postStatus: {
+        edit: false,
         error: false,
         loading: false,
         redirect: false,
@@ -100,6 +103,7 @@ describe('post reducer', () => {
   it('should fail to fetch posts gracefully', () => {
     const initialState = {
       postStatus: {
+        edit: false,
         error: false,
         loading: true,
         redirect: false,
@@ -110,6 +114,7 @@ describe('post reducer', () => {
     };
     const expectedState = {
       postStatus: {
+        edit: false,
         error: true,
         loading: false,
         redirect: false,
@@ -134,6 +139,7 @@ describe('post reducer', () => {
         commentCount: 0,
       },
       postStatus: {
+        edit: false,
         error: false,
         loading: false,
       },
@@ -177,6 +183,7 @@ describe('post reducer', () => {
         commentCount: 0,
       },
       postStatus: {
+        edit: false,
         error: false,
         loading: false,
         redirect: true,
@@ -198,9 +205,35 @@ describe('post reducer', () => {
     };
     const expectedState = {
       postStatus: {
+        edit: false,
         error: false,
         loading: false,
         redirect: false,
+      },
+    };
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should add the postId for the post selected for editing', () => {
+    const initialState = {
+      postStatus: {
+        error: false,
+        loading: false,
+        redirect: true,
+      },
+    };
+    const payload = '6ni6ok3ym7mf1p33lnez';
+    const action = {
+      type: SELECT_POST_TO_EDIT,
+      payload,
+    };
+    const expectedState = {
+      postStatus: {
+        edit: true,
+        error: false,
+        loading: false,
+        redirect: false,
+        postIdForEditing: '6ni6ok3ym7mf1p33lnez',
       },
     };
     expect(post(initialState, action)).toEqual(expectedState);

@@ -4,16 +4,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
+import NavbarContainer from '../containers/NavBarContainer';
 import Header from '../components/Header';
 import FormErrorMessage from '../components/FormErrorMessage';
-import NavbarContainer from '../containers/NavBarContainer';
+import FormInfoBar from '../components/FormInfoBar';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
 import { getCategoryValues } from '../selectors/categorySelectors';
-import { addNewPost } from '../actions/postActions';
+import { addNewPost, editExistingPost } from '../actions/postActions';
 import {
-  FORM_INFOBAR_BORDER,
-  FORM_INFOBAR_BACKGROUND,
   FORM_BUFFER_BACKGROUND,
   FORM_WRAPPER_LABEL_BACKGROUND,
 } from '../styles/colours';
@@ -21,10 +20,14 @@ import { userInputIsValid } from '../utils/utils';
 
 class NewPostForm extends Component {
   state = {
-    title: '',
-    body: '',
-    category: 'react',
-    author: '',
+    // id field is required for PUT request to edit an existing post
+    /* eslint-disable */
+    id: this.props.postToEdit.id,
+    /* eslint-enable */
+    title: this.props.postToEdit.title,
+    body: this.props.postToEdit.body,
+    category: this.props.postToEdit.category,
+    author: this.props.postToEdit.author,
   };
 
   render() {
@@ -65,6 +68,8 @@ class NewPostForm extends Component {
         this.setState({
           bodyInputError: true,
         });
+      } else if (this.props.edit) {
+        this.props.submitFormToEditPost(this.state);
       } else {
         this.props.submitFormToAddPost(this.state);
       }
@@ -77,13 +82,7 @@ class NewPostForm extends Component {
           <Header />
           <NavbarContainer />
           <StyledForm onSubmit={event => handleFormSubmit(event)}>
-            <FormH1>submit to readable</FormH1>
-            <InfoBar>
-              You are submitting a text-based post. Speak your mind. A title is
-              required, but expanding further in the text field is not.
-              Beginning your title with "vote up if" is violation of
-              intergalactic law.
-            </InfoBar>
+            <FormInfoBar />
             <Buffer />
             <FormWrapperLabel>
               <StyledLabel>
@@ -154,21 +153,25 @@ class NewPostForm extends Component {
                 ))}
               </StyledParagraph>
             </FormWrapperLabel>
-            <FormWrapperLabel>
-              <StyledLabel>
-                <StyledLabelSpan>*username</StyledLabelSpan>
-              </StyledLabel>
-            </FormWrapperLabel>
-            <FormWrapperLabel>
-              <StyledInput
-                name="author"
-                value={this.state.author}
-                onChange={event => handleInputChange(event)}
-              />
-              {this.state.authorInputError && (
-                <FormErrorMessage authorErrorMessage min={1} max={20} />
-              )}
-            </FormWrapperLabel>
+            {!this.props.edit && (
+              <div>
+                <FormWrapperLabel>
+                  <StyledLabel>
+                    <StyledLabelSpan>*username</StyledLabelSpan>
+                  </StyledLabel>
+                </FormWrapperLabel>
+                <FormWrapperLabel>
+                  <StyledInput
+                    name="author"
+                    value={this.state.author}
+                    onChange={event => handleInputChange(event)}
+                  />
+                  {this.state.authorInputError && (
+                    <FormErrorMessage authorErrorMessage min={1} max={20} />
+                  )}
+                </FormWrapperLabel>
+              </div>
+            )}
             <p>*required</p>
             <Buffer />
             <div>
@@ -185,28 +188,47 @@ class NewPostForm extends Component {
 NewPostForm.propTypes = {
   categories: PropTypes.array.isRequired,
   submitFormToAddPost: PropTypes.func.isRequired,
+  submitFormToEditPost: PropTypes.func.isRequired,
+  postToEdit: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    body: PropTypes.string,
+    category: PropTypes.string,
+    author: PropTypes.string,
+  }),
   redirect: PropTypes.bool,
+  edit: PropTypes.bool.isRequired,
 };
 
 NewPostForm.defaultProps = {
+  postToEdit: {
+    id: '',
+    title: '',
+    body: '',
+    category: 'react',
+    author: '',
+  },
   redirect: false,
 };
 
+const mapStateToProps = state => ({
+  categories: getCategoryValues(state),
+  redirect: state.post.postStatus.redirect,
+  edit: state.post.postStatus.edit,
+  postId: state.post.postStatus.postIdForEditing,
+  postToEdit: state.post[state.post.postStatus.postIdForEditing],
+});
+
+const mapDispatchToProps = dispatch => ({
+  submitFormToAddPost: (payload) => {
+    dispatch(addNewPost(payload));
+  },
+  submitFormToEditPost: (payload) => {
+    dispatch(editExistingPost(payload));
+  },
+});
+
 const StyledWrapper = styled(PageWrapper)``;
-
-const FormH1 = styled.h1`
-  font-size: 18px;
-  font-weight: normal;
-`;
-
-const InfoBar = styled.div`
-  background-color: ${FORM_INFOBAR_BACKGROUND};
-  border-color: ${FORM_INFOBAR_BORDER};
-  border-style: solid;
-  border-width: 1px;
-  font-size: small;
-  padding: 5px;
-`;
 
 const Buffer = styled.div`
   background-color: ${FORM_BUFFER_BACKGROUND};
@@ -268,16 +290,5 @@ const StyledParagraph = styled.p`
   padding-left: 10px;
   padding-bottom: 7px;
 `;
-
-const mapStateToProps = state => ({
-  categories: getCategoryValues(state),
-  redirect: state.post.postStatus.redirect,
-});
-
-const mapDispatchToProps = dispatch => ({
-  submitFormToAddPost: (payload) => {
-    dispatch(addNewPost(payload));
-  },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewPostForm);

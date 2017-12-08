@@ -12,6 +12,7 @@ import {
   getPostErrorStatus,
   getPostLoadingStatus,
 } from '../selectors/postSelectors';
+import { selectPostToEdit } from '../actions/postActions';
 import {
   POST_BACKGROUND,
   POST_BORDER,
@@ -22,7 +23,7 @@ import {
 import { slugifyPostTitle } from '../utils/utils';
 
 const PostView = ({
-  post, error, loading, homeFlag,
+  post, error, loading, homeFlag, submitPostToEdit,
 }) => {
   if (loading) {
     return <Loading />;
@@ -54,7 +55,12 @@ const PostView = ({
       {!homeFlag && <StyledPostBody>{post.body}</StyledPostBody>}
       <StyledCommentWrapper>
         <StyledPostMetaBold>{post.commentCount} comments</StyledPostMetaBold>
-        <StyledPostMetaBold>edit</StyledPostMetaBold>
+        <StyledPostMetaBoldLink
+          to="/newpost"
+          onClick={() => submitPostToEdit(post.id)}
+        >
+          edit
+        </StyledPostMetaBoldLink>
         <StyledPostMetaBold>delete</StyledPostMetaBold>
       </StyledCommentWrapper>
     </PostWrapper>
@@ -66,6 +72,7 @@ PostView.propTypes = {
   error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   homeFlag: PropTypes.bool,
+  submitPostToEdit: PropTypes.func.isRequired,
 };
 
 PostView.defaultProps = {
@@ -117,6 +124,14 @@ const StyledCommentWrapper = styled.div`
   grid-row: 3;
 `;
 
+const StyledPostMetaBoldLink = styled(Link)`
+  color: ${POST_META};
+  font-size: x-small;
+  font-weight: bold;
+  padding-right: 1rem;
+  text-decoration: none;
+`;
+
 const StyledPostMetaBold = styled.span`
   color: ${POST_META};
   font-size: x-small;
@@ -129,4 +144,10 @@ const mapStateToProps = state => ({
   loading: getPostLoadingStatus(state),
 });
 
-export default connect(mapStateToProps)(PostView);
+const mapDispatchToProps = dispatch => ({
+  submitPostToEdit: (payload) => {
+    dispatch(selectPostToEdit(payload));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostView);

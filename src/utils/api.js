@@ -62,3 +62,19 @@ export const persistPost = (payload) => {
     .then(response => response.json())
     .then(data => data);
 };
+
+export const editAndPersistPost = (payload) => {
+  const updatedPayload = {
+    title: payload.title,
+    body: payload.body,
+  };
+  return fetch(`${api}/posts/${payload.id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+    },
+    body: JSON.stringify(updatedPayload),
+  })
+    .then(response => response.json())
+    .then(data => data);
+};
