@@ -11,7 +11,7 @@ import FormInfoBar from '../components/FormInfoBar';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
 import { getCategoryValues } from '../selectors/categorySelectors';
-import { addNewPost } from '../actions/postActions';
+import { addNewPost, editExistingPost } from '../actions/postActions';
 import {
   FORM_BUFFER_BACKGROUND,
   FORM_WRAPPER_LABEL_BACKGROUND,
@@ -20,6 +20,10 @@ import { userInputIsValid } from '../utils/utils';
 
 class NewPostForm extends Component {
   state = {
+    // id field is required for PUT request to edit an existing post
+    /* eslint-disable */
+    id: this.props.postToEdit.id,
+    /* eslint-enable */
     title: this.props.postToEdit.title,
     body: this.props.postToEdit.body,
     category: this.props.postToEdit.category,
@@ -64,6 +68,8 @@ class NewPostForm extends Component {
         this.setState({
           bodyInputError: true,
         });
+      } else if (this.props.edit) {
+        this.props.submitFormToEditPost(this.state);
       } else {
         this.props.submitFormToAddPost(this.state);
       }
@@ -182,7 +188,9 @@ class NewPostForm extends Component {
 NewPostForm.propTypes = {
   categories: PropTypes.array.isRequired,
   submitFormToAddPost: PropTypes.func.isRequired,
+  submitFormToEditPost: PropTypes.func.isRequired,
   postToEdit: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
     body: PropTypes.string,
     category: PropTypes.string,
@@ -194,6 +202,7 @@ NewPostForm.propTypes = {
 
 NewPostForm.defaultProps = {
   postToEdit: {
+    id: '',
     title: '',
     body: '',
     category: 'react',
@@ -206,12 +215,16 @@ const mapStateToProps = state => ({
   categories: getCategoryValues(state),
   redirect: state.post.postStatus.redirect,
   edit: state.post.postStatus.edit,
+  postId: state.post.postStatus.postIdForEditing,
   postToEdit: state.post[state.post.postStatus.postIdForEditing],
 });
 
 const mapDispatchToProps = dispatch => ({
   submitFormToAddPost: (payload) => {
     dispatch(addNewPost(payload));
+  },
+  submitFormToEditPost: (payload) => {
+    dispatch(editExistingPost(payload));
   },
 });
 
