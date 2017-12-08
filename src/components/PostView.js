@@ -12,7 +12,7 @@ import {
   getPostErrorStatus,
   getPostLoadingStatus,
 } from '../selectors/postSelectors';
-import { selectPostToEdit } from '../actions/postActions';
+import { processPostDeletion, selectPostToEdit } from '../actions/postActions';
 import {
   POST_BACKGROUND,
   POST_BORDER,
@@ -23,7 +23,12 @@ import {
 import { slugifyPostTitle } from '../utils/utils';
 
 const PostView = ({
-  post, error, loading, homeFlag, submitPostToEdit,
+  post,
+  error,
+  loading,
+  homeFlag,
+  confirmedDeletePostRequest,
+  submitPostToEdit,
 }) => {
   if (loading) {
     return <Loading />;
@@ -61,7 +66,9 @@ const PostView = ({
         >
           edit
         </StyledPostMetaBoldLink>
-        <StyledPostMetaBold>delete</StyledPostMetaBold>
+        <StyledPostMetaBold onClick={() => confirmedDeletePostRequest(post.id)}>
+          delete
+        </StyledPostMetaBold>
       </StyledCommentWrapper>
     </PostWrapper>
   );
@@ -72,12 +79,27 @@ PostView.propTypes = {
   error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   homeFlag: PropTypes.bool,
+  confirmedDeletePostRequest: PropTypes.func.isRequired,
   submitPostToEdit: PropTypes.func.isRequired,
 };
 
 PostView.defaultProps = {
   homeFlag: false,
 };
+
+const mapStateToProps = state => ({
+  error: getPostErrorStatus(state),
+  loading: getPostLoadingStatus(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  submitPostToEdit: (payload) => {
+    dispatch(selectPostToEdit(payload));
+  },
+  confirmedDeletePostRequest: (payload) => {
+    dispatch(processPostDeletion(payload));
+  },
+});
 
 const PostWrapper = styled.div`
   display: grid;
@@ -138,16 +160,5 @@ const StyledPostMetaBold = styled.span`
   font-weight: bold;
   padding-right: 1rem;
 `;
-
-const mapStateToProps = state => ({
-  error: getPostErrorStatus(state),
-  loading: getPostLoadingStatus(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  submitPostToEdit: (payload) => {
-    dispatch(selectPostToEdit(payload));
-  },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostView);

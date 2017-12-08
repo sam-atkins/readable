@@ -4,6 +4,7 @@ import deepFreeze from 'deep-freeze';
 import post from './postReducer';
 import {
   ADD_NEW_POST_SUCCESS,
+  CONFIRM_DELETE_POST,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
   SELECT_POST_TO_EDIT,
@@ -234,6 +235,86 @@ describe('post reducer', () => {
         loading: false,
         redirect: false,
         postIdForEditing: '6ni6ok3ym7mf1p33lnez',
+      },
+    };
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should set a deleted post bool to true', () => {
+    const initialState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      Qzh7pWU9: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: false,
+        redirect: false,
+      },
+    };
+    const action = {
+      type: CONFIRM_DELETE_POST,
+      payload: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: true,
+        commentCount: 0,
+      },
+    };
+    const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      Qzh7pWU9: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: true,
+        commentCount: 0,
+      },
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: false,
+        redirect: false,
       },
     };
     expect(post(initialState, action)).toEqual(expectedState);

@@ -1,4 +1,9 @@
-import { editAndPersistPost, getPosts, persistPost } from '../utils/api';
+import {
+  editAndPersistPost,
+  deletePost,
+  getPosts,
+  persistPost,
+} from '../utils/api';
 
 export const RECEIVE_POSTS_SUCCESS = 'RECEIVE_POSTS_SUCCESS';
 export const receivePosts = posts => ({
@@ -53,4 +58,26 @@ export const editExistingPost = payload => (dispatch) => {
   editAndPersistPost(payload)
     .then(data => dispatch(addPostSuccess(data)))
     .catch(error => dispatch(addPostError(error)));
+};
+
+export const REQUEST_DELETE_POST = 'REQUEST_DELETE_POST';
+export const requestDeletePost = () => ({
+  type: REQUEST_DELETE_POST,
+});
+
+export const CONFIRM_DELETE_POST = 'CONFIRM_DELETE_POST';
+export const confirmDeletePost = payload => ({
+  type: CONFIRM_DELETE_POST,
+  payload,
+});
+
+export const FAILED_DELETE_POST = 'FAILED_DELETE_POST';
+export const failedDeletePost = () => ({
+  type: FAILED_DELETE_POST,
+});
+
+export const processPostDeletion = payload => (dispatch) => {
+  deletePost(payload)
+    .then(data => dispatch(confirmDeletePost(data)))
+    .catch(error => dispatch(failedDeletePost(error)));
 };

@@ -78,3 +78,14 @@ export const editAndPersistPost = (payload) => {
     .then(response => response.json())
     .then(data => data);
 };
+
+export const deletePost = (payload) => {
+  return fetch(`${api}/posts/${payload}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+    },
+  })
+    .then(response => response.json())
+    .then(data => data);
+};

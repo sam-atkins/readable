@@ -2,6 +2,7 @@ import {
   ADD_NEW_POST_FAILURE,
   ADD_NEW_POST_SUCCESS,
   ADD_NEW_POST_REQUEST,
+  CONFIRM_DELETE_POST,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
   SELECT_POST_TO_EDIT,
@@ -86,6 +87,17 @@ const post = (state = initialState, action) => {
     case TOGGLE_FORM_REDIRECT:
       return {
         ...state,
+        postStatus: {
+          edit: false,
+          error: false,
+          loading: false,
+          redirect: false,
+        },
+      };
+    case CONFIRM_DELETE_POST:
+      return {
+        ...state,
+        [action.payload.id]: { ...action.payload },
         postStatus: {
           edit: false,
           error: false,
