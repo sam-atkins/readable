@@ -15,6 +15,7 @@ import {
 } from '../selectors/postSelectors';
 import { processPostDeletion, selectPostToEdit } from '../actions/postActions';
 import {
+  LINK_HOVER,
   POST_BACKGROUND,
   POST_BORDER,
   POST_META,
@@ -160,6 +161,10 @@ const StyledPostMetaBoldLink = styled(Link)`
   font-weight: bold;
   padding-right: 1rem;
   text-decoration: none;
+
+  :hover {
+    color: ${LINK_HOVER};
+  }
 `;
 
 const StyledPostMetaBold = styled.span`
@@ -167,6 +172,11 @@ const StyledPostMetaBold = styled.span`
   font-size: x-small;
   font-weight: bold;
   padding-right: 1rem;
+
+  :hover {
+    color: ${LINK_HOVER};
+    cursor: pointer;
+  }
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostView);
