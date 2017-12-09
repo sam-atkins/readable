@@ -119,6 +119,32 @@ describe('selectors for posts', () => {
     expect(filterPostsByParam(selectPostsInState, urlParam)).toEqual(expectedShape);
   });
 
+  it('should filter posts by param and deleted property', () => {
+    const initialState = {
+      post: {
+        ni6ok3ym: {
+          id: 'ni6ok3ym',
+          timestamp: 1468479767190,
+          title: 'Learn Redux in 10 minutes!',
+          body:
+            'Just kidding. It takes more than 10 minutes to learn technology.',
+          author: 'thingone',
+          category: 'redux',
+          voteScore: -5,
+          deleted: true,
+          commentCount: 0,
+        },
+        postStatus: {
+          error: false,
+          loading: false,
+        },
+      },
+    };
+    const urlParam = 'redux';
+    const expectedShape = [];
+    expect(filterPostsByParam(initialState, urlParam)).toEqual(expectedShape);
+  });
+
   it('should select a post by the url postId}', () => {
     const postId = '2v3d8ayl';
     const expectedShape = [
