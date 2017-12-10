@@ -4,8 +4,11 @@ import deepFreeze from 'deep-freeze';
 import post from './postReducer';
 import {
   ADD_NEW_POST_SUCCESS,
+  CANCEL_REQUEST_DELETE_POST,
+  CONFIRM_DELETE_POST,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
+  REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
   TOGGLE_FORM_REDIRECT,
 } from '../actions/postActions';
@@ -14,15 +17,21 @@ describe('post reducer', () => {
   it('should return the initial state', () => {
     const initialState = {
       postStatus: {
+        edit: false,
         error: false,
         loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     const action = {};
     const expectedState = {
       postStatus: {
+        edit: false,
         error: false,
         loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     deepFreeze(initialState);
@@ -36,6 +45,7 @@ describe('post reducer', () => {
         error: false,
         loading: true,
         redirect: false,
+        requestDelete: false,
       },
     };
     const action = {
@@ -95,8 +105,10 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: false,
+        requestDelete: false,
       },
     };
+    deepFreeze(initialState);
     expect(post(initialState, action)).toEqual(expectedState);
   });
 
@@ -107,6 +119,7 @@ describe('post reducer', () => {
         error: false,
         loading: true,
         redirect: false,
+        requestDelete: false,
       },
     };
     const action = {
@@ -118,6 +131,7 @@ describe('post reducer', () => {
         error: true,
         loading: false,
         redirect: false,
+        requestDelete: false,
       },
     };
     deepFreeze(initialState);
@@ -125,7 +139,7 @@ describe('post reducer', () => {
   });
 
   it('should add a new post to the global store', () => {
-    const state = {
+    const initialState = {
       ni6ok3ym: {
         id: 'ni6ok3ym',
         timestamp: 1468479767190,
@@ -141,7 +155,9 @@ describe('post reducer', () => {
       postStatus: {
         edit: false,
         error: false,
-        loading: false,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     const action = {
@@ -187,17 +203,21 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: true,
+        requestDelete: false,
       },
     };
-    expect(post(state, action)).toEqual(expectedState);
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
   });
 
   it('should toggle redirect to false', () => {
     const initialState = {
       postStatus: {
+        edit: false,
         error: false,
-        loading: false,
-        redirect: true,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     const action = {
@@ -209,17 +229,21 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: false,
+        requestDelete: false,
       },
     };
+    deepFreeze(initialState);
     expect(post(initialState, action)).toEqual(expectedState);
   });
 
   it('should add the postId for the post selected for editing', () => {
     const initialState = {
       postStatus: {
+        edit: false,
         error: false,
-        loading: false,
-        redirect: true,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     const payload = '6ni6ok3ym7mf1p33lnez';
@@ -233,9 +257,173 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: false,
+        requestDelete: false,
         postIdForEditing: '6ni6ok3ym7mf1p33lnez',
       },
     };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should set a deleted post bool to true', () => {
+    const initialState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      Qzh7pWU9: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
+      },
+    };
+    const action = {
+      type: CONFIRM_DELETE_POST,
+      payload: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: true,
+        commentCount: 0,
+      },
+    };
+    const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      Qzh7pWU9: {
+        id: 'Qzh7pWU9',
+        timestamp: 1512330673632,
+        title: 'hi',
+        body: 'test message',
+        author: 'sam',
+        category: 'udacity',
+        voteScore: 1,
+        deleted: true,
+        commentCount: 0,
+      },
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: false,
+        redirect: false,
+        requestDelete: false,
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should set requestDelete bool to true and provide postId', () => {
+    const initialState = {
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
+      },
+    };
+    const payload = '6ni6ok3ym7mf1p33lnez';
+    const action = {
+      type: REQUEST_DELETE_POST,
+      payload,
+    };
+    const expectedState = {
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: false,
+        redirect: false,
+        requestDelete: true,
+        postIdForDeletion: '6ni6ok3ym7mf1p33lnez',
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should cancel delete request i.e. set requestDelete to false', () => {
+    const initialState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
+      },
+    };
+    const action = {
+      type: CANCEL_REQUEST_DELETE_POST,
+    };
+    const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: false,
+        redirect: false,
+        requestDelete: false,
+      },
+    };
+    deepFreeze(initialState);
     expect(post(initialState, action)).toEqual(expectedState);
   });
 });

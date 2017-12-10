@@ -6,7 +6,7 @@ import NavBarContainer from './NavBarContainer';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PostView from '../components/PostView';
-import NoMatch from '../components/NoMatch';
+import NoMatchWrapper from '../components/NoMatchWrapper';
 import NoPosts from '../components/NoPosts';
 import SideBar from '../components/SideBar';
 import PageWrapper from '../styles/pagewrapper';
@@ -15,7 +15,7 @@ import { filterPostsByParam } from '../selectors/postSelectors';
 
 const CategoryPageContainer = ({ posts, validUrl }) => {
   if (!validUrl) {
-    return <NoMatch />;
+    return <NoMatchWrapper />;
   }
 
   if (posts.length === 0) {

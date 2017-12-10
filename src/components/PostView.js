@@ -6,24 +6,42 @@ import PropTypes from 'prop-types';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
 import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
-import Loading from '../components/Loading';
-import Error from '../components/Error';
+import Loading from './Loading';
+import Error from './Error';
+import NoMatchText from './NoMatchText';
 import {
   getPostErrorStatus,
   getPostLoadingStatus,
+  selectPostForDeletion,
 } from '../selectors/postSelectors';
-import { selectPostToEdit } from '../actions/postActions';
 import {
+  cancelRequestDeletePost,
+  requestDeletePost,
+  processPostDeletion,
+  selectPostToEdit,
+} from '../actions/postActions';
+import {
+  LINK_HOVER,
   POST_BACKGROUND,
   POST_BORDER,
   POST_META,
   POST_TITLE,
+  TEXT_WARNING,
   VOTE_COUNT,
 } from '../styles/colours';
 import { slugifyPostTitle } from '../utils/utils';
 
 const PostView = ({
-  post, error, loading, homeFlag, submitPostToEdit,
+  post,
+  error,
+  loading,
+  homeFlag,
+  postPage,
+  requestDeletePostStatus,
+  confirmedDeletePostRequest,
+  submitPostToEdit,
+  userCancelDeleteRequest,
+  userRequestDeletePost,
 }) => {
   if (loading) {
     return <Loading />;
@@ -31,6 +49,10 @@ const PostView = ({
 
   if (error) {
     return <Error />;
+  }
+
+  if (postPage && post.deleted === true) {
+    return <NoMatchText />;
   }
 
   return (
@@ -61,7 +83,23 @@ const PostView = ({
         >
           edit
         </StyledPostMetaBoldLink>
-        <StyledPostMetaBold>delete</StyledPostMetaBold>
+        {!requestDeletePostStatus && (
+          <StyledPostMetaBold onClick={() => userRequestDeletePost(post.id)}>
+            delete
+          </StyledPostMetaBold>
+        )}
+        {requestDeletePostStatus && (
+          <div>
+            <StyledPostMetaBoldWarning
+              onClick={() => confirmedDeletePostRequest(post.id)}
+            >
+              confirm delete?
+            </StyledPostMetaBoldWarning>
+            <StyledPostMetaBold onClick={() => userCancelDeleteRequest()}>
+              cancel
+            </StyledPostMetaBold>
+          </div>
+        )}
       </StyledCommentWrapper>
     </PostWrapper>
   );
@@ -72,12 +110,43 @@ PostView.propTypes = {
   error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   homeFlag: PropTypes.bool,
+  postPage: PropTypes.bool,
+  requestDeletePostStatus: PropTypes.bool.isRequired,
+  userRequestDeletePost: PropTypes.func.isRequired,
+  confirmedDeletePostRequest: PropTypes.func.isRequired,
   submitPostToEdit: PropTypes.func.isRequired,
+  userCancelDeleteRequest: PropTypes.func.isRequired,
 };
 
 PostView.defaultProps = {
   homeFlag: false,
+  postPage: false,
 };
+
+const mapStateToProps = (state, ownProps) => ({
+  error: getPostErrorStatus(state),
+  loading: getPostLoadingStatus(state),
+  requestDeletePostStatus: selectPostForDeletion(
+    state.post.postStatus.requestDelete,
+    ownProps.post.id,
+    state.post.postStatus.postIdForDeletion
+  ),
+});
+
+const mapDispatchToProps = dispatch => ({
+  submitPostToEdit: (payload) => {
+    dispatch(selectPostToEdit(payload));
+  },
+  userRequestDeletePost: (payload) => {
+    dispatch(requestDeletePost(payload));
+  },
+  confirmedDeletePostRequest: (payload) => {
+    dispatch(processPostDeletion(payload));
+  },
+  userCancelDeleteRequest: () => {
+    dispatch(cancelRequestDeletePost());
+  },
+});
 
 const PostWrapper = styled.div`
   display: grid;
@@ -130,6 +199,10 @@ const StyledPostMetaBoldLink = styled(Link)`
   font-weight: bold;
   padding-right: 1rem;
   text-decoration: none;
+
+  :hover {
+    color: ${LINK_HOVER};
+  }
 `;
 
 const StyledPostMetaBold = styled.span`
@@ -137,17 +210,15 @@ const StyledPostMetaBold = styled.span`
   font-size: x-small;
   font-weight: bold;
   padding-right: 1rem;
+
+  :hover {
+    color: ${LINK_HOVER};
+    cursor: pointer;
+  }
 `;
 
-const mapStateToProps = state => ({
-  error: getPostErrorStatus(state),
-  loading: getPostLoadingStatus(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  submitPostToEdit: (payload) => {
-    dispatch(selectPostToEdit(payload));
-  },
-});
+const StyledPostMetaBoldWarning = StyledPostMetaBold.extend`
+  color: ${TEXT_WARNING};
+`;
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostView);

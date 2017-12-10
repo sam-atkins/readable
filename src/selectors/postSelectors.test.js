@@ -6,6 +6,7 @@ import {
   getPostValues,
   filterPostsByParam,
   selectPostByPostId,
+  selectPostForDeletion,
   validPostUrl,
 } from './postSelectors';
 
@@ -116,7 +117,36 @@ describe('selectors for posts', () => {
         commentCount: 0,
       },
     ];
-    expect(filterPostsByParam(selectPostsInState, urlParam)).toEqual(expectedShape);
+    expect(filterPostsByParam(
+      selectPostsInState,
+      urlParam
+    )).toEqual(expectedShape);
+  });
+
+  it('should filter posts by param and deleted property', () => {
+    const initialState = {
+      post: {
+        ni6ok3ym: {
+          id: 'ni6ok3ym',
+          timestamp: 1468479767190,
+          title: 'Learn Redux in 10 minutes!',
+          body:
+            'Just kidding. It takes more than 10 minutes to learn technology.',
+          author: 'thingone',
+          category: 'redux',
+          voteScore: -5,
+          deleted: true,
+          commentCount: 0,
+        },
+        postStatus: {
+          error: false,
+          loading: false,
+        },
+      },
+    };
+    const urlParam = 'redux';
+    const expectedShape = [];
+    expect(filterPostsByParam(initialState, urlParam)).toEqual(expectedShape);
   });
 
   it('should select a post by the url postId}', () => {
@@ -135,40 +165,88 @@ describe('selectors for posts', () => {
         commentCount: 0,
       },
     ];
-    expect(selectPostByPostId(selectPostsInState, postId)).toEqual(expectedShape);
+    expect(selectPostByPostId(
+      selectPostsInState,
+      postId
+    )).toEqual(expectedShape);
   });
 
   it('should return empty array if invalid url postId}', () => {
     const postId = 'djklsjdio3jek2391';
     const expectedShape = [];
-    expect(selectPostByPostId(selectPostsInState, postId)).toEqual(expectedShape);
+    expect(selectPostByPostId(
+      selectPostsInState,
+      postId
+    )).toEqual(expectedShape);
   });
 
   it('should return true for a correct post url', () => {
     const postCategoryUrl = 'redux';
     const postId = '2v3d8ayl';
     const postTitleSlug = 'learn-redux-in-10-minutes';
-    expect(validPostUrl(selectPostsInState, postCategoryUrl, postId, postTitleSlug)).toBe(true);
+    expect(validPostUrl(
+      selectPostsInState,
+      postCategoryUrl,
+      postId,
+      postTitleSlug
+    )).toBeTruthy();
   });
 
   it('should return false for an incorrect post categoryUrl', () => {
     const postCategoryUrl = 'react';
     const postId = '2v3d8ayl';
     const postTitleSlug = 'learn-redux-in-10-minutes';
-    expect(validPostUrl(selectPostsInState, postCategoryUrl, postId, postTitleSlug)).toBe(false);
+    expect(validPostUrl(
+      selectPostsInState,
+      postCategoryUrl,
+      postId,
+      postTitleSlug
+    )).toBeFalsy();
   });
 
   it('should return false for an incorrect postId', () => {
     const postCategoryUrl = 'redux';
     const postId = 'odo2010dkdie';
     const postTitleSlug = 'learn-redux-in-10-minutes';
-    expect(validPostUrl(selectPostsInState, postCategoryUrl, postId, postTitleSlug)).toBe(false);
+    expect(validPostUrl(
+      selectPostsInState,
+      postCategoryUrl,
+      postId,
+      postTitleSlug
+    )).toBeFalsy();
   });
 
   it('should return false for an incorrect post slug', () => {
     const postCategoryUrl = 'redux';
     const postId = '2v3d8ayl';
     const postTitleSlug = 'learn-redux-in-ten-minutes';
-    expect(validPostUrl(selectPostsInState, postCategoryUrl, postId, postTitleSlug)).toBe(false);
+    expect(validPostUrl(
+      selectPostsInState,
+      postCategoryUrl,
+      postId,
+      postTitleSlug
+    )).toBeFalsy();
+  });
+
+  it('should return true for a matching post to be deleted', () => {
+    const deleteBool = true;
+    const postId = 'z60i1tsf';
+    const postIdForDeletion = 'z60i1tsf';
+    expect(selectPostForDeletion(
+      deleteBool,
+      postId,
+      postIdForDeletion
+    )).toBeTruthy();
+  });
+
+  it('should return false for a non-matching post to be deleted', () => {
+    const deleteBool = true;
+    const postId = 'z60i1tsf';
+    const postIdForDeletion = '2v3d8ayl';
+    expect(selectPostForDeletion(
+      deleteBool,
+      postId,
+      postIdForDeletion
+    )).toBeFalsy();
   });
 });
