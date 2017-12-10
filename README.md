@@ -71,11 +71,7 @@ yarn start
 
 ### How to run: API Server
 
-```sh
-# in a new Terminal window/tab
-cd api-readable
-node server
-```
+Follow the development instructions in this [repo](https://github.com/cubiio/api-readable).
 
 ### Using the API Server
 
@@ -121,7 +117,6 @@ The following endpoints are available:
 [Jest](https://facebook.github.io/jest/) is used for tests in the React app. To run the test suite, use this command:
 
 ```sh
-cd client/
 yarn test
 ```
 
