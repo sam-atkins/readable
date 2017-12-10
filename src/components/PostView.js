@@ -12,6 +12,7 @@ import NoMatchText from './NoMatchText';
 import {
   getPostErrorStatus,
   getPostLoadingStatus,
+  selectPostForDeletion,
 } from '../selectors/postSelectors';
 import {
   cancelRequestDeletePost,
@@ -25,6 +26,7 @@ import {
   POST_BORDER,
   POST_META,
   POST_TITLE,
+  TEXT_WARNING,
   VOTE_COUNT,
 } from '../styles/colours';
 import { slugifyPostTitle } from '../utils/utils';
@@ -82,7 +84,7 @@ const PostView = ({
           edit
         </StyledPostMetaBoldLink>
         {!requestDeletePostStatus && (
-          <StyledPostMetaBold onClick={() => userRequestDeletePost()}>
+          <StyledPostMetaBold onClick={() => userRequestDeletePost(post.id)}>
             delete
           </StyledPostMetaBold>
         )}
@@ -93,10 +95,9 @@ const PostView = ({
             >
               confirm delete?
             </StyledPostMetaBoldWarning>
-            <span />
-            <StyledPostMetaBoldCancel onClick={() => userCancelDeleteRequest()}>
+            <StyledPostMetaBold onClick={() => userCancelDeleteRequest()}>
               cancel
-            </StyledPostMetaBoldCancel>
+            </StyledPostMetaBold>
           </div>
         )}
       </StyledCommentWrapper>
@@ -122,18 +123,22 @@ PostView.defaultProps = {
   postPage: false,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   error: getPostErrorStatus(state),
   loading: getPostLoadingStatus(state),
-  requestDeletePostStatus: state.post.postStatus.requestDelete,
+  requestDeletePostStatus: selectPostForDeletion(
+    state.post.postStatus.requestDelete,
+    ownProps.post.id,
+    state.post.postStatus.postIdForDeletion
+  ),
 });
 
 const mapDispatchToProps = dispatch => ({
   submitPostToEdit: (payload) => {
     dispatch(selectPostToEdit(payload));
   },
-  userRequestDeletePost: () => {
-    dispatch(requestDeletePost());
+  userRequestDeletePost: (payload) => {
+    dispatch(requestDeletePost(payload));
   },
   confirmedDeletePostRequest: (payload) => {
     dispatch(processPostDeletion(payload));
@@ -213,9 +218,7 @@ const StyledPostMetaBold = styled.span`
 `;
 
 const StyledPostMetaBoldWarning = StyledPostMetaBold.extend`
-  color: red;
+  color: ${TEXT_WARNING};
 `;
-
-const StyledPostMetaBoldCancel = StyledPostMetaBold.extend``;
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostView);

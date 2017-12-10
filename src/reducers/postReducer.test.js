@@ -348,7 +348,7 @@ describe('post reducer', () => {
     expect(post(initialState, action)).toEqual(expectedState);
   });
 
-  it('should set requestDelete bool to true', () => {
+  it('should set requestDelete bool to true and provide postId', () => {
     const initialState = {
       postStatus: {
         edit: false,
@@ -358,8 +358,10 @@ describe('post reducer', () => {
         requestDelete: false,
       },
     };
+    const payload = '6ni6ok3ym7mf1p33lnez';
     const action = {
       type: REQUEST_DELETE_POST,
+      payload,
     };
     const expectedState = {
       postStatus: {
@@ -368,6 +370,7 @@ describe('post reducer', () => {
         loading: false,
         redirect: false,
         requestDelete: true,
+        postIdForDeletion: '6ni6ok3ym7mf1p33lnez',
       },
     };
     deepFreeze(initialState);

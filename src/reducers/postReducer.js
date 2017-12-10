@@ -125,6 +125,7 @@ const post = (state = initialState, action) => {
           loading: false,
           redirect: false,
           requestDelete: true,
+          postIdForDeletion: action.payload,
         },
       };
     case CANCEL_REQUEST_DELETE_POST:

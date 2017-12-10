@@ -66,8 +66,9 @@ export const cancelRequestDeletePost = () => ({
 });
 
 export const REQUEST_DELETE_POST = 'REQUEST_DELETE_POST';
-export const requestDeletePost = () => ({
+export const requestDeletePost = payload => ({
   type: REQUEST_DELETE_POST,
+  payload,
 });
 
 export const CONFIRM_DELETE_POST = 'CONFIRM_DELETE_POST';
