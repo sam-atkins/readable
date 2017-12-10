@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -10,34 +10,41 @@ import SideBar from '../components/SideBar';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
 import { selectPostByPostId, validPostUrl } from '../selectors/postSelectors';
+import { fetchComments } from '../actions/commentActions';
 
-const PostPageContainer = ({ selectedPost, validPostUrlSlug }) => {
-  if (!validPostUrlSlug) {
-    return <NoMatchWrapper />;
+class PostPageContainer extends Component {
+  componentWillMount() {
+    this.props.getComments(this.props.selectedPost.id);
   }
 
-  if (selectedPost.deleted === true) {
-    return <NoMatchWrapper />;
-  }
+  render() {
+    if (!this.props.validPostUrlSlug) {
+      return <NoMatchWrapper />;
+    }
 
-  return (
-    <StyledWrapper>
-      <Header />
-      <NavBarContainer />
-      <SideBar />
-      {selectedPost.map(post => (
-        <PostView key={post.id} post={post} homeFlag={false} postPage />
-      ))}
-      <Footer />
-    </StyledWrapper>
-  );
-};
+    if (this.props.selectedPost.deleted === true) {
+      return <NoMatchWrapper />;
+    }
+    return (
+      <StyledWrapper>
+        <Header />
+        <NavBarContainer />
+        <SideBar />
+        {this.props.selectedPost.map(post => (
+          <PostView key={post.id} post={post} homeFlag={false} postPage />
+        ))}
+        <Footer />
+      </StyledWrapper>
+    );
+  }
+}
 
 const StyledWrapper = styled(PageWrapper)``;
 
 PostPageContainer.propTypes = {
   selectedPost: PropTypes.array,
   validPostUrlSlug: PropTypes.bool.isRequired,
+  getComments: PropTypes.func.isRequired,
 };
 
 PostPageContainer.defaultProps = {
@@ -54,4 +61,8 @@ const mapStateToProps = (state, ownProps) => ({
   ),
 });
 
-export default connect(mapStateToProps)(PostPageContainer);
+const mapDispatchToProps = dispatch => ({
+  getComments: payload => dispatch(fetchComments(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostPageContainer);

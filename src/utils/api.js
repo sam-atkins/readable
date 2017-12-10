@@ -79,8 +79,8 @@ export const editAndPersistPost = (payload) => {
     .then(data => data);
 };
 
-export const deletePost = (payload) => {
-  return fetch(`${api}/posts/${payload}`, {
+export const deletePost = payload =>
+  fetch(`${api}/posts/${payload}`, {
     method: 'DELETE',
     headers: {
       ...headers,
@@ -88,4 +88,13 @@ export const deletePost = (payload) => {
   })
     .then(response => response.json())
     .then(data => data);
-};
+
+export const fetchCommentsForSinglePost = payload =>
+  fetch(`${api}/posts/${payload}/comments`, {
+    method: 'GET',
+    headers: {
+      ...headers,
+    },
+  })
+    .then(response => response.json())
+    .then(data => data);
