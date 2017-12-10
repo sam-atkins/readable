@@ -13,7 +13,12 @@ import {
   getPostErrorStatus,
   getPostLoadingStatus,
 } from '../selectors/postSelectors';
-import { processPostDeletion, selectPostToEdit } from '../actions/postActions';
+import {
+  cancelRequestDeletePost,
+  requestDeletePost,
+  processPostDeletion,
+  selectPostToEdit,
+} from '../actions/postActions';
 import {
   LINK_HOVER,
   POST_BACKGROUND,
@@ -33,6 +38,8 @@ const PostView = ({
   requestDeletePostStatus,
   confirmedDeletePostRequest,
   submitPostToEdit,
+  userCancelDeleteRequest,
+  userRequestDeletePost,
 }) => {
   if (loading) {
     return <Loading />;
@@ -74,9 +81,24 @@ const PostView = ({
         >
           edit
         </StyledPostMetaBoldLink>
-        <StyledPostMetaBold onClick={() => confirmedDeletePostRequest(post.id)}>
-          delete
-        </StyledPostMetaBold>
+        {!requestDeletePostStatus && (
+          <StyledPostMetaBold onClick={() => userRequestDeletePost()}>
+            delete
+          </StyledPostMetaBold>
+        )}
+        {requestDeletePostStatus && (
+          <div>
+            <StyledPostMetaBoldWarning
+              onClick={() => confirmedDeletePostRequest(post.id)}
+            >
+              confirm delete?
+            </StyledPostMetaBoldWarning>
+            <span />
+            <StyledPostMetaBoldCancel onClick={() => userCancelDeleteRequest()}>
+              cancel
+            </StyledPostMetaBoldCancel>
+          </div>
+        )}
       </StyledCommentWrapper>
     </PostWrapper>
   );
@@ -89,8 +111,10 @@ PostView.propTypes = {
   homeFlag: PropTypes.bool,
   postPage: PropTypes.bool,
   requestDeletePostStatus: PropTypes.bool.isRequired,
+  userRequestDeletePost: PropTypes.func.isRequired,
   confirmedDeletePostRequest: PropTypes.func.isRequired,
   submitPostToEdit: PropTypes.func.isRequired,
+  userCancelDeleteRequest: PropTypes.func.isRequired,
 };
 
 PostView.defaultProps = {
@@ -108,8 +132,14 @@ const mapDispatchToProps = dispatch => ({
   submitPostToEdit: (payload) => {
     dispatch(selectPostToEdit(payload));
   },
+  userRequestDeletePost: () => {
+    dispatch(requestDeletePost());
+  },
   confirmedDeletePostRequest: (payload) => {
     dispatch(processPostDeletion(payload));
+  },
+  userCancelDeleteRequest: () => {
+    dispatch(cancelRequestDeletePost());
   },
 });
 
@@ -181,5 +211,11 @@ const StyledPostMetaBold = styled.span`
     cursor: pointer;
   }
 `;
+
+const StyledPostMetaBoldWarning = StyledPostMetaBold.extend`
+  color: red;
+`;
+
+const StyledPostMetaBoldCancel = StyledPostMetaBold.extend``;
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostView);

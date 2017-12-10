@@ -113,7 +113,7 @@ const post = (state = initialState, action) => {
           error: false,
           loading: false,
           redirect: false,
-          requestDelete: true,
+          requestDelete: false,
         },
       };
     case REQUEST_DELETE_POST:
@@ -129,6 +129,7 @@ const post = (state = initialState, action) => {
       };
     case CANCEL_REQUEST_DELETE_POST:
       return {
+        ...state,
         postStatus: {
           edit: false,
           error: false,

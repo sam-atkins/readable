@@ -341,7 +341,7 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: false,
-        requestDelete: true,
+        requestDelete: false,
       },
     };
     deepFreeze(initialState);
@@ -376,6 +376,18 @@ describe('post reducer', () => {
 
   it('should cancel delete request i.e. set requestDelete to false', () => {
     const initialState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
       postStatus: {
         edit: false,
         error: false,
@@ -388,6 +400,18 @@ describe('post reducer', () => {
       type: CANCEL_REQUEST_DELETE_POST,
     };
     const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
       postStatus: {
         edit: false,
         error: false,
