@@ -60,6 +60,11 @@ export const editExistingPost = payload => (dispatch) => {
     .catch(error => dispatch(addPostError(error)));
 };
 
+export const CANCEL_REQUEST_DELETE_POST = 'CANCEL_REQUEST_DELETE_POST';
+export const cancelRequestDeletePost = () => ({
+  type: CANCEL_REQUEST_DELETE_POST,
+});
+
 export const REQUEST_DELETE_POST = 'REQUEST_DELETE_POST';
 export const requestDeletePost = () => ({
   type: REQUEST_DELETE_POST,

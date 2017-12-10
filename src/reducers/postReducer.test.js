@@ -4,9 +4,11 @@ import deepFreeze from 'deep-freeze';
 import post from './postReducer';
 import {
   ADD_NEW_POST_SUCCESS,
+  CANCEL_REQUEST_DELETE_POST,
   CONFIRM_DELETE_POST,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
+  REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
   TOGGLE_FORM_REDIRECT,
 } from '../actions/postActions';
@@ -15,15 +17,21 @@ describe('post reducer', () => {
   it('should return the initial state', () => {
     const initialState = {
       postStatus: {
+        edit: false,
         error: false,
         loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     const action = {};
     const expectedState = {
       postStatus: {
+        edit: false,
         error: false,
         loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     deepFreeze(initialState);
@@ -37,6 +45,7 @@ describe('post reducer', () => {
         error: false,
         loading: true,
         redirect: false,
+        requestDelete: false,
       },
     };
     const action = {
@@ -96,6 +105,7 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: false,
+        requestDelete: false,
       },
     };
     deepFreeze(initialState);
@@ -109,6 +119,7 @@ describe('post reducer', () => {
         error: false,
         loading: true,
         redirect: false,
+        requestDelete: false,
       },
     };
     const action = {
@@ -120,6 +131,7 @@ describe('post reducer', () => {
         error: true,
         loading: false,
         redirect: false,
+        requestDelete: false,
       },
     };
     deepFreeze(initialState);
@@ -143,7 +155,9 @@ describe('post reducer', () => {
       postStatus: {
         edit: false,
         error: false,
-        loading: false,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     const action = {
@@ -189,6 +203,7 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: true,
+        requestDelete: false,
       },
     };
     deepFreeze(initialState);
@@ -198,9 +213,11 @@ describe('post reducer', () => {
   it('should toggle redirect to false', () => {
     const initialState = {
       postStatus: {
+        edit: false,
         error: false,
-        loading: false,
-        redirect: true,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     const action = {
@@ -212,6 +229,7 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: false,
+        requestDelete: false,
       },
     };
     deepFreeze(initialState);
@@ -221,9 +239,11 @@ describe('post reducer', () => {
   it('should add the postId for the post selected for editing', () => {
     const initialState = {
       postStatus: {
+        edit: false,
         error: false,
-        loading: false,
-        redirect: true,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
       },
     };
     const payload = '6ni6ok3ym7mf1p33lnez';
@@ -237,6 +257,7 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: false,
+        requestDelete: false,
         postIdForEditing: '6ni6ok3ym7mf1p33lnez',
       },
     };
@@ -272,8 +293,9 @@ describe('post reducer', () => {
       postStatus: {
         edit: false,
         error: false,
-        loading: false,
+        loading: true,
         redirect: false,
+        requestDelete: false,
       },
     };
     const action = {
@@ -319,6 +341,59 @@ describe('post reducer', () => {
         error: false,
         loading: false,
         redirect: false,
+        requestDelete: true,
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should set requestDelete bool to true', () => {
+    const initialState = {
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
+      },
+    };
+    const action = {
+      type: REQUEST_DELETE_POST,
+    };
+    const expectedState = {
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: false,
+        redirect: false,
+        requestDelete: true,
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should cancel delete request i.e. set requestDelete to false', () => {
+    const initialState = {
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
+      },
+    };
+    const action = {
+      type: CANCEL_REQUEST_DELETE_POST,
+    };
+    const expectedState = {
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: false,
+        redirect: false,
+        requestDelete: false,
       },
     };
     deepFreeze(initialState);

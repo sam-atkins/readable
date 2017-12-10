@@ -30,6 +30,7 @@ const PostView = ({
   loading,
   homeFlag,
   postPage,
+  requestDeletePostStatus,
   confirmedDeletePostRequest,
   submitPostToEdit,
 }) => {
@@ -87,6 +88,7 @@ PostView.propTypes = {
   loading: PropTypes.bool.isRequired,
   homeFlag: PropTypes.bool,
   postPage: PropTypes.bool,
+  requestDeletePostStatus: PropTypes.bool.isRequired,
   confirmedDeletePostRequest: PropTypes.func.isRequired,
   submitPostToEdit: PropTypes.func.isRequired,
 };
@@ -99,6 +101,7 @@ PostView.defaultProps = {
 const mapStateToProps = state => ({
   error: getPostErrorStatus(state),
   loading: getPostLoadingStatus(state),
+  requestDeletePostStatus: state.post.postStatus.requestDelete,
 });
 
 const mapDispatchToProps = dispatch => ({
