@@ -98,6 +98,7 @@ describe('post reducer', () => {
         redirect: false,
       },
     };
+    deepFreeze(initialState);
     expect(post(initialState, action)).toEqual(expectedState);
   });
 
@@ -126,7 +127,7 @@ describe('post reducer', () => {
   });
 
   it('should add a new post to the global store', () => {
-    const state = {
+    const initialState = {
       ni6ok3ym: {
         id: 'ni6ok3ym',
         timestamp: 1468479767190,
@@ -190,7 +191,8 @@ describe('post reducer', () => {
         redirect: true,
       },
     };
-    expect(post(state, action)).toEqual(expectedState);
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
   });
 
   it('should toggle redirect to false', () => {
@@ -212,6 +214,7 @@ describe('post reducer', () => {
         redirect: false,
       },
     };
+    deepFreeze(initialState);
     expect(post(initialState, action)).toEqual(expectedState);
   });
 
@@ -237,6 +240,7 @@ describe('post reducer', () => {
         postIdForEditing: '6ni6ok3ym7mf1p33lnez',
       },
     };
+    deepFreeze(initialState);
     expect(post(initialState, action)).toEqual(expectedState);
   });
 
@@ -317,6 +321,7 @@ describe('post reducer', () => {
         redirect: false,
       },
     };
+    deepFreeze(initialState);
     expect(post(initialState, action)).toEqual(expectedState);
   });
 });
