@@ -155,4 +155,6 @@ Links for articles / docs I've found useful:
 
 - [How to Structure Your React Project](https://daveceddia.com/react-project-structure/)
 
+- [Structuring your application](https://react.christmas/3)
+
 - [Extreme Decoupling React, Redux, Selectors](http://www.thinkloop.com/article/extreme-decoupling-react-redux-selectors/)
