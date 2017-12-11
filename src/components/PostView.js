@@ -103,11 +103,11 @@ const PostView = ({
             </StyledPostMetaBold>
           </div>
         )}
+        {!homeFlag &&
+          comments.map(comment => (
+            <CommentView key={comment.id} comment={comment} />
+          ))}
       </StyledCommentWrapper>
-      {!homeFlag &&
-        comments.map(comment => (
-          <CommentView key={comment.id} comment={comment} />
-        ))}
     </PostWrapper>
   );
 };

@@ -1,14 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
+import {
+  CommentDiv,
+  StyledCommentBody,
+  StyledCommentMetaBold,
+} from './CommentView.styles';
 
 const CommentView = ({ comment }) => (
-  <div>
-    <span>{comment.body}</span>
-    <span>{comment.author}</span>
-    <span>{comment.voteScore}</span>
-    <span>{comment.timestamp}</span>
-  </div>
+  <CommentDiv>
+    <StyledCommentBody>{comment.body}</StyledCommentBody>
+    <StyledCommentMetaBold>
+      Submitted {distanceInWordsToNow(comment.timestamp)} ago by{' '}
+      {comment.author}
+    </StyledCommentMetaBold>
+    <StyledCommentMetaBold>{comment.voteScore}</StyledCommentMetaBold>
+  </CommentDiv>
 );
 
 CommentView.propTypes = {
