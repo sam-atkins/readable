@@ -13,8 +13,8 @@ import { selectPostByPostId, validPostUrl } from '../selectors/postSelectors';
 import { fetchComments } from '../actions/commentActions';
 
 class PostPageContainer extends Component {
-  componentWillMount() {
-    this.props.getComments(this.props.selectedPost.id);
+  componentDidMount() {
+    this.props.getComments(this.props.selectedPost[0].id);
   }
 
   render() {
