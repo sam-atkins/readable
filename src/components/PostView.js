@@ -9,6 +9,7 @@ import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import Loading from './Loading';
 import Error from './Error';
 import NoMatchText from './NoMatchText';
+import CommentView from './CommentView';
 import {
   getPostErrorStatus,
   getPostLoadingStatus,
@@ -20,6 +21,7 @@ import {
   processPostDeletion,
   selectPostToEdit,
 } from '../actions/postActions';
+import selectComments from '../selectors/commentSelectors';
 import {
   LINK_HOVER,
   POST_BACKGROUND,
@@ -33,6 +35,7 @@ import { slugifyPostTitle } from '../utils/utils';
 
 const PostView = ({
   post,
+  comments,
   error,
   loading,
   homeFlag,
@@ -101,6 +104,10 @@ const PostView = ({
           </div>
         )}
       </StyledCommentWrapper>
+      {!homeFlag &&
+        comments.map(comment => (
+          <CommentView key={comment.id} comment={comment} />
+        ))}
     </PostWrapper>
   );
 };
@@ -131,6 +138,7 @@ const mapStateToProps = (state, ownProps) => ({
     ownProps.post.id,
     state.post.postStatus.postIdForDeletion
   ),
+  comments: selectComments(state.comments, ownProps.post.id),
 });
 
 const mapDispatchToProps = dispatch => ({
