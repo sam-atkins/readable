@@ -11,6 +11,8 @@ const initialState = {
 };
 
 const comments = (state = initialState, action) => {
+  const { payload } = action;
+
   switch (action.type) {
     case RECEIVE_COMMENTS_FAIL:
       return {
@@ -23,7 +25,10 @@ const comments = (state = initialState, action) => {
     case RECEIVE_COMMENTS_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        ...payload.reduce(
+          (newObj, comment) => ({ ...newObj, [comment.id]: comment }),
+          {}
+        ),
         commentStatus: {
           error: false,
           loading: false,
