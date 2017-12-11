@@ -1,8 +1,13 @@
 import styled from 'styled-components';
-import { POST_BACKGROUND, POST_BORDER, POST_META } from '../../styles/colours';
+import {
+  LINK_HOVER,
+  POST_BACKGROUND,
+  POST_BORDER,
+  POST_META,
+} from '../../styles/colours';
 
 export const CommentDiv = styled.div`
-  padding: .2rem;
+  padding: 0.2rem;
 `;
 
 export const StyledCommentBody = styled.div`
@@ -17,4 +22,17 @@ export const StyledCommentMetaBold = styled.span`
   font-size: x-small;
   font-weight: bold;
   padding-right: 1rem;
+`;
+
+export const StyledPostMetaBoldLink = styled.div`
+  color: ${POST_META};
+  font-size: x-small;
+  font-weight: bold;
+  padding-right: 1rem;
+  text-decoration: none;
+
+  :hover {
+    color: ${LINK_HOVER};
+    cursor: pointer;
+  }
 `;

@@ -5,6 +5,7 @@ import {
   CommentDiv,
   StyledCommentBody,
   StyledCommentMetaBold,
+  StyledPostMetaBoldLink,
 } from './CommentView.styles';
 
 const CommentView = ({ comment }) => (
@@ -14,7 +15,9 @@ const CommentView = ({ comment }) => (
       Submitted {distanceInWordsToNow(comment.timestamp)} ago by{' '}
       {comment.author}
     </StyledCommentMetaBold>
-    <StyledCommentMetaBold>{comment.voteScore}</StyledCommentMetaBold>
+    <StyledCommentMetaBold>Votes: {comment.voteScore}</StyledCommentMetaBold>
+    <StyledPostMetaBoldLink>edit</StyledPostMetaBoldLink>
+    <StyledPostMetaBoldLink>delete</StyledPostMetaBoldLink>
   </CommentDiv>
 );
 
