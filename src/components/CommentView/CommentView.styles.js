@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import {
   LINK_HOVER,
   POST_BACKGROUND,
@@ -24,7 +25,7 @@ export const StyledCommentMetaBold = styled.span`
   padding-right: 1rem;
 `;
 
-export const StyledPostMetaBoldLink = styled.div`
+export const StyledPostMetaBoldLink = styled(Link)`
   color: ${POST_META};
   font-size: x-small;
   font-weight: bold;
@@ -33,6 +34,5 @@ export const StyledPostMetaBoldLink = styled.div`
 
   :hover {
     color: ${LINK_HOVER};
-    cursor: pointer;
   }
 `;
