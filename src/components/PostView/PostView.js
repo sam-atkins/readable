@@ -39,6 +39,7 @@ const PostView = ({
   comments,
   error,
   loading,
+  commentsFlag,
   homeFlag,
   postPage,
   requestDeletePostStatus,
@@ -104,7 +105,7 @@ const PostView = ({
             </StyledPostMetaBold>
           </div>
         )}
-        {!homeFlag &&
+        {commentsFlag &&
           comments.map(comment => (
             <CommentView key={comment.id} comment={comment} />
           ))}
@@ -120,6 +121,7 @@ PostView.propTypes = {
   loading: PropTypes.bool.isRequired,
   homeFlag: PropTypes.bool,
   postPage: PropTypes.bool,
+  commentsFlag: PropTypes.bool,
   requestDeletePostStatus: PropTypes.bool.isRequired,
   userRequestDeletePost: PropTypes.func.isRequired,
   confirmedDeletePostRequest: PropTypes.func.isRequired,
@@ -130,6 +132,7 @@ PostView.propTypes = {
 PostView.defaultProps = {
   homeFlag: false,
   postPage: false,
+  commentsFlag: false,
 };
 
 const mapStateToProps = (state, ownProps) => ({

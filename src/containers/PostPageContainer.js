@@ -41,7 +41,13 @@ class PostPageContainer extends Component {
         <NavBarContainer />
         <SideBar />
         {this.props.selectedPost.map(post => (
-          <PostView key={post.id} post={post} homeFlag={false} postPage />
+          <PostView
+            key={post.id}
+            post={post}
+            homeFlag={false}
+            postPage
+            commentsFlag
+          />
         ))}
         <Footer />
       </StyledWrapper>
