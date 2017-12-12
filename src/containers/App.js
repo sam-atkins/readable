@@ -6,7 +6,7 @@ import { fetchCategories } from '../actions/categoryActions';
 import { fetchPosts } from '../actions/postActions';
 import HomePageWrapper from '../components/HomePageWrapper';
 import CategoryRoutingContainer from './CategoryRoutingContainer';
-import NewPostForm from './NewPostForm';
+import PostForm from './PostForm';
 
 class App extends Component {
   componentWillMount() {
@@ -19,7 +19,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={HomePageWrapper} />
-          <Route exact path="/newpost" component={NewPostForm} />
+          <Route exact path="/newpost" component={PostForm} />
           <Route path="/:categoryUrl" component={CategoryRoutingContainer} />
         </Switch>
       </BrowserRouter>
