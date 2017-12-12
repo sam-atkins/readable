@@ -8,6 +8,7 @@ import Loading from '../Loading';
 import Error from '../Error';
 import NoMatchText from '../NoMatchText';
 import CommentView from '../CommentView';
+import CommentForm from '../../containers/CommentForm';
 import {
   getPostErrorStatus,
   getPostLoadingStatus,
@@ -109,6 +110,7 @@ const PostView = ({
             </StyledPostMetaBold>
           </div>
         )}
+        {commentsFlag && <CommentForm />}
         {commentsFlag &&
           comments.map(comment => (
             <CommentView key={comment.id} comment={comment} />
