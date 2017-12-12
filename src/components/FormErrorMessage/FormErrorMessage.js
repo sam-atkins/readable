@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { TEXT_WARNING } from '../styles/colours';
+import { ErrorMessageWrapper, ErrorText } from './FormErrorMessage.styles';
 
 const FormErrorMessage = ({
   bodyErrorMessage,
@@ -28,15 +27,6 @@ const FormErrorMessage = ({
     )}
   </ErrorMessageWrapper>
 );
-
-const ErrorMessageWrapper = styled.div`
-  margin-left: 0.8rem;
-  padding-bottom: 0.2rem;
-`;
-
-const ErrorText = styled.p`
-  color: ${TEXT_WARNING};
-`;
 
 FormErrorMessage.propTypes = {
   bodyErrorMessage: PropTypes.bool.isRequired,

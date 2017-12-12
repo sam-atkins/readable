@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import _ from 'lodash';
 import NavBarContainer from './NavBarContainer';
 import Header from '../components/Header';
 import PostView from '../components/PostView';
@@ -10,34 +11,56 @@ import SideBar from '../components/SideBar';
 import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
 import { selectPostByPostId, validPostUrl } from '../selectors/postSelectors';
+import { fetchComments } from '../actions/commentActions';
 
-const PostPageContainer = ({ selectedPost, validPostUrlSlug }) => {
-  if (!validPostUrlSlug) {
-    return <NoMatchWrapper />;
+class PostPageContainer extends Component {
+  componentDidMount() {
+    const { selectedPost, getComments } = this.props;
+    if (selectedPost[0]) {
+      getComments(selectedPost[0].id);
+    }
   }
 
-  if (selectedPost.deleted === true) {
-    return <NoMatchWrapper />;
+  componentWillReceiveProps(nextProps) {
+    if (!_.isEqual(this.props.selectedPost[0], nextProps.selectedPost[0])) {
+      nextProps.getComments(nextProps.selectedPost[0].id);
+    }
   }
 
-  return (
-    <StyledWrapper>
-      <Header />
-      <NavBarContainer />
-      <SideBar />
-      {selectedPost.map(post => (
-        <PostView key={post.id} post={post} homeFlag={false} postPage />
-      ))}
-      <Footer />
-    </StyledWrapper>
-  );
-};
+  render() {
+    if (!this.props.validPostUrlSlug) {
+      return <NoMatchWrapper />;
+    }
+
+    if (this.props.selectedPost.deleted === true) {
+      return <NoMatchWrapper />;
+    }
+    return (
+      <StyledWrapper>
+        <Header />
+        <NavBarContainer />
+        <SideBar />
+        {this.props.selectedPost.map(post => (
+          <PostView
+            key={post.id}
+            post={post}
+            homeFlag={false}
+            postPage
+            commentsFlag
+          />
+        ))}
+        <Footer />
+      </StyledWrapper>
+    );
+  }
+}
 
 const StyledWrapper = styled(PageWrapper)``;
 
 PostPageContainer.propTypes = {
   selectedPost: PropTypes.array,
   validPostUrlSlug: PropTypes.bool.isRequired,
+  getComments: PropTypes.func.isRequired,
 };
 
 PostPageContainer.defaultProps = {
@@ -54,4 +77,8 @@ const mapStateToProps = (state, ownProps) => ({
   ),
 });
 
-export default connect(mapStateToProps)(PostPageContainer);
+const mapDispatchToProps = dispatch => ({
+  getComments: payload => dispatch(fetchComments(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostPageContainer);

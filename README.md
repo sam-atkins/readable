@@ -71,11 +71,7 @@ yarn start
 
 ### How to run: API Server
 
-```sh
-# in a new Terminal window/tab
-cd api-readable
-node server
-```
+Follow the development instructions in this [repo](https://github.com/cubiio/api-readable).
 
 ### Using the API Server
 
@@ -121,7 +117,6 @@ The following endpoints are available:
 [Jest](https://facebook.github.io/jest/) is used for tests in the React app. To run the test suite, use this command:
 
 ```sh
-cd client/
 yarn test
 ```
 
@@ -159,5 +154,7 @@ Links for articles / docs I've found useful:
 - [Presentational and Container Components – Dan Abramov – Medium](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
 
 - [How to Structure Your React Project](https://daveceddia.com/react-project-structure/)
+
+- [Structuring your application](https://react.christmas/3)
 
 - [Extreme Decoupling React, Redux, Selectors](http://www.thinkloop.com/article/extreme-decoupling-react-redux-selectors/)

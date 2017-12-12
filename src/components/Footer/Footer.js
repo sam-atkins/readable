@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { FooterText, FooterWrapper } from './Footer.styles';
 
 const Footer = () => (
   <FooterWrapper>
@@ -25,17 +25,5 @@ const Footer = () => (
     </FooterText>
   </FooterWrapper>
 );
-
-const FooterWrapper = styled.div`
-  grid-column: col 2 / span 1;
-  grid-row-start: 3;
-  grid-row-end: 4;
-  align-self: end;
-  margin-bottom: 1rem;
-`;
-
-const FooterText = styled.div`
-  font-size: 0.8em;
-`;
 
 export default Footer;
