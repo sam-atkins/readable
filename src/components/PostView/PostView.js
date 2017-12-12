@@ -81,7 +81,11 @@ const PostView = ({
       </StyledPostMetaWrapper>
       {!homeFlag && <StyledPostBody>{post.body}</StyledPostBody>}
       <StyledCommentWrapper>
-        <StyledPostMetaBold>{post.commentCount} comments</StyledPostMetaBold>
+        <StyledPostMetaBoldLink
+          to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
+        >
+          {post.commentCount} comments
+        </StyledPostMetaBoldLink>
         <StyledPostMetaBoldLink
           to="/newpost"
           onClick={() => submitPostToEdit(post.id)}
