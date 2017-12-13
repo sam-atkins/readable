@@ -40,17 +40,15 @@ export const getPosts = () =>
     .then(data => data);
 
 export const persistPost = (payload) => {
-  // Below is for the purposes of the project but creating an ID and timestamp
-  // should be done server side, not on the client.
+  // creating UUID and timestamps is for the purposes and scope of the project
+  // but creating an ID and timestamp should be done server side,
+  // not on the client.
   const newPostId = createRandomID(8);
   const newPostTimestamp = Date.now();
   const updatedPayload = {
+    ...payload,
     id: newPostId,
     timestamp: newPostTimestamp,
-    title: payload.title,
-    body: payload.body,
-    author: payload.author,
-    category: payload.category,
   };
   return fetch(`${api}/posts`, {
     method: 'POST',
@@ -98,3 +96,25 @@ export const fetchCommentsForSinglePost = payload =>
   })
     .then(response => response.json())
     .then(data => data);
+
+export const persistComment = (payload) => {
+  // creating UUID and timestamps is for the purposes and scope of the project
+  // but creating an ID and timestamp should be done server side,
+  // not on the client.
+  const newCommentId = createRandomID(24);
+  const newCommentTimestamp = Date.now();
+  const updatedPayload = {
+    ...payload,
+    id: newCommentId,
+    timestamp: newCommentTimestamp,
+  };
+  return fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+    },
+    body: JSON.stringify(updatedPayload),
+  })
+    .then(response => response.json())
+    .then(data => data);
+};
