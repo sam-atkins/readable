@@ -39,7 +39,7 @@ class PostView extends Component {
   renderComments = () => {
     const { commentsFlag, comments } = this.props;
     if (commentsFlag && comments.length === 0) {
-      return <div>there doesn't seem to be anything here</div>;
+      return <div>there doesn&apos;t seem to be anything here</div>;
     } else if (commentsFlag) {
       return comments.map(comment => (
         <CommentView key={comment.id} comment={comment} />
