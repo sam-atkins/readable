@@ -1,11 +1,8 @@
 import styled from 'styled-components';
-import PageWrapper from '../../styles/pagewrapper';
 import {
   FORM_BUFFER_BACKGROUND,
   FORM_WRAPPER_LABEL_BACKGROUND,
 } from '../../styles/colours';
-
-export const StyledWrapper = styled(PageWrapper)``;
 
 export const Buffer = styled.div`
   background-color: ${FORM_BUFFER_BACKGROUND};
@@ -39,7 +36,9 @@ export const StyledTextArea = styled.textarea`
   border: 1px solid gray;
 `;
 
-export const StyledLabel = styled.label``;
+export const StyledLabel = styled.label`
+  padding-left: 10px;
+`;
 
 export const StyledLabelSpan = styled.span`
   padding-left: 10px;
