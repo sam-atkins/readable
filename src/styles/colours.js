@@ -1,10 +1,12 @@
 export const ANCHOR_HOVER = 'rgba(0, 0, 0, .3)';
-export const NAV_ANCHOR = '#616161';
+export const COMMENT_BUTTON_BACKGROUND = '#3baee7, #08c';
+export const COMMENT_BUTTON_TEXT = '#fff';
 export const FORM_INFOBAR_BACKGROUND = '#f6e69f';
 export const FORM_INFOBAR_BORDER = '#ffa500';
 export const FORM_BUFFER_BACKGROUND = '#FFFFFF';
 export const FORM_WRAPPER_LABEL_BACKGROUND = '#cee3f8';
 export const LINK_HOVER = '#212121';
+export const NAV_ANCHOR = '#616161';
 export const NEW_POST_BUTTON_BACKGROUND = '#9CBCD9';
 export const NEW_POST_BUTTON_TEXT = '#FFFFFF';
 export const POST_BACKGROUND = '#fafafa';
