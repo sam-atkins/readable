@@ -66,10 +66,10 @@ describe('validates user input', () => {
     expect(userInputIsValid(type, fieldInput)).toBeFalsy();
   });
 
-  it('should return true if body string is 0', () => {
+  it('should return false if body string is 0', () => {
     const type = 'body';
     const fieldInput = '';
-    expect(userInputIsValid(type, fieldInput)).toBeTruthy();
+    expect(userInputIsValid(type, fieldInput)).toBeFalsy();
   });
 
   it('should return true if body string is 1', () => {

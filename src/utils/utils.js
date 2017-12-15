@@ -18,7 +18,7 @@ export const userInputIsValid = (type, fieldInput) => {
   const formMinLengths = {
     title: 1,
     author: 1,
-    body: 0,
+    body: 1,
   };
 
   const input = fieldInput.trim();
