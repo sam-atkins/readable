@@ -1,5 +1,6 @@
 import {
   editAndPersistComment,
+  deleteComment,
   fetchCommentsForSinglePost,
   persistComment,
 } from '../utils/api';
@@ -43,8 +44,7 @@ export const toggleCommentViewToEdit = payload => ({
   payload,
 });
 
-export const TOGGLE_COMMENT_EDIT_TO_VIEW =
-  'TOGGLE_COMMENT_EDIT_TO_VIEW';
+export const TOGGLE_COMMENT_EDIT_TO_VIEW = 'TOGGLE_COMMENT_EDIT_TO_VIEW';
 export const toggleCommentFromEditToView = payload => ({
   type: TOGGLE_COMMENT_EDIT_TO_VIEW,
   payload,
@@ -54,4 +54,32 @@ export const editExistingComment = payload => (dispatch) => {
   editAndPersistComment(payload)
     .then(data => dispatch(addCommentSuccess(data)))
     .catch(error => dispatch(addCommentError(error)));
+};
+
+export const REQUEST_DELETE_COMMENT = 'REQUEST_DELETE_COMMENT';
+export const requestDeleteComment = payload => ({
+  type: REQUEST_DELETE_COMMENT,
+  payload,
+});
+
+export const CANCEL_REQUEST_DELETE_COMMENT = 'CANCEL_REQUEST_DELETE_COMMENT';
+export const cancelRequestDeleteComment = () => ({
+  type: CANCEL_REQUEST_DELETE_COMMENT,
+});
+
+export const CONFIRM_DELETE_COMMENT = 'CONFIRM_DELETE_COMMENT';
+export const confirmDeleteComment = payload => ({
+  type: CONFIRM_DELETE_COMMENT,
+  payload,
+});
+
+export const FAILED_DELETE_COMMENT = 'FAILED_DELETE_COMMENT';
+export const failedDeleteComment = () => ({
+  type: FAILED_DELETE_COMMENT,
+});
+
+export const processCommentDeletion = payload => (dispatch) => {
+  deleteComment(payload)
+    .then(data => dispatch(confirmDeleteComment(data)))
+    .catch(error => dispatch(failedDeleteComment(error)));
 };
