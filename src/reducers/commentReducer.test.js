@@ -208,9 +208,7 @@ describe('comments reducer', () => {
     };
     const action = {
       type: TOGGLE_COMMENT_VIEW_TO_EDIT,
-      payload: {
-        id: '8tu4bsun805n8un48ve89',
-      },
+      payload: '8tu4bsun805n8un48ve89',
     };
     const expectedState = {
       '8tu4bsun805n8un48ve89': {
@@ -254,9 +252,7 @@ describe('comments reducer', () => {
     };
     const action = {
       type: TOGGLE_COMMENT_EDIT_TO_VIEW,
-      payload: {
-        id: '8tu4bsun805n8un48ve89',
-      },
+      payload: '8tu4bsun805n8un48ve89',
     };
     const expectedState = {
       '8tu4bsun805n8un48ve89': {

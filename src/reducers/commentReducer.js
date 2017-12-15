@@ -64,7 +64,7 @@ const comments = (state = initialState, action) => {
           error: false,
           loading: false,
           commentEditViewToggle: true,
-          commentIdForEditing: action.payload.id,
+          commentIdForEditing: action.payload,
         },
       };
     case TOGGLE_COMMENT_EDIT_TO_VIEW:
@@ -74,7 +74,7 @@ const comments = (state = initialState, action) => {
           error: false,
           loading: false,
           commentEditViewToggle: false,
-          commentIdForEditing: action.payload.id,
+          commentIdForEditing: action.payload,
         },
       };
     default:
