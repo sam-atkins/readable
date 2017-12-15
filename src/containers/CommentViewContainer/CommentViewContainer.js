@@ -2,12 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CommentView from '../../components/CommentView';
+import EditCommentForm from '../EditCommentForm';
 
 class CommentViewContainer extends Component {
   renderViewOrForm = () => {
     const { comment, toggleView, commentIdForEditing } = this.props;
     if (toggleView && comment.id === commentIdForEditing) {
-      return <div>edit this comment, id: {comment.id}</div>;
+      return <EditCommentForm comment={comment} />
     }
     return <CommentView key={comment.id} comment={comment} />;
   };

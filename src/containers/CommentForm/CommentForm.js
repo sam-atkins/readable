@@ -16,7 +16,7 @@ import {
 
 class CommentForm extends Component {
   state = {
-    // parentId field is required for requests to add/edit a comment
+    // parentId field is required for requests to add a comment
     /* eslint-disable */
     parentId: this.props.parentId,
     /* eslint-enable */
@@ -59,7 +59,6 @@ class CommentForm extends Component {
           authorInputError: true,
         });
       } else {
-        // the happy path to add a comment
         this.props.submitFormToAddComment(this.state);
         this.setState({
           body: '',
