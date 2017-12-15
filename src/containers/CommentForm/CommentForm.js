@@ -36,23 +36,23 @@ class CommentForm extends Component {
     const handleFormSubmit = (event) => {
       event.preventDefault();
       this.setState({
-        bodyInputError: false,
+        commentBodyInputError: false,
         authorInputError: false,
       });
 
       const { author, body } = this.state;
 
       if (
-        !userInputIsValid('body', body) &&
+        !userInputIsValid('comment', body) &&
         !userInputIsValid('author', author)
       ) {
         this.setState({
-          bodyInputError: true,
+          commentBodyInputError: true,
           authorInputError: true,
         });
-      } else if (!userInputIsValid('body', body)) {
+      } else if (!userInputIsValid('comment', body)) {
         this.setState({
-          bodyInputError: true,
+          commentBodyInputError: true,
         });
       } else if (!userInputIsValid('author', author)) {
         this.setState({
@@ -82,8 +82,8 @@ class CommentForm extends Component {
             rows="8"
             onChange={event => handleInputChange(event)}
           />
-          {this.state.bodyInputError && (
-            <FormErrorMessage commentBodyErrorMessage min={1} max={2000} />
+          {this.state.commentBodyInputError && (
+            <FormErrorMessage commentBodyErrorMessage min={1} max={1000} />
           )}
         </FormWrapperLabel>
         <FormWrapperLabel>
