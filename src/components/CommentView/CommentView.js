@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
+import { toggleCommentViewToEdit } from '../../actions/commentActions';
 import {
   CommentDiv,
   StyledCommentBody,
@@ -8,7 +10,7 @@ import {
   StyledPostMetaBoldLink,
 } from './CommentView.styles';
 
-const CommentView = ({ comment }) => (
+const CommentView = ({ comment, toggleView }) => (
   <CommentDiv>
     <StyledCommentBody>{comment.body}</StyledCommentBody>
     <StyledCommentMetaBold>
@@ -16,8 +18,12 @@ const CommentView = ({ comment }) => (
       {comment.author}
     </StyledCommentMetaBold>
     <StyledCommentMetaBold>Votes: {comment.voteScore}</StyledCommentMetaBold>
-    <StyledPostMetaBoldLink to="/">edit</StyledPostMetaBoldLink>
-    <StyledPostMetaBoldLink to="/">delete</StyledPostMetaBoldLink>
+    <StyledPostMetaBoldLink
+      onClick={() => toggleView(comment.id)}
+    >
+      edit
+    </StyledPostMetaBoldLink>
+    <StyledPostMetaBoldLink>delete</StyledPostMetaBoldLink>
   </CommentDiv>
 );
 
@@ -41,4 +47,10 @@ CommentView.defaultProps = {
   },
 };
 
-export default CommentView;
+const mapStateToDispatch = dispatch => ({
+  toggleView: (payload) => {
+    dispatch(toggleCommentViewToEdit(payload));
+  },
+});
+
+export default connect(null, mapStateToDispatch)(CommentView);
