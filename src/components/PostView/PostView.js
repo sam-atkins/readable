@@ -125,8 +125,12 @@ class PostView extends Component {
               </StyledPostMetaBold>
             </div>
           )}
-          {commentsFlag && <CommentForm />}
-          Comments:
+          {commentsFlag && (
+            <div>
+              <CommentForm />
+              Comments:
+            </div>
+          )}
           {this.renderComments()}
         </StyledCommentWrapper>
       </PostWrapper>
