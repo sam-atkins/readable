@@ -7,6 +7,8 @@ import {
   ADD_NEW_COMMENT_SUCCESS,
   RECEIVE_COMMENTS_FAIL,
   RECEIVE_COMMENTS_SUCCESS,
+  TOGGLE_COMMENT_EDIT_TO_VIEW,
+  TOGGLE_COMMENT_VIEW_TO_EDIT,
 } from '../actions/commentActions';
 
 const initialState = {
@@ -174,12 +176,100 @@ describe('comments reducer', () => {
     };
     const action = {
       type: ADD_NEW_COMMENT_FAILURE,
-    }
+    };
     const expectedState = {
       commentStatus: {
         error: false,
         loading: false,
         errorAddComment: true,
+      },
+    };
+    deepFreeze(state);
+    expect(comments(state, action)).toEqual(expectedState);
+  });
+
+  it('should toggle commentEditViewToggle to true', () => {
+    const state = {
+      '8tu4bsun805n8un48ve89': {
+        id: '8tu4bsun805n8un48ve89',
+        parentId: 'z60i1tsf',
+        timestamp: 1469479767190,
+        body: 'Comments. Are. Cool.',
+        author: 'thingone',
+        voteScore: -5,
+        deleted: false,
+        parentDeleted: false,
+      },
+      commentStatus: {
+        error: false,
+        loading: false,
+        commentEditViewToggle: false,
+      },
+    };
+    const action = {
+      type: TOGGLE_COMMENT_VIEW_TO_EDIT,
+      payload: '8tu4bsun805n8un48ve89',
+    };
+    const expectedState = {
+      '8tu4bsun805n8un48ve89': {
+        id: '8tu4bsun805n8un48ve89',
+        parentId: 'z60i1tsf',
+        timestamp: 1469479767190,
+        body: 'Comments. Are. Cool.',
+        author: 'thingone',
+        voteScore: -5,
+        deleted: false,
+        parentDeleted: false,
+      },
+      commentStatus: {
+        error: false,
+        loading: false,
+        commentEditViewToggle: true,
+        commentIdForEditing: '8tu4bsun805n8un48ve89',
+      },
+    };
+    deepFreeze(state);
+    expect(comments(state, action)).toEqual(expectedState);
+  });
+
+  it('should toggle commentEditViewToggle to false', () => {
+    const state = {
+      '8tu4bsun805n8un48ve89': {
+        id: '8tu4bsun805n8un48ve89',
+        parentId: 'z60i1tsf',
+        timestamp: 1469479767190,
+        body: 'Comments. Are. Cool.',
+        author: 'thingone',
+        voteScore: -5,
+        deleted: false,
+        parentDeleted: false,
+      },
+      commentStatus: {
+        error: false,
+        loading: false,
+        commentEditViewToggle: true,
+      },
+    };
+    const action = {
+      type: TOGGLE_COMMENT_EDIT_TO_VIEW,
+      payload: '8tu4bsun805n8un48ve89',
+    };
+    const expectedState = {
+      '8tu4bsun805n8un48ve89': {
+        id: '8tu4bsun805n8un48ve89',
+        parentId: 'z60i1tsf',
+        timestamp: 1469479767190,
+        body: 'Comments. Are. Cool.',
+        author: 'thingone',
+        voteScore: -5,
+        deleted: false,
+        parentDeleted: false,
+      },
+      commentStatus: {
+        error: false,
+        loading: false,
+        commentEditViewToggle: false,
+        commentIdForEditing: '8tu4bsun805n8un48ve89',
       },
     };
     deepFreeze(state);

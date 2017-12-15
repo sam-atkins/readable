@@ -7,7 +7,7 @@ import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import Loading from '../Loading';
 import Error from '../Error';
 import NoMatchText from '../NoMatchText';
-import CommentView from '../CommentView';
+import CommentViewContainer from '../../containers/CommentViewContainer';
 import CommentForm from '../../containers/CommentForm';
 import {
   getPostErrorStatus,
@@ -42,7 +42,7 @@ class PostView extends Component {
       return <div>there doesn&apos;t seem to be anything here</div>;
     } else if (commentsFlag) {
       return comments.map(comment => (
-        <CommentView key={comment.id} comment={comment} />
+        <CommentViewContainer key={comment.id} comment={comment} />
       ));
     }
     return null;

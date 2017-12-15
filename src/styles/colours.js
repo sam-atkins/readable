@@ -1,5 +1,7 @@
 export const ANCHOR_HOVER = 'rgba(0, 0, 0, .3)';
 export const COMMENT_BUTTON_BACKGROUND = '#3baee7, #08c';
+export const COMMENT_BUTTON_EDIT_BACKGROUND = '#5F848D';
+export const COMMENT_BUTTON_CANCEL_BACKGROUND = '#A1535D';
 export const COMMENT_BUTTON_TEXT = '#fff';
 export const FORM_INFOBAR_BACKGROUND = '#f6e69f';
 export const FORM_INFOBAR_BORDER = '#ffa500';

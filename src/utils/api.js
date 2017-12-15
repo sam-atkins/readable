@@ -118,3 +118,20 @@ export const persistComment = (payload) => {
     .then(response => response.json())
     .then(data => data);
 };
+
+export const editAndPersistComment = (payload) => {
+  const editCommentTimestamp = Date.now();
+  const updatedPayload = {
+    ...payload,
+    timestamp: editCommentTimestamp,
+  };
+  return fetch(`${api}/comments/${payload.id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+    },
+    body: JSON.stringify(updatedPayload),
+  })
+    .then(response => response.json())
+    .then(data => data);
+};

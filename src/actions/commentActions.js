@@ -1,4 +1,8 @@
-import { fetchCommentsForSinglePost, persistComment } from '../utils/api';
+import {
+  editAndPersistComment,
+  fetchCommentsForSinglePost,
+  persistComment,
+} from '../utils/api';
 
 export const RECEIVE_COMMENTS_SUCCESS = 'RECEIVE_COMMENTS_SUCCESS';
 export const receiveCommentsSuccess = payload => ({
@@ -29,6 +33,25 @@ export const addCommentError = () => ({
 
 export const addCommentPost = payload => (dispatch) => {
   persistComment(payload)
+    .then(data => dispatch(addCommentSuccess(data)))
+    .catch(error => dispatch(addCommentError(error)));
+};
+
+export const TOGGLE_COMMENT_VIEW_TO_EDIT = 'TOGGLE_COMMENT_VIEW_TO_EDIT';
+export const toggleCommentViewToEdit = payload => ({
+  type: TOGGLE_COMMENT_VIEW_TO_EDIT,
+  payload,
+});
+
+export const TOGGLE_COMMENT_EDIT_TO_VIEW =
+  'TOGGLE_COMMENT_EDIT_TO_VIEW';
+export const toggleCommentFromEditToView = payload => ({
+  type: TOGGLE_COMMENT_EDIT_TO_VIEW,
+  payload,
+});
+
+export const editExistingComment = payload => (dispatch) => {
+  editAndPersistComment(payload)
     .then(data => dispatch(addCommentSuccess(data)))
     .catch(error => dispatch(addCommentError(error)));
 };
