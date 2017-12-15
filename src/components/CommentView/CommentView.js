@@ -16,8 +16,8 @@ const CommentView = ({ comment }) => (
       {comment.author}
     </StyledCommentMetaBold>
     <StyledCommentMetaBold>Votes: {comment.voteScore}</StyledCommentMetaBold>
-    <StyledPostMetaBoldLink>edit</StyledPostMetaBoldLink>
-    <StyledPostMetaBoldLink>delete</StyledPostMetaBoldLink>
+    <StyledPostMetaBoldLink to="/">edit</StyledPostMetaBoldLink>
+    <StyledPostMetaBoldLink to="/">delete</StyledPostMetaBoldLink>
   </CommentDiv>
 );
 

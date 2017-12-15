@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
@@ -8,6 +8,7 @@ import Loading from '../Loading';
 import Error from '../Error';
 import NoMatchText from '../NoMatchText';
 import CommentView from '../CommentView';
+import CommentForm from '../../containers/CommentForm';
 import {
   getPostErrorStatus,
   getPostLoadingStatus,
@@ -34,89 +35,108 @@ import {
   PostTitleLink,
 } from './PostView.styles';
 
-const PostView = ({
-  post,
-  comments,
-  error,
-  loading,
-  commentsFlag,
-  homeFlag,
-  postPage,
-  requestDeletePostStatus,
-  confirmedDeletePostRequest,
-  submitPostToEdit,
-  userCancelDeleteRequest,
-  userRequestDeletePost,
-}) => {
-  if (loading) {
-    return <Loading />;
-  }
+class PostView extends Component {
+  renderComments = () => {
+    const { commentsFlag, comments } = this.props;
+    if (commentsFlag && comments.length === 0) {
+      return <div>there doesn&apos;t seem to be anything here</div>;
+    } else if (commentsFlag) {
+      return comments.map(comment => (
+        <CommentView key={comment.id} comment={comment} />
+      ));
+    }
+    return null;
+  };
 
-  if (error) {
-    return <Error />;
-  }
+  render() {
+    const {
+      post,
+      error,
+      loading,
+      commentsFlag,
+      homeFlag,
+      postPage,
+      requestDeletePostStatus,
+      confirmedDeletePostRequest,
+      submitPostToEdit,
+      userCancelDeleteRequest,
+      userRequestDeletePost,
+    } = this.props;
 
-  if (postPage && post.deleted === true) {
-    return <NoMatchText />;
-  }
+    if (loading) {
+      return <Loading />;
+    }
 
-  return (
-    <PostWrapper>
-      <StyledVoteCount>
-        <FaArrowUp />
-        <br />
-        {post.voteScore}
-        <br />
-        <FaArrowDown />
-      </StyledVoteCount>
-      <StyledPostMetaWrapper>
-        <PostTitleLink
-          to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
-        >
-          {post.title}
-        </PostTitleLink>
-        <StyledPostMeta>
-          Submitted {distanceInWordsToNow(post.timestamp)} ago by {post.author}
-        </StyledPostMeta>
-      </StyledPostMetaWrapper>
-      {!homeFlag && <StyledPostBody>{post.body}</StyledPostBody>}
-      <StyledCommentWrapper>
-        <StyledPostMetaBoldLink
-          to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
-        >
-          {post.commentCount} comments
-        </StyledPostMetaBoldLink>
-        <StyledPostMetaBoldLink
-          to="/newpost"
-          onClick={() => submitPostToEdit(post.id)}
-        >
-          edit
-        </StyledPostMetaBoldLink>
-        {!requestDeletePostStatus && (
-          <StyledPostMetaBold onClick={() => userRequestDeletePost(post.id)}>
-            delete
-          </StyledPostMetaBold>
-        )}
-        {requestDeletePostStatus && (
-          <div>
-            <StyledPostMetaBoldWarning
-              onClick={() => confirmedDeletePostRequest(post.id)}
-            >
-              confirm delete?
-            </StyledPostMetaBoldWarning>
-            <StyledPostMetaBold onClick={() => userCancelDeleteRequest()}>
-              cancel
+    if (error) {
+      return <Error />;
+    }
+
+    if (postPage && post.deleted === true) {
+      return <NoMatchText />;
+    }
+
+    return (
+      <PostWrapper>
+        <StyledVoteCount>
+          <FaArrowUp />
+          <br />
+          {post.voteScore}
+          <br />
+          <FaArrowDown />
+        </StyledVoteCount>
+        <StyledPostMetaWrapper>
+          <PostTitleLink
+            to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
+          >
+            {post.title}
+          </PostTitleLink>
+          <StyledPostMeta>
+            Submitted {distanceInWordsToNow(post.timestamp)} ago by{' '}
+            {post.author}
+          </StyledPostMeta>
+        </StyledPostMetaWrapper>
+        {!homeFlag && <StyledPostBody>{post.body}</StyledPostBody>}
+        <StyledCommentWrapper>
+          <StyledPostMetaBoldLink
+            to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
+          >
+            {post.commentCount} comments
+          </StyledPostMetaBoldLink>
+          <StyledPostMetaBoldLink
+            to="/newpost"
+            onClick={() => submitPostToEdit(post.id)}
+          >
+            edit
+          </StyledPostMetaBoldLink>
+          {!requestDeletePostStatus && (
+            <StyledPostMetaBold onClick={() => userRequestDeletePost(post.id)}>
+              delete
             </StyledPostMetaBold>
-          </div>
-        )}
-        {commentsFlag &&
-          comments.map(comment => (
-            <CommentView key={comment.id} comment={comment} />
-          ))}
-      </StyledCommentWrapper>
-    </PostWrapper>
-  );
-};
+          )}
+          {requestDeletePostStatus && (
+            <div>
+              <StyledPostMetaBoldWarning
+                onClick={() => confirmedDeletePostRequest(post.id)}
+              >
+                confirm delete?
+              </StyledPostMetaBoldWarning>
+              <StyledPostMetaBold onClick={() => userCancelDeleteRequest()}>
+                cancel
+              </StyledPostMetaBold>
+            </div>
+          )}
+          {commentsFlag && (
+            <div>
+              <CommentForm />
+              Comments:
+            </div>
+          )}
+          {this.renderComments()}
+        </StyledCommentWrapper>
+      </PostWrapper>
+    );
+  }
+}
 
 PostView.propTypes = {
   post: PropTypes.object.isRequired,

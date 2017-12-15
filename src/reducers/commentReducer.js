@@ -1,4 +1,6 @@
 import {
+  ADD_NEW_COMMENT_FAILURE,
+  ADD_NEW_COMMENT_SUCCESS,
   RECEIVE_COMMENTS_FAIL,
   RECEIVE_COMMENTS_SUCCESS,
 } from '../actions/commentActions';
@@ -32,6 +34,24 @@ const comments = (state = initialState, action) => {
         commentStatus: {
           error: false,
           loading: false,
+        },
+      };
+    case ADD_NEW_COMMENT_SUCCESS:
+      return {
+        ...state,
+        [action.payload.id]: { ...action.payload },
+        commentStatus: {
+          error: false,
+          loading: false,
+        },
+      };
+    case ADD_NEW_COMMENT_FAILURE:
+      return {
+        ...state,
+        commentStatus: {
+          error: false,
+          loading: false,
+          errorAddComment: true,
         },
       };
     default:

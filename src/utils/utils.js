@@ -13,12 +13,14 @@ export const userInputIsValid = (type, fieldInput) => {
     title: 100,
     author: 20,
     body: 3000,
+    comment: 1000,
   };
 
   const formMinLengths = {
     title: 1,
     author: 1,
     body: 0,
+    comment: 1,
   };
 
   const input = fieldInput.trim();

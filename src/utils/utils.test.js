@@ -77,4 +77,16 @@ describe('validates user input', () => {
     const fieldInput = 'a';
     expect(userInputIsValid(type, fieldInput)).toBeTruthy();
   });
+
+  it('should return false if comment string is 0', () => {
+    const type = 'comment';
+    const fieldInput = '';
+    expect(userInputIsValid(type, fieldInput)).toBeFalsy();
+  });
+
+  it('should return true if body string is 1', () => {
+    const type = 'comment';
+    const fieldInput = 'a';
+    expect(userInputIsValid(type, fieldInput)).toBeTruthy();
+  });
 });
