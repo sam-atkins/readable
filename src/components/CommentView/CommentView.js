@@ -18,9 +18,7 @@ const CommentView = ({ comment, toggleView }) => (
       {comment.author}
     </StyledCommentMetaBold>
     <StyledCommentMetaBold>Votes: {comment.voteScore}</StyledCommentMetaBold>
-    <StyledPostMetaBoldLink
-      onClick={() => toggleView(comment.id)}
-    >
+    <StyledPostMetaBoldLink onClick={() => toggleView(comment.id)}>
       edit
     </StyledPostMetaBoldLink>
     <StyledPostMetaBoldLink>delete</StyledPostMetaBoldLink>
@@ -35,6 +33,7 @@ CommentView.propTypes = {
     body: PropTypes.string,
     voteScore: PropTypes.number,
   }),
+  toggleView: PropTypes.func.isRequired,
 };
 
 CommentView.defaultProps = {

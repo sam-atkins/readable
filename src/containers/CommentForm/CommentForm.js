@@ -110,14 +110,13 @@ class CommentForm extends Component {
 CommentForm.propTypes = {
   body: PropTypes.string,
   author: PropTypes.string,
-  parentId: PropTypes.string,
+  parentId: PropTypes.string.isRequired,
   submitFormToAddComment: PropTypes.func.isRequired,
 };
 
 CommentForm.defaultProps = {
   body: '',
   author: '',
-  parentId: '',
 };
 
 const mapDispatchToProps = dispatch => ({
