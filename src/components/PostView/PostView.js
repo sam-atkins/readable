@@ -127,7 +127,7 @@ class PostView extends Component {
           )}
           {commentsFlag && (
             <div>
-              <CommentForm />
+              <CommentForm parentId={post.id} />
               Comments:
             </div>
           )}
