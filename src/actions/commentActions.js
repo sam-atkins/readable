@@ -1,3 +1,4 @@
+import { incrementCommentCount } from './postActions';
 import {
   editAndPersistComment,
   deleteComment,
@@ -35,6 +36,7 @@ export const addCommentError = () => ({
 export const addCommentPost = payload => (dispatch) => {
   persistComment(payload)
     .then(data => dispatch(addCommentSuccess(data)))
+    .then(data => dispatch(incrementCommentCount(data)))
     .catch(error => dispatch(addCommentError(error)));
 };
 

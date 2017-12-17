@@ -4,6 +4,8 @@ import {
   ADD_NEW_POST_REQUEST,
   CANCEL_REQUEST_DELETE_POST,
   CONFIRM_DELETE_POST,
+  DECREMENT_COMMENT_COUNT,
+  INCREMENT_COMMENT_COUNT,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
   REQUEST_DELETE_POST,
@@ -137,6 +139,22 @@ const post = (state = initialState, action) => {
           loading: false,
           redirect: false,
           requestDelete: false,
+        },
+      };
+    case INCREMENT_COMMENT_COUNT:
+      return {
+        ...state,
+        [action.payload.payload.parentId]: {
+          ...state[action.payload.payload.parentId],
+          commentCount: state[action.payload.payload.parentId].commentCount + 1,
+        },
+      };
+    case DECREMENT_COMMENT_COUNT:
+      return {
+        ...state,
+        [action.payload.parentId]: {
+          ...state[action.payload.parentId],
+          commentCount: state[action.payload.parentId].commentCount - 1,
         },
       };
     default:
