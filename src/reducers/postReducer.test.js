@@ -11,6 +11,7 @@ import {
   REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
   TOGGLE_FORM_REDIRECT,
+  VOTE_UP_POST,
 } from '../actions/postActions';
 import {
   DECREMENT_COMMENT_COUNT,
@@ -521,6 +522,62 @@ describe('post reducer', () => {
         voteScore: -5,
         deleted: false,
         commentCount: 2,
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should up vote a post', () => {
+    const initialState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: 5,
+        deleted: false,
+        commentCount: 0,
+      },
+    };
+    const action = {
+      type: VOTE_UP_POST,
+      payload: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: 6,
+        deleted: false,
+        commentCount: 0,
+      },
+    };
+    const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: 6,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: false,
+        redirect: false,
+        requestDelete: false,
+        voteError: false,
       },
     };
     deepFreeze(initialState);

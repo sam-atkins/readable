@@ -145,3 +145,24 @@ export const deleteComment = payload =>
   })
     .then(response => response.json())
     .then(data => data);
+
+/**
+ * persistVote used for up/down voting posts and comments
+ * @param {string} id of the post or comment
+ * @param {string} voteType 'posts' or 'comments'
+ * @param {string} voteDirection either "upVote" or "downVote"
+ */
+export const persistVote = (id, voteDirection, voteType) => {
+  const updatedPayload = {
+    option: voteDirection,
+  };
+  return fetch(`${api}/${voteType}/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+    },
+    body: JSON.stringify(updatedPayload),
+  })
+    .then(response => response.json())
+    .then(data => data);
+};

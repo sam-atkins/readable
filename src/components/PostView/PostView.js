@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import FaArrowUp from 'react-icons/lib/fa/arrow-up';
-import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import Loading from '../Loading';
 import Error from '../Error';
@@ -17,6 +15,7 @@ import selectItemForDeletion from '../../selectors/selectors';
 import {
   cancelRequestDeletePost,
   requestDeletePost,
+  persistVotePost,
   processPostDeletion,
   selectPostToEdit,
 } from '../../actions/postActions';
@@ -25,6 +24,8 @@ import { slugifyPostTitle } from '../../utils/utils';
 import {
   PostWrapper,
   StyledCommentWrapper,
+  StyledFaArrowDown,
+  StyledFaArrowUp,
   StyledPostBody,
   StyledPostMeta,
   StyledPostMetaBold,
@@ -62,6 +63,7 @@ class PostView extends Component {
       submitPostToEdit,
       userCancelDeleteRequest,
       userRequestDeletePost,
+      userUpVotePost,
     } = this.props;
 
     if (loading) {
@@ -79,11 +81,13 @@ class PostView extends Component {
     return (
       <PostWrapper>
         <StyledVoteCount>
-          <FaArrowUp />
+          <StyledFaArrowUp
+            onClick={() => userUpVotePost(post.id, 'upVote', 'posts')}
+          />
           <br />
           {post.voteScore}
           <br />
-          <FaArrowDown />
+          <StyledFaArrowDown />
         </StyledVoteCount>
         <StyledPostMetaWrapper>
           <PostTitleLink
@@ -156,6 +160,7 @@ PostView.propTypes = {
   confirmedDeletePostRequest: PropTypes.func.isRequired,
   submitPostToEdit: PropTypes.func.isRequired,
   userCancelDeleteRequest: PropTypes.func.isRequired,
+  userUpVotePost: PropTypes.func.isRequired,
 };
 
 PostView.defaultProps = {
@@ -187,6 +192,9 @@ const mapDispatchToProps = dispatch => ({
   },
   userCancelDeleteRequest: () => {
     dispatch(cancelRequestDeletePost());
+  },
+  userUpVotePost: (id, voteDirection, voteType) => {
+    dispatch(persistVotePost(id, voteDirection, voteType));
   },
 });
 

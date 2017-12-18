@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import FaArrowUp from 'react-icons/lib/fa/arrow-up';
+import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import { Link } from 'react-router-dom';
 import {
   LINK_HOVER,
@@ -85,4 +87,18 @@ export const StyledPostMetaBoldWarning = StyledPostMetaBold.extend`
 
 export const StyledPostMetaBoldCancel = StyledPostMetaBold.extend`
   color: ${TEXT_WARNING};
+`;
+
+export const StyledFaArrowUp = styled(FaArrowUp)`
+  :hover {
+    color: ${LINK_HOVER};
+    cursor: pointer;
+  }
+`;
+
+export const StyledFaArrowDown = styled(FaArrowDown)`
+  :hover {
+    color: ${LINK_HOVER};
+    cursor: pointer;
+  }
 `;
