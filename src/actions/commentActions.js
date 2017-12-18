@@ -1,4 +1,4 @@
-import { incrementCommentCount } from './postActions';
+import { decrementCommentCount, incrementCommentCount } from './postActions';
 import {
   editAndPersistComment,
   deleteComment,
@@ -83,5 +83,6 @@ export const failedDeleteComment = () => ({
 export const processCommentDeletion = payload => (dispatch) => {
   deleteComment(payload)
     .then(data => dispatch(confirmDeleteComment(data)))
+    .then(data => dispatch(decrementCommentCount(data)))
     .catch(error => dispatch(failedDeleteComment(error)));
 };

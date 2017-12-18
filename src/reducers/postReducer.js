@@ -152,9 +152,9 @@ const post = (state = initialState, action) => {
     case DECREMENT_COMMENT_COUNT:
       return {
         ...state,
-        [action.payload.parentId]: {
-          ...state[action.payload.parentId],
-          commentCount: state[action.payload.parentId].commentCount - 1,
+        [action.payload.payload.parentId]: {
+          ...state[action.payload.payload.parentId],
+          commentCount: state[action.payload.payload.parentId].commentCount - 1,
         },
       };
     default:

@@ -495,14 +495,16 @@ describe('post reducer', () => {
     const action = {
       type: DECREMENT_COMMENT_COUNT,
       payload: {
-        id: '8tu4bsun805n8un48ve89',
-        parentId: 'ni6ok3ym',
-        timestamp: 1469479767190,
-        body: 'Comments. Are. Cool.',
-        author: 'thingone',
-        voteScore: -5,
-        deleted: false,
-        parentDeleted: false,
+        payload: {
+          id: '8tu4bsun805n8un48ve89',
+          parentId: 'ni6ok3ym',
+          timestamp: 1469479767190,
+          body: 'Comments. Are. Cool.',
+          author: 'thingone',
+          voteScore: -5,
+          deleted: false,
+          parentDeleted: false,
+        },
       },
     };
     const expectedState = {
