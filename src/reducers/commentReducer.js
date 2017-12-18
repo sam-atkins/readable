@@ -88,7 +88,7 @@ const comments = (state = initialState, action) => {
           error: false,
           loading: false,
           requestDelete: true,
-          postIdForDeletion: action.payload,
+          commentIdForDeletion: action.payload,
         },
       };
     case CANCEL_REQUEST_DELETE_COMMENT:
@@ -104,6 +104,10 @@ const comments = (state = initialState, action) => {
       return {
         ...state,
         [action.payload.id]: { ...payload },
+        commentStatus: {
+          error: false,
+          loading: false,
+        },
       };
     case FAILED_DELETE_COMMENT:
       return {

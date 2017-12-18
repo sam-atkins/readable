@@ -316,7 +316,7 @@ describe('comments reducer', () => {
         error: false,
         loading: false,
         requestDelete: true,
-        postIdForDeletion: '8tu4bsun805n8un48ve89',
+        commentIdForDeletion: '8tu4bsun805n8un48ve89',
       },
     };
     deepFreeze(state);
@@ -420,6 +420,10 @@ describe('comments reducer', () => {
         voteScore: 6,
         deleted: true,
         parentDeleted: false,
+      },
+      commentStatus: {
+        error: false,
+        loading: false,
       },
     };
     deepFreeze(state);
