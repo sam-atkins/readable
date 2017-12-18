@@ -4,6 +4,7 @@ import {
   POST_BACKGROUND,
   POST_BORDER,
   POST_META,
+  TEXT_WARNING,
 } from '../../styles/colours';
 
 export const CommentDiv = styled.div`
@@ -17,7 +18,7 @@ export const StyledCommentBody = styled.div`
   padding: 0.5rem;
 `;
 
-export const StyledCommentMetaBold = styled.span`
+export const StyledMetaBold = styled.span`
   color: ${POST_META};
   font-size: x-small;
   font-weight: bold;
@@ -35,4 +36,12 @@ export const StyledPostMetaBoldLink = styled.a`
     color: ${LINK_HOVER};
     cursor: pointer;
   }
+`;
+
+export const StyledMetaBoldWarning = StyledPostMetaBoldLink.extend`
+  color: ${TEXT_WARNING};
+`;
+
+export const StyledMetaBoldCancel = StyledPostMetaBoldLink.extend`
+  color: ${TEXT_WARNING};
 `;
