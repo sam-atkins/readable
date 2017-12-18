@@ -1,16 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Loading from '../components/Loading';
-import Error from '../components/Error';
-import PostView from '../components/PostView';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import PostView from '../../components/PostView';
 import {
   getCategoryValues,
   getCategoryErrorStatus,
   getCategoryLoadingStatus,
-} from '../selectors/categorySelectors';
-import { getPostValues } from '../selectors/postSelectors';
+} from '../../selectors/categorySelectors';
+import { getPostValues } from '../../selectors/postSelectors';
+import {
+  CategoryViewWrapper,
+  CategoryPostWrapper,
+  CategoryContent,
+  CategoryHeader,
+  SortPostsMenu,
+} from './CategoryPostViewContainer.styles';
 
 const CategoryPostViewContainer = ({
   categories,
@@ -59,30 +65,6 @@ CategoryPostViewContainer.propTypes = {
   categoryError: PropTypes.bool.isRequired,
   posts: PropTypes.array.isRequired,
 };
-
-const CategoryViewWrapper = styled.div`
-  grid-column-start: 1;
-  grid-column-end: 4;
-  grid-row: 2;
-`;
-
-const CategoryPostWrapper = styled.div``;
-
-const CategoryContent = styled.div`
-  margin-left: 1rem;
-`;
-
-const CategoryHeader = styled.h2`
-  grid-column-start: 1;
-  grid-row-start: 1;
-  text-decoration: underline;
-`;
-
-const SortPostsMenu = styled.select`
-  grid-column-start: 1;
-  grid-row-start: 1;
-  cursor: pointer;
-`;
 
 const mapStateToProps = state => ({
   categories: getCategoryValues(state),

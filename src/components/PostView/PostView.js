@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
@@ -12,8 +12,8 @@ import CommentForm from '../../containers/CommentForm';
 import {
   getPostErrorStatus,
   getPostLoadingStatus,
-  selectPostForDeletion,
 } from '../../selectors/postSelectors';
+import selectItemForDeletion from '../../selectors/selectors';
 import {
   cancelRequestDeletePost,
   requestDeletePost,
@@ -28,6 +28,7 @@ import {
   StyledPostBody,
   StyledPostMeta,
   StyledPostMetaBold,
+  StyledPostMetaBoldCancel,
   StyledPostMetaBoldLink,
   StyledPostMetaBoldWarning,
   StyledPostMetaWrapper,
@@ -114,20 +115,24 @@ class PostView extends Component {
             </StyledPostMetaBold>
           )}
           {requestDeletePostStatus && (
-            <div>
+            <Fragment>
+              <StyledPostMetaBold>are you sure?</StyledPostMetaBold>
               <StyledPostMetaBoldWarning
                 onClick={() => confirmedDeletePostRequest(post.id)}
               >
-                confirm delete?
+                yes
               </StyledPostMetaBoldWarning>
-              <StyledPostMetaBold onClick={() => userCancelDeleteRequest()}>
-                cancel
-              </StyledPostMetaBold>
-            </div>
+              <StyledPostMetaBold>/</StyledPostMetaBold>
+              <StyledPostMetaBoldCancel
+                onClick={() => userCancelDeleteRequest()}
+              >
+                no
+              </StyledPostMetaBoldCancel>
+            </Fragment>
           )}
           {commentsFlag && (
             <div>
-              <CommentForm />
+              <CommentForm parentId={post.id} />
               Comments:
             </div>
           )}
@@ -162,7 +167,7 @@ PostView.defaultProps = {
 const mapStateToProps = (state, ownProps) => ({
   error: getPostErrorStatus(state),
   loading: getPostLoadingStatus(state),
-  requestDeletePostStatus: selectPostForDeletion(
+  requestDeletePostStatus: selectItemForDeletion(
     state.post.postStatus.requestDelete,
     ownProps.post.id,
     state.post.postStatus.postIdForDeletion

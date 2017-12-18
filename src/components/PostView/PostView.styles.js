@@ -82,3 +82,7 @@ export const StyledPostMetaBold = styled.span`
 export const StyledPostMetaBoldWarning = StyledPostMetaBold.extend`
   color: ${TEXT_WARNING};
 `;
+
+export const StyledPostMetaBoldCancel = StyledPostMetaBold.extend`
+  color: ${TEXT_WARNING};
+`;

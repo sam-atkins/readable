@@ -135,3 +135,13 @@ export const editAndPersistComment = (payload) => {
     .then(response => response.json())
     .then(data => data);
 };
+
+export const deleteComment = payload =>
+  fetch(`${api}/comments/${payload}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+    },
+  })
+    .then(response => response.json())
+    .then(data => data);

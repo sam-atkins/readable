@@ -1,8 +1,12 @@
 import {
   ADD_NEW_COMMENT_FAILURE,
   ADD_NEW_COMMENT_SUCCESS,
+  CANCEL_REQUEST_DELETE_COMMENT,
+  CONFIRM_DELETE_COMMENT,
+  FAILED_DELETE_COMMENT,
   RECEIVE_COMMENTS_FAIL,
   RECEIVE_COMMENTS_SUCCESS,
+  REQUEST_DELETE_COMMENT,
   TOGGLE_COMMENT_EDIT_TO_VIEW,
   TOGGLE_COMMENT_VIEW_TO_EDIT,
 } from '../actions/commentActions';
@@ -75,6 +79,43 @@ const comments = (state = initialState, action) => {
           loading: false,
           commentEditViewToggle: false,
           commentIdForEditing: action.payload,
+        },
+      };
+    case REQUEST_DELETE_COMMENT:
+      return {
+        ...state,
+        commentStatus: {
+          error: false,
+          loading: false,
+          requestDelete: true,
+          commentIdForDeletion: action.payload,
+        },
+      };
+    case CANCEL_REQUEST_DELETE_COMMENT:
+      return {
+        ...state,
+        commentStatus: {
+          error: false,
+          loading: false,
+          requestDelete: false,
+        },
+      };
+    case CONFIRM_DELETE_COMMENT:
+      return {
+        ...state,
+        [action.payload.id]: { ...payload },
+        commentStatus: {
+          error: false,
+          loading: false,
+        },
+      };
+    case FAILED_DELETE_COMMENT:
+      return {
+        ...state,
+        commentStatus: {
+          error: false,
+          loading: false,
+          requestDeleteError: true,
         },
       };
     default:

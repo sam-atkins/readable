@@ -8,7 +8,7 @@ class CommentViewContainer extends Component {
   renderViewOrForm = () => {
     const { comment, toggleView, commentIdForEditing } = this.props;
     if (toggleView && comment.id === commentIdForEditing) {
-      return <EditCommentForm comment={comment} />
+      return <EditCommentForm comment={comment} />;
     }
     return <CommentView key={comment.id} comment={comment} />;
   };

@@ -7,7 +7,8 @@ const selectComments = (comments, postId) => {
   }
 
   return Object.keys(comments)
-    .filter(key => comments[key].parentId === postId)
+    .filter(key =>
+      comments[key].parentId === postId && comments[key].deleted === false)
     .map(key => ({
       id: key,
       parentId: comments[key].parentId,

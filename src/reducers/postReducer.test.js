@@ -6,6 +6,8 @@ import {
   ADD_NEW_POST_SUCCESS,
   CANCEL_REQUEST_DELETE_POST,
   CONFIRM_DELETE_POST,
+  DECREMENT_COMMENT_COUNT,
+  INCREMENT_COMMENT_COUNT,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
   REQUEST_DELETE_POST,
@@ -421,6 +423,102 @@ describe('post reducer', () => {
         loading: false,
         redirect: false,
         requestDelete: false,
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should increment comment count', () => {
+    const initialState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 1,
+      },
+    };
+    const action = {
+      type: INCREMENT_COMMENT_COUNT,
+      payload: {
+        payload: {
+          id: '8tu4bsun805n8un48ve89',
+          parentId: 'ni6ok3ym',
+          timestamp: 1469479767190,
+          body: 'Comments. Are. Cool.',
+          author: 'thingone',
+          voteScore: -5,
+          deleted: false,
+          parentDeleted: false,
+        },
+      },
+    };
+    const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 2,
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should decrement comment count', () => {
+    const initialState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 3,
+      },
+    };
+    const action = {
+      type: DECREMENT_COMMENT_COUNT,
+      payload: {
+        payload: {
+          id: '8tu4bsun805n8un48ve89',
+          parentId: 'ni6ok3ym',
+          timestamp: 1469479767190,
+          body: 'Comments. Are. Cool.',
+          author: 'thingone',
+          voteScore: -5,
+          deleted: false,
+          parentDeleted: false,
+        },
+      },
+    };
+    const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 2,
       },
     };
     deepFreeze(initialState);
