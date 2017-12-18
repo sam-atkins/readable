@@ -6,7 +6,6 @@ import {
   getPostValues,
   filterPostsByParam,
   selectPostByPostId,
-  selectPostForDeletion,
   validPostUrl,
 } from './postSelectors';
 
@@ -225,28 +224,6 @@ describe('selectors for posts', () => {
       postCategoryUrl,
       postId,
       postTitleSlug
-    )).toBeFalsy();
-  });
-
-  it('should return true for a matching post to be deleted', () => {
-    const deleteBool = true;
-    const postId = 'z60i1tsf';
-    const postIdForDeletion = 'z60i1tsf';
-    expect(selectPostForDeletion(
-      deleteBool,
-      postId,
-      postIdForDeletion
-    )).toBeTruthy();
-  });
-
-  it('should return false for a non-matching post to be deleted', () => {
-    const deleteBool = true;
-    const postId = 'z60i1tsf';
-    const postIdForDeletion = '2v3d8ayl';
-    expect(selectPostForDeletion(
-      deleteBool,
-      postId,
-      postIdForDeletion
     )).toBeFalsy();
   });
 });

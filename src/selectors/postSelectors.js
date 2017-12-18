@@ -70,14 +70,3 @@ export const validPostUrl = (
   }
   return false;
 };
-
-export const selectPostForDeletion = (
-  deleteBool,
-  postId,
-  postIdForDeletion
-) => {
-  if (deleteBool && postId === postIdForDeletion) {
-    return true;
-  }
-  return false;
-};
