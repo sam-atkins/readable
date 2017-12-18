@@ -6,14 +6,16 @@ import {
   ADD_NEW_POST_SUCCESS,
   CANCEL_REQUEST_DELETE_POST,
   CONFIRM_DELETE_POST,
-  DECREMENT_COMMENT_COUNT,
-  INCREMENT_COMMENT_COUNT,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
   REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
   TOGGLE_FORM_REDIRECT,
 } from '../actions/postActions';
+import {
+  DECREMENT_COMMENT_COUNT,
+  INCREMENT_COMMENT_COUNT,
+} from '../actions/commentActions';
 
 describe('post reducer', () => {
   it('should return the initial state', () => {

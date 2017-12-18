@@ -1,4 +1,5 @@
-import { decrementCommentCount, incrementCommentCount } from './postActions';
+// import { decrementCommentCount, incrementCommentCount } from './postActions';
+// import { decrementCommentCount } from './postActions';
 import {
   editAndPersistComment,
   deleteComment,
@@ -31,6 +32,12 @@ export const addCommentSuccess = payload => ({
 export const ADD_NEW_COMMENT_FAILURE = 'ADD_NEW_COMMENT_FAILURE';
 export const addCommentError = () => ({
   type: ADD_NEW_COMMENT_FAILURE,
+});
+
+export const INCREMENT_COMMENT_COUNT = 'INCREMENT_COMMENT_COUNT';
+export const incrementCommentCount = payload => ({
+  type: INCREMENT_COMMENT_COUNT,
+  payload,
 });
 
 export const addCommentPost = payload => (dispatch) => {
@@ -78,6 +85,12 @@ export const confirmDeleteComment = payload => ({
 export const FAILED_DELETE_COMMENT = 'FAILED_DELETE_COMMENT';
 export const failedDeleteComment = () => ({
   type: FAILED_DELETE_COMMENT,
+});
+
+export const DECREMENT_COMMENT_COUNT = 'DECREMENT_COMMENT_COUNT';
+export const decrementCommentCount = payload => ({
+  type: DECREMENT_COMMENT_COUNT,
+  payload,
 });
 
 export const processCommentDeletion = payload => (dispatch) => {

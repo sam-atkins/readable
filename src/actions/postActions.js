@@ -87,15 +87,3 @@ export const processPostDeletion = payload => (dispatch) => {
     .then(data => dispatch(confirmDeletePost(data)))
     .catch(error => dispatch(failedDeletePost(error)));
 };
-
-export const DECREMENT_COMMENT_COUNT = 'DECREMENT_COMMENT_COUNT';
-export const decrementCommentCount = payload => ({
-  type: DECREMENT_COMMENT_COUNT,
-  payload,
-});
-
-export const INCREMENT_COMMENT_COUNT = 'INCREMENT_COMMENT_COUNT';
-export const incrementCommentCount = payload => ({
-  type: INCREMENT_COMMENT_COUNT,
-  payload,
-});
