@@ -12,8 +12,8 @@ import CommentForm from '../../containers/CommentForm';
 import {
   getPostErrorStatus,
   getPostLoadingStatus,
-  selectPostForDeletion,
 } from '../../selectors/postSelectors';
+import selectItemForDeletion from '../../selectors/selectors';
 import {
   cancelRequestDeletePost,
   requestDeletePost,
@@ -167,7 +167,7 @@ PostView.defaultProps = {
 const mapStateToProps = (state, ownProps) => ({
   error: getPostErrorStatus(state),
   loading: getPostLoadingStatus(state),
-  requestDeletePostStatus: selectPostForDeletion(
+  requestDeletePostStatus: selectItemForDeletion(
     state.post.postStatus.requestDelete,
     ownProps.post.id,
     state.post.postStatus.postIdForDeletion
