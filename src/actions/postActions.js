@@ -89,19 +89,19 @@ export const processPostDeletion = payload => (dispatch) => {
     .catch(error => dispatch(failedDeletePost(error)));
 };
 
-export const VOTE_UP_POST = 'VOTE_UP_POST';
-export const voteUpPost = payload => ({
-  type: VOTE_UP_POST,
+export const VOTE_POST_SUCCESS = 'VOTE_POST_SUCCESS';
+export const votePostSuccess = payload => ({
+  type: VOTE_POST_SUCCESS,
   payload,
 });
 
-export const VOTE_FAILED = 'VOTE_FAILED';
+export const VOTE_POST_FAILED = 'VOTE_POST_FAILED';
 export const failedVote = () => ({
-  type: VOTE_FAILED,
+  type: VOTE_POST_FAILED,
 });
 
 export const persistVotePost = (id, voteDirection, voteType) => (dispatch) => {
   persistVote(id, voteDirection, voteType)
-    .then(data => dispatch(voteUpPost(data)))
+    .then(data => dispatch(votePostSuccess(data)))
     .catch(error => dispatch(failedVote(error)));
 };

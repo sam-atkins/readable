@@ -9,7 +9,8 @@ import {
   REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
   TOGGLE_FORM_REDIRECT,
-  VOTE_UP_POST,
+  VOTE_POST_FAILED,
+  VOTE_POST_SUCCESS,
 } from '../actions/postActions';
 import {
   DECREMENT_COMMENT_COUNT,
@@ -160,7 +161,7 @@ const post = (state = initialState, action) => {
           commentCount: state[action.payload.payload.parentId].commentCount - 1,
         },
       };
-    case VOTE_UP_POST:
+    case VOTE_POST_SUCCESS:
       return {
         ...state,
         [action.payload.id]: { ...action.payload },
@@ -171,6 +172,18 @@ const post = (state = initialState, action) => {
           redirect: false,
           requestDelete: false,
           voteError: false,
+        },
+      };
+    case VOTE_POST_FAILED:
+      return {
+        ...state,
+        postStatus: {
+          edit: false,
+          error: false,
+          loading: false,
+          redirect: false,
+          requestDelete: false,
+          voteError: true,
         },
       };
     default:

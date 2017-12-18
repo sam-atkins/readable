@@ -87,7 +87,9 @@ class PostView extends Component {
           <br />
           {post.voteScore}
           <br />
-          <StyledFaArrowDown />
+          <StyledFaArrowDown
+            onClick={() => userUpVotePost(post.id, 'downVote', 'posts')}
+          />
         </StyledVoteCount>
         <StyledPostMetaWrapper>
           <PostTitleLink
@@ -194,6 +196,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(cancelRequestDeletePost());
   },
   userUpVotePost: (id, voteDirection, voteType) => {
+    dispatch(persistVotePost(id, voteDirection, voteType));
+  },
+  userDownVotePost: (id, voteDirection, voteType) => {
     dispatch(persistVotePost(id, voteDirection, voteType));
   },
 });
