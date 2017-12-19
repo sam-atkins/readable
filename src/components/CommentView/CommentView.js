@@ -7,6 +7,7 @@ import {
   processCommentDeletion,
   requestDeleteComment,
   toggleCommentViewToEdit,
+  persistVoteComment,
 } from '../../actions/commentActions';
 import selectItemForDeletion from '../../selectors/selectors';
 import {
@@ -30,6 +31,7 @@ const CommentView = ({
   userCancelDeleteRequest,
   confirmedDeleteCommentRequest,
   userRequestDeleteComment,
+  userVoteComment,
 }) => (
   <CommentDiv>
     <StyledCommentBody>{comment.body}</StyledCommentBody>
@@ -38,9 +40,13 @@ const CommentView = ({
       {comment.author}
     </StyledMetaBold>
     <StyledVoteCount>
-      <StyledFaArrowUp />
+      <StyledFaArrowUp
+        onClick={() => userVoteComment(comment.id, 'upVote', 'comments')}
+      />
       <StyledMetaBold>{comment.voteScore}</StyledMetaBold>
-      <StyledFaArrowDown />
+      <StyledFaArrowDown
+        onClick={() => userVoteComment(comment.id, 'downVote', 'comments')}
+      />
     </StyledVoteCount>
     <StyledPostMetaBoldLink onClick={() => toggleView(comment.id)}>
       edit
@@ -82,6 +88,7 @@ CommentView.propTypes = {
   userCancelDeleteRequest: PropTypes.func.isRequired,
   confirmedDeleteCommentRequest: PropTypes.func.isRequired,
   userRequestDeleteComment: PropTypes.func.isRequired,
+  userVoteComment: PropTypes.func.isRequired,
 };
 
 CommentView.defaultProps = {
@@ -114,6 +121,9 @@ const mapStateToDispatch = dispatch => ({
   },
   userCancelDeleteRequest: (payload) => {
     dispatch(cancelRequestDeleteComment(payload));
+  },
+  userVoteComment: (id, voteDirection, voteType) => {
+    dispatch(persistVoteComment(id, voteDirection, voteType));
   },
 });
 
