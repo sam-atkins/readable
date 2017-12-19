@@ -1,10 +1,9 @@
-// import { decrementCommentCount, incrementCommentCount } from './postActions';
-// import { decrementCommentCount } from './postActions';
 import {
   editAndPersistComment,
   deleteComment,
   fetchCommentsForSinglePost,
   persistComment,
+  persistVote,
 } from '../utils/api';
 
 export const RECEIVE_COMMENTS_SUCCESS = 'RECEIVE_COMMENTS_SUCCESS';
@@ -98,4 +97,25 @@ export const processCommentDeletion = payload => (dispatch) => {
     .then(data => dispatch(confirmDeleteComment(data)))
     .then(data => dispatch(decrementCommentCount(data)))
     .catch(error => dispatch(failedDeleteComment(error)));
+};
+
+export const VOTE_COMMENT_SUCCESS = 'VOTE_COMMENT_SUCCESS';
+export const voteCommentSuccess = payload => ({
+  type: VOTE_COMMENT_SUCCESS,
+  payload,
+});
+
+export const VOTE_COMMENT_FAILED = 'VOTE_COMMENT_FAILED';
+export const failedVote = () => ({
+  type: VOTE_COMMENT_FAILED,
+});
+
+export const persistVoteComment = (
+  id,
+  voteDirection,
+  voteType
+) => (dispatch) => {
+  persistVote(id, voteDirection, voteType)
+    .then(data => dispatch(voteCommentSuccess(data)))
+    .catch(error => dispatch(failedVote(error)));
 };
