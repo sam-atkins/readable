@@ -1,9 +1,9 @@
-import { decrementCommentCount, incrementCommentCount } from './postActions';
 import {
   editAndPersistComment,
   deleteComment,
   fetchCommentsForSinglePost,
   persistComment,
+  persistVote,
 } from '../utils/api';
 
 export const RECEIVE_COMMENTS_SUCCESS = 'RECEIVE_COMMENTS_SUCCESS';
@@ -31,6 +31,12 @@ export const addCommentSuccess = payload => ({
 export const ADD_NEW_COMMENT_FAILURE = 'ADD_NEW_COMMENT_FAILURE';
 export const addCommentError = () => ({
   type: ADD_NEW_COMMENT_FAILURE,
+});
+
+export const INCREMENT_COMMENT_COUNT = 'INCREMENT_COMMENT_COUNT';
+export const incrementCommentCount = payload => ({
+  type: INCREMENT_COMMENT_COUNT,
+  payload,
 });
 
 export const addCommentPost = payload => (dispatch) => {
@@ -80,9 +86,36 @@ export const failedDeleteComment = () => ({
   type: FAILED_DELETE_COMMENT,
 });
 
+export const DECREMENT_COMMENT_COUNT = 'DECREMENT_COMMENT_COUNT';
+export const decrementCommentCount = payload => ({
+  type: DECREMENT_COMMENT_COUNT,
+  payload,
+});
+
 export const processCommentDeletion = payload => (dispatch) => {
   deleteComment(payload)
     .then(data => dispatch(confirmDeleteComment(data)))
     .then(data => dispatch(decrementCommentCount(data)))
     .catch(error => dispatch(failedDeleteComment(error)));
+};
+
+export const VOTE_COMMENT_SUCCESS = 'VOTE_COMMENT_SUCCESS';
+export const voteCommentSuccess = payload => ({
+  type: VOTE_COMMENT_SUCCESS,
+  payload,
+});
+
+export const VOTE_COMMENT_FAILED = 'VOTE_COMMENT_FAILED';
+export const failedVote = () => ({
+  type: VOTE_COMMENT_FAILED,
+});
+
+export const persistVoteComment = (
+  id,
+  voteDirection,
+  voteType
+) => (dispatch) => {
+  persistVote(id, voteDirection, voteType)
+    .then(data => dispatch(voteCommentSuccess(data)))
+    .catch(error => dispatch(failedVote(error)));
 };

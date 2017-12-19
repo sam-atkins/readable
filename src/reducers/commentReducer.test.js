@@ -13,6 +13,8 @@ import {
   REQUEST_DELETE_COMMENT,
   TOGGLE_COMMENT_EDIT_TO_VIEW,
   TOGGLE_COMMENT_VIEW_TO_EDIT,
+  VOTE_COMMENT_FAILED,
+  VOTE_COMMENT_SUCCESS,
 } from '../actions/commentActions';
 
 const initialState = {
@@ -465,6 +467,110 @@ describe('comments reducer', () => {
         error: false,
         loading: false,
         requestDeleteError: true,
+      },
+    };
+    deepFreeze(state);
+    expect(comments(state, action)).toEqual(expectedState);
+  });
+
+  it('should up vote a comment', () => {
+    const state = {
+      '8tu4bsun805n8un48ve89': {
+        id: '8tu4bsun805n8un48ve89',
+        parentId: 'z60i1tsf',
+        timestamp: 1469479767190,
+        body: 'Comments. Are. Cool.',
+        author: 'thingone',
+        voteScore: -5,
+        deleted: false,
+        parentDeleted: false,
+      },
+      '894tuq4ut84ut8v4t8wun89g': {
+        id: '894tuq4ut84ut8v4t8wun89g',
+        parentId: 'z60i1tsf',
+        timestamp: 1468166872634,
+        body: 'Hi there! I am a COMMENT.',
+        author: 'thingtwo',
+        voteScore: 6,
+        deleted: false,
+        parentDeleted: false,
+      },
+    };
+    const action = {
+      type: VOTE_COMMENT_SUCCESS,
+      payload: {
+        id: '894tuq4ut84ut8v4t8wun89g',
+        parentId: 'z60i1tsf',
+        timestamp: 1468166872634,
+        body: 'Hi there! I am a COMMENT.',
+        author: 'thingtwo',
+        voteScore: 7,
+        deleted: false,
+        parentDeleted: false,
+      },
+    };
+    const expectedState = {
+      '8tu4bsun805n8un48ve89': {
+        id: '8tu4bsun805n8un48ve89',
+        parentId: 'z60i1tsf',
+        timestamp: 1469479767190,
+        body: 'Comments. Are. Cool.',
+        author: 'thingone',
+        voteScore: -5,
+        deleted: false,
+        parentDeleted: false,
+      },
+      '894tuq4ut84ut8v4t8wun89g': {
+        id: '894tuq4ut84ut8v4t8wun89g',
+        parentId: 'z60i1tsf',
+        timestamp: 1468166872634,
+        body: 'Hi there! I am a COMMENT.',
+        author: 'thingtwo',
+        voteScore: 7,
+        deleted: false,
+        parentDeleted: false,
+      },
+      commentStatus: {
+        error: false,
+        loading: false,
+        voteError: false,
+      },
+    };
+    deepFreeze(state);
+    expect(comments(state, action)).toEqual(expectedState);
+  });
+
+  it('should fail gracefully when a vote errors', () => {
+    const state = {
+      '894tuq4ut84ut8v4t8wun89g': {
+        id: '894tuq4ut84ut8v4t8wun89g',
+        parentId: 'z60i1tsf',
+        timestamp: 1468166872634,
+        body: 'Hi there! I am a COMMENT.',
+        author: 'thingtwo',
+        voteScore: 6,
+        deleted: false,
+        parentDeleted: false,
+      },
+    };
+    const action = {
+      type: VOTE_COMMENT_FAILED,
+    };
+    const expectedState = {
+      '894tuq4ut84ut8v4t8wun89g': {
+        id: '894tuq4ut84ut8v4t8wun89g',
+        parentId: 'z60i1tsf',
+        timestamp: 1468166872634,
+        body: 'Hi there! I am a COMMENT.',
+        author: 'thingtwo',
+        voteScore: 6,
+        deleted: false,
+        parentDeleted: false,
+      },
+      commentStatus: {
+        error: false,
+        loading: false,
+        voteError: true,
       },
     };
     deepFreeze(state);

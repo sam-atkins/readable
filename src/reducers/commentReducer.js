@@ -9,6 +9,8 @@ import {
   REQUEST_DELETE_COMMENT,
   TOGGLE_COMMENT_EDIT_TO_VIEW,
   TOGGLE_COMMENT_VIEW_TO_EDIT,
+  VOTE_COMMENT_FAILED,
+  VOTE_COMMENT_SUCCESS,
 } from '../actions/commentActions';
 
 const initialState = {
@@ -116,6 +118,25 @@ const comments = (state = initialState, action) => {
           error: false,
           loading: false,
           requestDeleteError: true,
+        },
+      };
+    case VOTE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        [action.payload.id]: { ...action.payload },
+        commentStatus: {
+          error: false,
+          loading: false,
+          voteError: false,
+        },
+      };
+    case VOTE_COMMENT_FAILED:
+      return {
+        ...state,
+        commentStatus: {
+          error: false,
+          loading: false,
+          voteError: true,
         },
       };
     default:

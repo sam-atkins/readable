@@ -4,14 +4,18 @@ import {
   ADD_NEW_POST_REQUEST,
   CANCEL_REQUEST_DELETE_POST,
   CONFIRM_DELETE_POST,
-  DECREMENT_COMMENT_COUNT,
-  INCREMENT_COMMENT_COUNT,
   RECEIVE_POSTS_FAILURE,
   RECEIVE_POSTS_SUCCESS,
   REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
   TOGGLE_FORM_REDIRECT,
+  VOTE_POST_FAILED,
+  VOTE_POST_SUCCESS,
 } from '../actions/postActions';
+import {
+  DECREMENT_COMMENT_COUNT,
+  INCREMENT_COMMENT_COUNT,
+} from '../actions/commentActions';
 
 const initialState = {
   postStatus: {
@@ -155,6 +159,31 @@ const post = (state = initialState, action) => {
         [action.payload.payload.parentId]: {
           ...state[action.payload.payload.parentId],
           commentCount: state[action.payload.payload.parentId].commentCount - 1,
+        },
+      };
+    case VOTE_POST_SUCCESS:
+      return {
+        ...state,
+        [action.payload.id]: { ...action.payload },
+        postStatus: {
+          edit: false,
+          error: false,
+          loading: false,
+          redirect: false,
+          requestDelete: false,
+          voteError: false,
+        },
+      };
+    case VOTE_POST_FAILED:
+      return {
+        ...state,
+        postStatus: {
+          edit: false,
+          error: false,
+          loading: false,
+          redirect: false,
+          requestDelete: false,
+          voteError: true,
         },
       };
     default:

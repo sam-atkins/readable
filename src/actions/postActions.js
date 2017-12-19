@@ -3,6 +3,7 @@ import {
   deletePost,
   getPosts,
   persistPost,
+  persistVote,
 } from '../utils/api';
 
 export const RECEIVE_POSTS_SUCCESS = 'RECEIVE_POSTS_SUCCESS';
@@ -88,14 +89,19 @@ export const processPostDeletion = payload => (dispatch) => {
     .catch(error => dispatch(failedDeletePost(error)));
 };
 
-export const DECREMENT_COMMENT_COUNT = 'DECREMENT_COMMENT_COUNT';
-export const decrementCommentCount = payload => ({
-  type: DECREMENT_COMMENT_COUNT,
+export const VOTE_POST_SUCCESS = 'VOTE_POST_SUCCESS';
+export const votePostSuccess = payload => ({
+  type: VOTE_POST_SUCCESS,
   payload,
 });
 
-export const INCREMENT_COMMENT_COUNT = 'INCREMENT_COMMENT_COUNT';
-export const incrementCommentCount = payload => ({
-  type: INCREMENT_COMMENT_COUNT,
-  payload,
+export const VOTE_POST_FAILED = 'VOTE_POST_FAILED';
+export const failedVote = () => ({
+  type: VOTE_POST_FAILED,
 });
+
+export const persistVotePost = (id, voteDirection, voteType) => (dispatch) => {
+  persistVote(id, voteDirection, voteType)
+    .then(data => dispatch(votePostSuccess(data)))
+    .catch(error => dispatch(failedVote(error)));
+};

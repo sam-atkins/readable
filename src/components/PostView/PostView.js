@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import FaArrowUp from 'react-icons/lib/fa/arrow-up';
-import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import Loading from '../Loading';
 import Error from '../Error';
@@ -17,6 +15,7 @@ import selectItemForDeletion from '../../selectors/selectors';
 import {
   cancelRequestDeletePost,
   requestDeletePost,
+  persistVotePost,
   processPostDeletion,
   selectPostToEdit,
 } from '../../actions/postActions';
@@ -32,9 +31,13 @@ import {
   StyledPostMetaBoldLink,
   StyledPostMetaBoldWarning,
   StyledPostMetaWrapper,
-  StyledVoteCount,
   PostTitleLink,
 } from './PostView.styles';
+import {
+  StyledFaArrowDown,
+  StyledFaArrowUp,
+  StyledVoteCount,
+} from '../../styles/voteArrows';
 
 class PostView extends Component {
   renderComments = () => {
@@ -62,6 +65,7 @@ class PostView extends Component {
       submitPostToEdit,
       userCancelDeleteRequest,
       userRequestDeletePost,
+      userVotePost,
     } = this.props;
 
     if (loading) {
@@ -79,11 +83,15 @@ class PostView extends Component {
     return (
       <PostWrapper>
         <StyledVoteCount>
-          <FaArrowUp />
+          <StyledFaArrowUp
+            onClick={() => userVotePost(post.id, 'upVote', 'posts')}
+          />
           <br />
           {post.voteScore}
           <br />
-          <FaArrowDown />
+          <StyledFaArrowDown
+            onClick={() => userVotePost(post.id, 'downVote', 'posts')}
+          />
         </StyledVoteCount>
         <StyledPostMetaWrapper>
           <PostTitleLink
@@ -156,6 +164,7 @@ PostView.propTypes = {
   confirmedDeletePostRequest: PropTypes.func.isRequired,
   submitPostToEdit: PropTypes.func.isRequired,
   userCancelDeleteRequest: PropTypes.func.isRequired,
+  userVotePost: PropTypes.func.isRequired,
 };
 
 PostView.defaultProps = {
@@ -187,6 +196,9 @@ const mapDispatchToProps = dispatch => ({
   },
   userCancelDeleteRequest: () => {
     dispatch(cancelRequestDeletePost());
+  },
+  userVotePost: (id, voteDirection, voteType) => {
+    dispatch(persistVotePost(id, voteDirection, voteType));
   },
 });
 
