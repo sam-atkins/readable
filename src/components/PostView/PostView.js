@@ -24,8 +24,6 @@ import { slugifyPostTitle } from '../../utils/utils';
 import {
   PostWrapper,
   StyledCommentWrapper,
-  StyledFaArrowDown,
-  StyledFaArrowUp,
   StyledPostBody,
   StyledPostMeta,
   StyledPostMetaBold,
@@ -33,9 +31,13 @@ import {
   StyledPostMetaBoldLink,
   StyledPostMetaBoldWarning,
   StyledPostMetaWrapper,
-  StyledVoteCount,
   PostTitleLink,
 } from './PostView.styles';
+import {
+  StyledFaArrowDown,
+  StyledFaArrowUp,
+  StyledVoteCount,
+} from '../../styles/voteArrows';
 
 class PostView extends Component {
   renderComments = () => {

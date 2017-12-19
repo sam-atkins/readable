@@ -17,6 +17,11 @@ import {
   StyledMetaBoldCancel,
   StyledPostMetaBoldLink,
 } from './CommentView.styles';
+import {
+  StyledFaArrowDown,
+  StyledFaArrowUp,
+  StyledVoteCount,
+} from '../../styles/voteArrows';
 
 const CommentView = ({
   comment,
@@ -32,7 +37,11 @@ const CommentView = ({
       Submitted {distanceInWordsToNow(comment.timestamp)} ago by{' '}
       {comment.author}
     </StyledMetaBold>
-    <StyledMetaBold>Votes: {comment.voteScore}</StyledMetaBold>
+    <StyledVoteCount>
+      <StyledFaArrowUp />
+      <StyledMetaBold>{comment.voteScore}</StyledMetaBold>
+      <StyledFaArrowDown />
+    </StyledVoteCount>
     <StyledPostMetaBoldLink onClick={() => toggleView(comment.id)}>
       edit
     </StyledPostMetaBoldLink>
