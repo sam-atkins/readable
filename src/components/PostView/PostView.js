@@ -65,7 +65,7 @@ class PostView extends Component {
       submitPostToEdit,
       userCancelDeleteRequest,
       userRequestDeletePost,
-      userUpVotePost,
+      userVotePost,
     } = this.props;
 
     if (loading) {
@@ -84,13 +84,13 @@ class PostView extends Component {
       <PostWrapper>
         <StyledVoteCount>
           <StyledFaArrowUp
-            onClick={() => userUpVotePost(post.id, 'upVote', 'posts')}
+            onClick={() => userVotePost(post.id, 'upVote', 'posts')}
           />
           <br />
           {post.voteScore}
           <br />
           <StyledFaArrowDown
-            onClick={() => userUpVotePost(post.id, 'downVote', 'posts')}
+            onClick={() => userVotePost(post.id, 'downVote', 'posts')}
           />
         </StyledVoteCount>
         <StyledPostMetaWrapper>
@@ -164,7 +164,7 @@ PostView.propTypes = {
   confirmedDeletePostRequest: PropTypes.func.isRequired,
   submitPostToEdit: PropTypes.func.isRequired,
   userCancelDeleteRequest: PropTypes.func.isRequired,
-  userUpVotePost: PropTypes.func.isRequired,
+  userVotePost: PropTypes.func.isRequired,
 };
 
 PostView.defaultProps = {
@@ -197,10 +197,7 @@ const mapDispatchToProps = dispatch => ({
   userCancelDeleteRequest: () => {
     dispatch(cancelRequestDeletePost());
   },
-  userUpVotePost: (id, voteDirection, voteType) => {
-    dispatch(persistVotePost(id, voteDirection, voteType));
-  },
-  userDownVotePost: (id, voteDirection, voteType) => {
+  userVotePost: (id, voteDirection, voteType) => {
     dispatch(persistVotePost(id, voteDirection, voteType));
   },
 });
