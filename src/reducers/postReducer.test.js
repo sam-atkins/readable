@@ -10,6 +10,8 @@ import {
   RECEIVE_POSTS_SUCCESS,
   REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
+  SORT_BY_HIGHEST_VOTE,
+  SORT_BY_NEW,
   TOGGLE_FORM_REDIRECT,
   VOTE_POST_FAILED,
   VOTE_POST_SUCCESS,
@@ -623,6 +625,46 @@ describe('post reducer', () => {
         redirect: false,
         requestDelete: false,
         voteError: true,
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should set status to sort by highest vote', () => {
+    const initialState = {
+      sortPosts: {
+        sortBy: '',
+        sortByFocus: '',
+      },
+    };
+    const action = {
+      type: SORT_BY_HIGHEST_VOTE,
+    };
+    const expectedState = {
+      sortPosts: {
+        sortBy: 'HIGHEST_VOTE',
+        sortByFocus: 'HIGHEST_VOTE',
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should set status to sort by highest vote', () => {
+    const initialState = {
+      sortPosts: {
+        sortBy: '',
+        sortByFocus: '',
+      },
+    };
+    const action = {
+      type: SORT_BY_NEW,
+    };
+    const expectedState = {
+      sortPosts: {
+        sortBy: 'NEW',
+        sortByFocus: 'NEW',
       },
     };
     deepFreeze(initialState);

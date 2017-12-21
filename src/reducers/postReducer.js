@@ -8,6 +8,8 @@ import {
   RECEIVE_POSTS_SUCCESS,
   REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
+  SORT_BY_HIGHEST_VOTE,
+  SORT_BY_NEW,
   TOGGLE_FORM_REDIRECT,
   VOTE_POST_FAILED,
   VOTE_POST_SUCCESS,
@@ -184,6 +186,22 @@ const post = (state = initialState, action) => {
           redirect: false,
           requestDelete: false,
           voteError: true,
+        },
+      };
+    case SORT_BY_HIGHEST_VOTE:
+      return {
+        ...state,
+        sortPosts: {
+          sortBy: 'HIGHEST_VOTE',
+          sortByFocus: 'HIGHEST_VOTE',
+        },
+      };
+    case SORT_BY_NEW:
+      return {
+        ...state,
+        sortPosts: {
+          sortBy: 'NEW',
+          sortByFocus: 'NEW',
         },
       };
     default:

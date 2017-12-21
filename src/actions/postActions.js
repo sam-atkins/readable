@@ -105,3 +105,13 @@ export const persistVotePost = (id, voteDirection, voteType) => (dispatch) => {
     .then(data => dispatch(votePostSuccess(data)))
     .catch(error => dispatch(failedVote(error)));
 };
+
+export const SORT_BY_NEW = 'SORT_BY_NEW';
+export const userRequestSortByNew = () => ({
+  type: SORT_BY_NEW,
+});
+
+export const SORT_BY_HIGHEST_VOTE = 'SORT_BY_HIGHEST_VOTE';
+export const userRequestSortByHighestVote = () => ({
+  type: SORT_BY_HIGHEST_VOTE,
+});
