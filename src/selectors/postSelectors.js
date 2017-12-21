@@ -25,24 +25,30 @@ export const convertPostObjToArray = postObj =>
       commentCount: postObj[key].commentCount,
     }));
 
+// export const sortPostsByNew = postObj =>
+//   Object.keys(postObj)
+//     .filter(key => key !== 'postStatus')
+//     .slice()
+//     .sort();
+
 /**
  * The selector used in mapStateToProps within components.
- * It converts {state.post} into arrays used for UI. The type arg determines
+ * It converts {state.post} into arrays used for UI. The sortType arg determines
  * how the arrays are sorted.
  * @param {object} state.post
- * @param {string} type
- * @returns {array} based on the 'sortBy' type arg
+ * @param {string} sortType
+ * @returns {array} based on the 'sortBy' sortType arg
  */
-export const getPostValues = ({ post }, type) => {
+export const getPostValues = ({ post }, sortType) => {
   if (post.postStatus.error === true) {
     return [];
   }
 
-  switch (type) {
+  switch (sortType) {
     // NOTE example below on how this func will work
-    // case SORT_BY_NEW:
+    // case 'SORT_BY_NEW':
     //   return sortPostsByNew(post);
-    // case SORT_BY_HIGHEST_VOTE:
+    // case 'SORT_BY_HIGHEST_VOTE':
     //   return sortPostsByHighestVote(post);
     default:
       return convertPostObjToArray(post);
