@@ -25,11 +25,21 @@ export const convertPostObjToArray = postObj =>
       commentCount: postObj[key].commentCount,
     }));
 
-// export const sortPostsByNew = postObj =>
-//   Object.keys(postObj)
-//     .filter(key => key !== 'postStatus')
-//     .slice()
-//     .sort();
+export const sortPostsByHighestVote = postsArray =>
+  postsArray.sort((prev, next) => {
+    if (prev.voteScore > next.voteScore) {
+      return -1;
+    }
+    return 1;
+  });
+
+export const sortPostsByNewestDate = postsArray =>
+  postsArray.sort((prev, next) => {
+    if (prev.timestamp > next.timestamp) {
+      return -1;
+    }
+    return 1;
+  });
 
 /**
  * The selector used in mapStateToProps within components.
@@ -47,9 +57,9 @@ export const getPostValues = ({ post }, sortType) => {
   switch (sortType) {
     // NOTE example below on how this func will work
     // case 'SORT_BY_NEW':
-    //   return sortPostsByNew(post);
+    //   return sortPostsByNewestDate(postsArray);
     // case 'SORT_BY_HIGHEST_VOTE':
-    //   return sortPostsByHighestVote(post);
+    //   return sortPostsByHighestVote(postsArray);
     default:
       return convertPostObjToArray(post);
   }
