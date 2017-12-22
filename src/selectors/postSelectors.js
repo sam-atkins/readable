@@ -54,6 +54,8 @@ export const getPostValues = ({ post }, sortType) => {
     return [];
   }
 
+  const postValues = convertPostObjToArray(post);
+
   switch (sortType) {
     // NOTE example below on how this func will work
     // case 'SORT_BY_NEW':
@@ -61,7 +63,7 @@ export const getPostValues = ({ post }, sortType) => {
     // case 'SORT_BY_HIGHEST_VOTE':
     //   return sortPostsByHighestVote(postsArray);
     default:
-      return convertPostObjToArray(post);
+      return postValues;
   }
 };
 

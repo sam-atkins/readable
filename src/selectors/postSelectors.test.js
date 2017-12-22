@@ -1,6 +1,7 @@
 /* global describe, it, expect */
 
 import {
+  convertPostObjToArray,
   getPostLoadingStatus,
   getPostErrorStatus,
   getPostValues,
@@ -100,6 +101,64 @@ describe('selectors for posts', () => {
       },
     ];
     expect(getPostValues(selectPostsInState)).toEqual(expectedShape);
+  });
+
+  it('should convert an object to array of objects', () => {
+    const initialObject = {
+      z60i1tsf: {
+        id: 'z60i1tsf',
+        timestamp: 1467166872634,
+        title: 'Udacity is the best place to learn React',
+        body: 'Everyone says so after all.',
+        author: 'thingtwo',
+        category: 'react',
+        voteScore: 6,
+        deleted: false,
+        commentCount: 2,
+      },
+      '2v3d8ayl': {
+        id: '2v3d8ayl',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        error: false,
+        loading: false,
+      },
+    };
+    const expectedArray = [
+      {
+        id: 'z60i1tsf',
+        timestamp: 1467166872634,
+        title: 'Udacity is the best place to learn React',
+        body: 'Everyone says so after all.',
+        author: 'thingtwo',
+        category: 'react',
+        voteScore: 6,
+        deleted: false,
+        commentCount: 2,
+      },
+      {
+        id: '2v3d8ayl',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+    ];
+    expect(convertPostObjToArray(initialObject)).toEqual(expectedArray);
   });
 
   it('should filter posts by param', () => {
