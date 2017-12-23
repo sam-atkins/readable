@@ -44,7 +44,7 @@ export const sortPostsByNewestDate = postsArray =>
 /**
  * The selector used in mapStateToProps within components.
  * It converts {state.post} into arrays used for UI. The sortType arg determines
- * how the arrays are sorted.
+ * how the arrays are sorted, based on {post.sortPosts.sortBy} in Redux store.
  * @param {object} state.post
  * @param {string} sortType
  * @returns {array} based on the 'sortBy' sortType arg
@@ -57,11 +57,10 @@ export const getPostValues = ({ post }, sortType) => {
   const postValues = convertPostObjToArray(post);
 
   switch (sortType) {
-    // NOTE example below on how this func will work
-    // case 'SORT_BY_NEW':
-    //   return sortPostsByNewestDate(postsArray);
-    // case 'SORT_BY_HIGHEST_VOTE':
-    //   return sortPostsByHighestVote(postsArray);
+    case 'NEW':
+      return sortPostsByNewestDate(postValues);
+    case 'HIGHEST_VOTE':
+      return sortPostsByHighestVote(postValues);
     default:
       return postValues;
   }

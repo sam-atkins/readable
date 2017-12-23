@@ -70,7 +70,7 @@ const mapStateToProps = state => ({
   categories: getCategoryValues(state),
   categoryError: getCategoryErrorStatus(state),
   categoryLoading: getCategoryLoadingStatus(state),
-  posts: getPostValues(state),
+  posts: getPostValues(state, state.post.sortPosts.sortBy),
 });
 
 export default connect(mapStateToProps)(CategoryPostViewContainer);

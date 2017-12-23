@@ -27,6 +27,10 @@ const initialState = {
     redirect: false,
     requestDelete: false,
   },
+  sortPosts: {
+    sortBy: '',
+    sortByFocus: '',
+  },
 };
 
 const post = (state = initialState, action) => {
@@ -35,6 +39,7 @@ const post = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_POSTS_SUCCESS:
       return {
+        ...state,
         ...posts.reduce((newObj, pst) => ({ ...newObj, [pst.id]: pst }), {}),
         postStatus: {
           edit: false,
@@ -46,6 +51,7 @@ const post = (state = initialState, action) => {
       };
     case RECEIVE_POSTS_FAILURE:
       return {
+        ...state,
         ...posts,
         postStatus: {
           edit: false,
