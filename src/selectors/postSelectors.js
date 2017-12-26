@@ -33,12 +33,28 @@ export const sortPostsByHighestVote = postsArray =>
     return 1;
   });
 
+export const sortPostsByLowestVote = postsArray =>
+  postsArray.sort((prev, next) => {
+    if (prev.voteScore > next.voteScore) {
+      return 1;
+    }
+    return -1;
+  });
+
 export const sortPostsByNewestDate = postsArray =>
   postsArray.sort((prev, next) => {
     if (prev.timestamp > next.timestamp) {
       return -1;
     }
     return 1;
+  });
+
+export const sortPostsByOldestDate = postsArray =>
+  postsArray.sort((prev, next) => {
+    if (prev.timestamp > next.timestamp) {
+      return 1;
+    }
+    return -1;
   });
 
 /**

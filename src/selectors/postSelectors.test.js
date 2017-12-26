@@ -7,7 +7,9 @@ import {
   getPostValues,
   selectPostByPostId,
   sortPostsByHighestVote,
+  sortPostsByLowestVote,
   sortPostsByNewestDate,
+  sortPostsByOldestDate,
   validPostUrl,
 } from './postSelectors';
 
@@ -388,6 +390,50 @@ describe('selectors for posts', () => {
     expect(sortPostsByHighestVote(initialArray)).toEqual(sortedArray);
   });
 
+  it('should sort posts by lowest vote', () => {
+    const initialArray = [
+      {
+        id: 'z60i1tsf',
+        timestamp: 1467166872634,
+        title: 'Udacity is the best place to learn React',
+        voteScore: 6,
+      },
+      {
+        id: '2v3d8ayl',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        voteScore: -5,
+      },
+      {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn React',
+        voteScore: 5,
+      },
+    ];
+    const sortedArray = [
+      {
+        id: '2v3d8ayl',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        voteScore: -5,
+      },
+      {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn React',
+        voteScore: 5,
+      },
+      {
+        id: 'z60i1tsf',
+        timestamp: 1467166872634,
+        title: 'Udacity is the best place to learn React',
+        voteScore: 6,
+      },
+    ];
+    expect(sortPostsByLowestVote(initialArray)).toEqual(sortedArray);
+  });
+
   it('should sort posts by newest first', () => {
     const initialArray = [
       {
@@ -430,5 +476,49 @@ describe('selectors for posts', () => {
       },
     ];
     expect(sortPostsByNewestDate(initialArray)).toEqual(sortedArray);
+  });
+
+  it('should sort posts by oldest first', () => {
+    const initialArray = [
+      {
+        id: 'z60i1tsf',
+        timestamp: 1567166872634,
+        title: 'Udacity is the best place to learn React',
+        voteScore: 6,
+      },
+      {
+        id: '2v3d8ayl',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        voteScore: -5,
+      },
+      {
+        id: 'ni6ok3ym',
+        timestamp: 1868479767190,
+        title: 'Learn React',
+        voteScore: 5,
+      },
+    ];
+    const sortedArray = [
+      {
+        id: '2v3d8ayl',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        voteScore: -5,
+      },
+      {
+        id: 'z60i1tsf',
+        timestamp: 1567166872634,
+        title: 'Udacity is the best place to learn React',
+        voteScore: 6,
+      },
+      {
+        id: 'ni6ok3ym',
+        timestamp: 1868479767190,
+        title: 'Learn React',
+        voteScore: 5,
+      },
+    ];
+    expect(sortPostsByOldestDate(initialArray)).toEqual(sortedArray);
   });
 });
