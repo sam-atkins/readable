@@ -15,7 +15,6 @@ import {
   CategoryPostWrapper,
   CategoryContent,
   CategoryHeader,
-  SortPostsMenu,
 } from './CategoryPostViewContainer.styles';
 
 const CategoryPostViewContainer = ({
@@ -38,11 +37,6 @@ const CategoryPostViewContainer = ({
         <CategoryPostWrapper key={cat.id}>
           <CategoryContent>
             <CategoryHeader>{cat.name}</CategoryHeader>
-            <SortPostsMenu>
-              <option disabled>Sort posts by:</option>
-              <option>Sort by score</option>
-              <option>Sort by date</option>
-            </SortPostsMenu>
           </CategoryContent>
           {posts.reduce((postArray, post) => {
             if (post.category === cat.id && post.deleted === false) {
@@ -70,7 +64,7 @@ const mapStateToProps = state => ({
   categories: getCategoryValues(state),
   categoryError: getCategoryErrorStatus(state),
   categoryLoading: getCategoryLoadingStatus(state),
-  posts: getPostValues(state),
+  posts: getPostValues(state, state.post.sortPosts.sortBy),
 });
 
 export default connect(mapStateToProps)(CategoryPostViewContainer);

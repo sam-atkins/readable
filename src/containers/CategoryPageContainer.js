@@ -9,9 +9,10 @@ import PostView from '../components/PostView';
 import NoMatchWrapper from '../components/NoMatchWrapper';
 import NoPosts from '../components/NoPosts';
 import SideBar from '../components/SideBar';
+import TabMenu from '../components/TabMenu';
 import PageWrapper from '../styles/pagewrapper';
 import { validCategoryUrl } from '../selectors/categorySelectors';
-import { filterPostsByParam } from '../selectors/postSelectors';
+import { getPostValues } from '../selectors/postSelectors';
 
 const CategoryPageContainer = ({ posts, validUrl }) => {
   if (!validUrl) {
@@ -26,6 +27,7 @@ const CategoryPageContainer = ({ posts, validUrl }) => {
     <StyledWrapper>
       <Header />
       <NavBarContainer />
+      <TabMenu />
       <SideBar />
       {posts.map(post => (
         <PostView key={post.id} post={post} homeFlag={false} />
@@ -48,7 +50,11 @@ const StyledWrapper = styled(PageWrapper)``;
 
 const mapStateToProps = (state, ownProps) => ({
   validUrl: validCategoryUrl(state, ownProps.match.params.categoryUrl),
-  posts: filterPostsByParam(state, ownProps.match.params.categoryUrl),
+  posts: getPostValues(
+    state,
+    state.post.sortPosts.sortBy,
+    ownProps.match.params.categoryUrl
+  ),
 });
 
 export default connect(mapStateToProps)(CategoryPageContainer);

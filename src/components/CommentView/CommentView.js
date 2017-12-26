@@ -109,7 +109,7 @@ const mapStateToProps = (state, ownProps) => ({
   ),
 });
 
-const mapStateToDispatch = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   toggleView: (payload) => {
     dispatch(toggleCommentViewToEdit(payload));
   },
@@ -127,4 +127,4 @@ const mapStateToDispatch = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(CommentView);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentView);

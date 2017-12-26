@@ -5,12 +5,14 @@ import NavbarContainer from '../containers/NavBarContainer';
 import CategoryPostViewContainer from '../containers/CategoryPostViewContainer';
 import Footer from './Footer';
 import SideBar from './SideBar';
+import TabMenu from './TabMenu';
 import PageWrapper from '../styles/pagewrapper';
 
 const HomePageWrapper = () => (
   <StyledWrapper>
     <Header />
     <NavbarContainer />
+    <TabMenu />
     <CategoryPostViewContainer />
     <SideBar />
     <Footer />

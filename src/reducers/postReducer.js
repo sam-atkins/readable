@@ -8,6 +8,10 @@ import {
   RECEIVE_POSTS_SUCCESS,
   REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
+  SORT_BY_HIGHEST_VOTE,
+  SORT_BY_LOWEST_VOTE,
+  SORT_BY_NEW,
+  SORT_BY_OLD,
   TOGGLE_FORM_REDIRECT,
   VOTE_POST_FAILED,
   VOTE_POST_SUCCESS,
@@ -25,6 +29,10 @@ const initialState = {
     redirect: false,
     requestDelete: false,
   },
+  sortPosts: {
+    sortBy: '',
+    sortByFocus: '',
+  },
 };
 
 const post = (state = initialState, action) => {
@@ -33,6 +41,7 @@ const post = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_POSTS_SUCCESS:
       return {
+        ...state,
         ...posts.reduce((newObj, pst) => ({ ...newObj, [pst.id]: pst }), {}),
         postStatus: {
           edit: false,
@@ -44,6 +53,7 @@ const post = (state = initialState, action) => {
       };
     case RECEIVE_POSTS_FAILURE:
       return {
+        ...state,
         ...posts,
         postStatus: {
           edit: false,
@@ -184,6 +194,38 @@ const post = (state = initialState, action) => {
           redirect: false,
           requestDelete: false,
           voteError: true,
+        },
+      };
+    case SORT_BY_HIGHEST_VOTE:
+      return {
+        ...state,
+        sortPosts: {
+          sortBy: 'HIGHEST_VOTE',
+          sortByFocus: 'HIGHEST_VOTE',
+        },
+      };
+    case SORT_BY_LOWEST_VOTE:
+      return {
+        ...state,
+        sortPosts: {
+          sortBy: 'LOWEST_VOTE',
+          sortByFocus: 'LOWEST_VOTE',
+        },
+      };
+    case SORT_BY_NEW:
+      return {
+        ...state,
+        sortPosts: {
+          sortBy: 'NEW',
+          sortByFocus: 'NEW',
+        },
+      };
+    case SORT_BY_OLD:
+      return {
+        ...state,
+        sortPosts: {
+          sortBy: 'OLD',
+          sortByFocus: 'OLD',
         },
       };
     default:

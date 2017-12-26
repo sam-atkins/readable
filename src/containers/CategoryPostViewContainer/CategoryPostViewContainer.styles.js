@@ -17,9 +17,3 @@ export const CategoryHeader = styled.h2`
   grid-row-start: 1;
   text-decoration: underline;
 `;
-
-export const SortPostsMenu = styled.select`
-  grid-column-start: 1;
-  grid-row-start: 1;
-  cursor: pointer;
-`;
