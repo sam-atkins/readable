@@ -5,7 +5,6 @@ import {
   getPostLoadingStatus,
   getPostErrorStatus,
   getPostValues,
-  filterPostsByParam,
   selectPostByPostId,
   sortPostsByHighestVote,
   sortPostsByNewestDate,
@@ -177,7 +176,7 @@ describe('selectors for posts', () => {
         commentCount: 0,
       },
     ];
-    expect(filterPostsByParam(selectPostsInState, urlParam)).toEqual(expectedShape);
+    expect(getPostValues(selectPostsInState, null, urlParam)).toEqual(expectedShape);
   });
 
   it('should filter posts by param and deleted property', () => {
@@ -203,7 +202,93 @@ describe('selectors for posts', () => {
     };
     const urlParam = 'redux';
     const expectedShape = [];
-    expect(filterPostsByParam(initialState, urlParam)).toEqual(expectedShape);
+    expect(getPostValues(initialState, null, urlParam)).toEqual(expectedShape);
+  });
+
+  it('should filter by param and deleted, and sort by votes', () => {
+    const initialState = {
+      post: {
+        z60i1tsf: {
+          id: 'z60i1tsf',
+          timestamp: 1467166872634,
+          title: 'Udacity is the best place to learn React',
+          body: 'Everyone says so after all.',
+          author: 'thingtwo',
+          category: 'react',
+          voteScore: 6,
+          deleted: false,
+          commentCount: 2,
+        },
+        '2v3d8ayl': {
+          id: '2v3d8ayl',
+          timestamp: 1468479767190,
+          title: 'Learn Redux in 10 minutes!',
+          body:
+            'Just kidding. It takes more than 10 minutes to learn technology.',
+          author: 'thingone',
+          category: 'react',
+          voteScore: -5,
+          deleted: false,
+          commentCount: 0,
+        },
+        mi6ok3ym: {
+          id: 'mi6ok3ym',
+          timestamp: 1468479767190,
+          title: 'Learn Redux in 10 minutes!',
+          body:
+            'Just kidding. It takes more than 10 minutes to learn technology.',
+          author: 'thingone',
+          category: 'redux',
+          voteScore: 1,
+          deleted: false,
+          commentCount: 0,
+        },
+        ni6ok3ym: {
+          id: 'ni6ok3ym',
+          timestamp: 1468479767190,
+          title: 'Learn Redux in 10 minutes!',
+          body:
+            'Just kidding. It takes more than 10 minutes to learn technology.',
+          author: 'thingone',
+          category: 'react',
+          voteScore: -5,
+          deleted: true,
+          commentCount: 0,
+        },
+        postStatus: {
+          error: false,
+          loading: false,
+        },
+      },
+    };
+    const sort = 'HIGHEST_VOTE';
+    const urlParam = 'react';
+    const expectedShape = [
+      {
+        id: 'z60i1tsf',
+        timestamp: 1467166872634,
+        title: 'Udacity is the best place to learn React',
+        body: 'Everyone says so after all.',
+        author: 'thingtwo',
+        category: 'react',
+        voteScore: 6,
+        deleted: false,
+        commentCount: 2,
+      },
+      {
+        id: '2v3d8ayl',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'react',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+    ];
+    expect(getPostValues(initialState, sort, urlParam)).toEqual(expectedShape);
   });
 
   it('should select a post by the url postId}', () => {

@@ -49,12 +49,19 @@ export const sortPostsByNewestDate = postsArray =>
  * @param {string} sortType
  * @returns {array} based on the 'sortBy' sortType arg
  */
-export const getPostValues = ({ post }, sortType) => {
+export const getPostValues = ({ post }, sortType, urlParam = '') => {
   if (post.postStatus.error === true) {
     return [];
   }
 
-  const postValues = convertPostObjToArray(post);
+  let postValues = [];
+  if (urlParam === '') {
+    postValues = convertPostObjToArray(post);
+  } else {
+    const postArray = convertPostObjToArray(post);
+    postValues = postArray.filter(filteredPost =>
+      filteredPost.category === urlParam && filteredPost.deleted === false);
+  }
 
   switch (sortType) {
     case 'NEW':
