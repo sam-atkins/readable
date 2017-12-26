@@ -15,6 +15,8 @@ import {
   TOGGLE_FORM_REDIRECT,
   VOTE_POST_FAILED,
   VOTE_POST_SUCCESS,
+  SORT_BY_OLD,
+  SORT_BY_LOWEST_VOTE,
 } from '../actions/postActions';
 import {
   DECREMENT_COMMENT_COUNT,
@@ -651,7 +653,27 @@ describe('post reducer', () => {
     expect(post(initialState, action)).toEqual(expectedState);
   });
 
-  it('should set status to sort by highest vote', () => {
+  it('should set status to sort by lowest vote', () => {
+    const initialState = {
+      sortPosts: {
+        sortBy: '',
+        sortByFocus: '',
+      },
+    };
+    const action = {
+      type: SORT_BY_LOWEST_VOTE,
+    };
+    const expectedState = {
+      sortPosts: {
+        sortBy: 'LOWEST_VOTE',
+        sortByFocus: 'LOWEST_VOTE',
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should set status to sort by newest post', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
@@ -665,6 +687,26 @@ describe('post reducer', () => {
       sortPosts: {
         sortBy: 'NEW',
         sortByFocus: 'NEW',
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should set status to sort by oldest vote', () => {
+    const initialState = {
+      sortPosts: {
+        sortBy: '',
+        sortByFocus: '',
+      },
+    };
+    const action = {
+      type: SORT_BY_OLD,
+    };
+    const expectedState = {
+      sortPosts: {
+        sortBy: 'OLD',
+        sortByFocus: 'OLD',
       },
     };
     deepFreeze(initialState);

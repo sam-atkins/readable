@@ -9,7 +9,9 @@ import {
   REQUEST_DELETE_POST,
   SELECT_POST_TO_EDIT,
   SORT_BY_HIGHEST_VOTE,
+  SORT_BY_LOWEST_VOTE,
   SORT_BY_NEW,
+  SORT_BY_OLD,
   TOGGLE_FORM_REDIRECT,
   VOTE_POST_FAILED,
   VOTE_POST_SUCCESS,
@@ -202,12 +204,28 @@ const post = (state = initialState, action) => {
           sortByFocus: 'HIGHEST_VOTE',
         },
       };
+    case SORT_BY_LOWEST_VOTE:
+      return {
+        ...state,
+        sortPosts: {
+          sortBy: 'LOWEST_VOTE',
+          sortByFocus: 'LOWEST_VOTE',
+        },
+      };
     case SORT_BY_NEW:
       return {
         ...state,
         sortPosts: {
           sortBy: 'NEW',
           sortByFocus: 'NEW',
+        },
+      };
+    case SORT_BY_OLD:
+      return {
+        ...state,
+        sortPosts: {
+          sortBy: 'OLD',
+          sortByFocus: 'OLD',
         },
       };
     default:
