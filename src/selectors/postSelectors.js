@@ -80,10 +80,14 @@ export const getPostValues = ({ post }, sortType, urlParam = '') => {
   }
 
   switch (sortType) {
-    case 'NEW':
-      return sortPostsByNewestDate(postValues);
     case 'HIGHEST_VOTE':
       return sortPostsByHighestVote(postValues);
+    case 'LOWEST_VOTE':
+      return sortPostsByLowestVote(postValues);
+    case 'NEW':
+      return sortPostsByNewestDate(postValues);
+    case 'OLD':
+      return sortPostsByOldestDate(postValues);
     default:
       return postValues;
   }
