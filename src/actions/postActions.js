@@ -111,7 +111,17 @@ export const userRequestSortByNew = () => ({
   type: SORT_BY_NEW,
 });
 
+export const SORT_BY_OLD = 'SORT_BY_OLD';
+export const userRequestSortByOld = () => ({
+  type: SORT_BY_OLD,
+});
+
 export const SORT_BY_HIGHEST_VOTE = 'SORT_BY_HIGHEST_VOTE';
 export const userRequestSortByHighestVote = () => ({
   type: SORT_BY_HIGHEST_VOTE,
+});
+
+export const SORT_BY_LOWEST_VOTE = 'SORT_BY_LOWEST_VOTE';
+export const userRequestSortByLowestVote = () => ({
+  type: SORT_BY_LOWEST_VOTE,
 });
