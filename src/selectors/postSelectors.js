@@ -73,12 +73,6 @@ export const getPostValues = ({ post }, sortType, urlParam = '') => {
   }
 };
 
-export const filterPostsByParam = (post, urlParam) => {
-  const postsArray = getPostValues(post);
-  return postsArray.filter(filteredPost =>
-    filteredPost.category === urlParam && filteredPost.deleted === false);
-};
-
 export const selectPostByPostId = ({ post }, postId) => {
   if (post.postStatus.error === true) {
     return [];
