@@ -15,7 +15,6 @@ import {
   CategoryPostWrapper,
   CategoryContent,
   CategoryHeader,
-  SortPostsMenu,
 } from './CategoryPostViewContainer.styles';
 
 const CategoryPostViewContainer = ({
@@ -38,11 +37,6 @@ const CategoryPostViewContainer = ({
         <CategoryPostWrapper key={cat.id}>
           <CategoryContent>
             <CategoryHeader>{cat.name}</CategoryHeader>
-            <SortPostsMenu>
-              <option disabled>Sort posts by:</option>
-              <option>Sort by score</option>
-              <option>Sort by date</option>
-            </SortPostsMenu>
           </CategoryContent>
           {posts.reduce((postArray, post) => {
             if (post.category === cat.id && post.deleted === false) {
