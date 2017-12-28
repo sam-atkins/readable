@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { NAV_ANCHOR } from '../../styles/colours';
 
 export const NavWrapper = styled.div`
@@ -20,12 +20,17 @@ export const NavWrapper = styled.div`
   }
 `;
 
-export const NavAnchor = styled(Link)`
+export const NavAnchor = styled(NavLink)`
   /* color: ${NAV_ANCHOR}; */
   color: #000000;
   text-decoration: none;
 
-  :hover {
+  &.active {
+    font-weight: bold;
+    color: orangered;
+  }
+
+  &:hover {
     text-decoration: underline;
   }
 `;

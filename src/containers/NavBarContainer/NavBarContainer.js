@@ -29,12 +29,21 @@ const NavBarContainer = ({ categories, categoryError, categoryLoading }) => {
     <NavWrapper>
       <NavList>
         <NavItem>
-          <NavAnchor to="/">home</NavAnchor>
+          <NavAnchor to="/" activeClassName="active" exact strict>
+            home
+          </NavAnchor>
         </NavItem>
         {categories.map(category => (
           <NavItem key={category.id}>
             <SpanSeparator>-</SpanSeparator>
-            <NavAnchor to={`/${category.path}`}>{category.name}</NavAnchor>
+            <NavAnchor
+              to={`/${category.path}`}
+              activeClassName="active"
+              exact
+              strict
+            >
+              {category.name}
+            </NavAnchor>
           </NavItem>
         ))}
         <SpanSeparator>|</SpanSeparator>
