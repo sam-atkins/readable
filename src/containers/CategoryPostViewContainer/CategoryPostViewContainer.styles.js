@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+// import PageWrapper from '../../styles/pagewrapper';
+
+// export const CategoryViewWrapper = styled(PageWrapper)``;
 
 export const CategoryViewWrapper = styled.div`
-  grid-column-start: 1;
+  /* grid-column-start: 1;
   grid-column-end: 4;
-  grid-row: 2;
+  grid-row: 2; */
+  justify-self: stretch;
+  display: subgrid;
 `;
 
 export const CategoryPostWrapper = styled.div``;

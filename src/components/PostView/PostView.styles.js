@@ -11,24 +11,22 @@ import {
 } from '../../styles/colours';
 
 export const PostWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 50px repeat(2, [col] 1fr);
+  justify-self: stretch;
+  display: subgrid;
+  /* display: flex; */
+  /* grid-template-columns: 50px repeat(2, [col] 1fr);
   grid-template-rows: repeat(3, [row] 1fr);
   grid-gap: 2px;
-  grid-auto-rows: minmax(200px, auto);
+  grid-auto-rows: auto; */
 `;
 
 export const StyledVoteCount = styled.div`
-  grid-column-start: 1;
-  span: 1;
-  grid-row-start: 2;
   color: ${VOTE_COUNT};
-  text-align: center;
 `;
 
 export const StyledPostMetaWrapper = styled.div`
-  grid-column-start: 2;
-  grid-column-end: 4;
+  /* grid-column-start: 2;
+  grid-column-end: 4; */
   grid-row: 1;
 `;
 
@@ -42,8 +40,8 @@ export const StyledPostMeta = styled.div`
 `;
 
 export const StyledPostBody = styled.div`
-  grid-column-start: 2;
-  grid-column-end: 3;
+  /* grid-column-start: 2;
+  grid-column-end: 3; */
   grid-row: 2;
   background-color: ${POST_BACKGROUND};
   border: 0.5px solid ${POST_BORDER};
@@ -51,7 +49,7 @@ export const StyledPostBody = styled.div`
 `;
 
 export const StyledCommentWrapper = styled.div`
-  grid-column-start: 2;
+  /* grid-column-start: 2; */
   grid-row: 3;
 `;
 

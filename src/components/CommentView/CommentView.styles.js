@@ -5,6 +5,7 @@ import {
   POST_BORDER,
   POST_META,
   TEXT_WARNING,
+  VOTE_COUNT,
 } from '../../styles/colours';
 
 export const CommentDiv = styled.div`
@@ -16,6 +17,10 @@ export const StyledCommentBody = styled.div`
   background-color: ${POST_BACKGROUND};
   border: 0.5px solid ${POST_BORDER};
   padding: 0.5rem;
+`;
+
+export const StyledVoteCount = styled.div`
+  color: ${VOTE_COUNT};
 `;
 
 export const StyledMetaBold = styled.span`

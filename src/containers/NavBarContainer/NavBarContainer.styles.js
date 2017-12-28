@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { NAV_ANCHOR } from '../../styles/colours';
+// import { NAV_ANCHOR } from '../../styles/colours';
 
 export const NavWrapper = styled.div`
   text-align: center;

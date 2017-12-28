@@ -32,11 +32,11 @@ import {
   StyledPostMetaBoldWarning,
   StyledPostMetaWrapper,
   PostTitleLink,
+  StyledVoteCount,
 } from './PostView.styles';
 import {
   StyledFaArrowDown,
   StyledFaArrowUp,
-  StyledVoteCount,
 } from '../../styles/voteArrows';
 
 class PostView extends Component {

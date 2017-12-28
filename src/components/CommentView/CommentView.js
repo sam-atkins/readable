@@ -17,11 +17,11 @@ import {
   StyledMetaBoldWarning,
   StyledMetaBoldCancel,
   StyledPostMetaBoldLink,
+  StyledVoteCount,
 } from './CommentView.styles';
 import {
   StyledFaArrowDown,
   StyledFaArrowUp,
-  StyledVoteCount,
 } from '../../styles/voteArrows';
 
 const CommentView = ({
