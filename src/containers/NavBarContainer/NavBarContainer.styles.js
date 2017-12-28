@@ -27,7 +27,7 @@ export const NavAnchor = styled(NavLink)`
 
   &.active {
     font-weight: bold;
-    color: orangered;
+    color: #FF4500;
   }
 
   &:hover {

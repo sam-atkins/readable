@@ -11,7 +11,7 @@ export const AppHeader = styled(Link)`
   background-color: #222;
   height: 40px;
   padding-left: 10px;
-  color: white;
+  color: #222;
   background-color: #d1e3f6;
   text-decoration: none;
 `;
