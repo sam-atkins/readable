@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { NAV_ANCHOR } from '../../styles/colours';
 
 export const NavWrapper = styled.div`
-  grid-column: col 1 / span 3;
-  grid-row: 1;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -21,7 +19,6 @@ export const NavWrapper = styled.div`
 `;
 
 export const NavAnchor = styled(NavLink)`
-  /* color: ${NAV_ANCHOR}; */
   color: #000000;
   text-decoration: none;
 

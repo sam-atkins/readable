@@ -10,7 +10,7 @@ export const TabMenuList = styled.div`
   list-style-type: none;
   white-space: nowrap;
   display: inline-block;
-  margin-top: 22px;
+  margin-top: 30px;
   vertical-align: bottom;
 `;
 
