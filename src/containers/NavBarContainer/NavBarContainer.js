@@ -29,7 +29,7 @@ const NavBarContainer = ({ categories, categoryError, categoryLoading }) => {
     <NavWrapper>
       <NavList>
         <NavItem>
-          <NavAnchor to="/" activeClassName="active" exact strict>
+          <NavAnchor to="/" activeClassName="active" exact>
             home
           </NavAnchor>
         </NavItem>
@@ -39,8 +39,6 @@ const NavBarContainer = ({ categories, categoryError, categoryLoading }) => {
             <NavAnchor
               to={`/${category.path}`}
               activeClassName="active"
-              exact
-              strict
             >
               {category.name}
             </NavAnchor>
