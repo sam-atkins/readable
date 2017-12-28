@@ -1,17 +1,19 @@
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const StyledHeader = styled.div`
   grid-column: col 1 / span 3;
   grid-row: 1;
-  text-align: center;
 `;
 
-export const AppHeader = styled.header`
+export const AppHeader = styled(Link)`
+  display: flex;
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 40px;
+  padding-left: 10px;
   color: white;
   background-color: #d1e3f6;
+  text-decoration: none;
 `;
 
 export const rotate360 = keyframes`
@@ -25,7 +27,7 @@ export const rotate360 = keyframes`
 
 export const AppLogo = styled.img`
   animation: ${rotate360} infinite 20s linear;
-  height: 80px;
+  height: 40px;
 `;
 
 export const AppTitle = styled.h1`
