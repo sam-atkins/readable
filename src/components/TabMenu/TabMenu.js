@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Wrapper, TabMenuList, TabMenuItem } from './TabMenu.styles';
+import {
+  TabMenuList,
+  TabMenuItem,
+  TabMenuItemSeparator,
+} from './TabMenu.styles';
 import {
   userRequestSortByHighestVote,
   userRequestSortByLowestVote,
@@ -15,14 +19,15 @@ const TabMenu = ({
   sortByNewest,
   sortByOldest,
 }) => (
-  <Wrapper>
-    <TabMenuList>
-      <TabMenuItem onClick={() => sortByNewest()}>New</TabMenuItem>
-      <TabMenuItem onClick={() => sortByOldest()}>Old</TabMenuItem>
-      <TabMenuItem onClick={() => sortByHighestVotes()}>Top</TabMenuItem>
-      <TabMenuItem onClick={() => sortByLowestVotes()}>Low</TabMenuItem>
-    </TabMenuList>
-  </Wrapper>
+  <TabMenuList>
+    <TabMenuItem onClick={() => sortByNewest()}>new</TabMenuItem>
+    <TabMenuItemSeparator />
+    <TabMenuItem onClick={() => sortByOldest()}>old</TabMenuItem>
+    <TabMenuItemSeparator />
+    <TabMenuItem onClick={() => sortByHighestVotes()}>top</TabMenuItem>
+    <TabMenuItemSeparator />
+    <TabMenuItem onClick={() => sortByLowestVotes()}>low</TabMenuItem>
+  </TabMenuList>
 );
 
 TabMenu.propTypes = {

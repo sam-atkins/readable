@@ -10,8 +10,8 @@ const Header = () => (
     <AppHeader to="/">
       <AppLogo src={logo} alt="logo" />
       <AppTitle>readable</AppTitle>
+      <TabMenu />
     </AppHeader>
-    <TabMenu />
   </StyledHeader>
 );
 
