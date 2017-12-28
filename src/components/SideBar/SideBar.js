@@ -4,7 +4,9 @@ import { SideBarMessageWrapper, SideBarText } from './SideBar.styles';
 
 const SideBar = () => (
   <SideBarMessageWrapper>
-    <SideBarText>Sidebar</SideBarText>
+    <SideBarText>
+      readable: a reddit clone built with React and Redux
+    </SideBarText>
     <NewPostButton />
   </SideBarMessageWrapper>
 );

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
-import NavbarContainer from '../NavBarContainer';
 import Header from '../../components/Header';
 import FormErrorMessage from '../../components/FormErrorMessage';
 import FormInfoBar from '../../components/FormInfoBar';
@@ -86,7 +85,6 @@ class PostForm extends Component {
         {this.props.redirect && <Redirect to={`/${this.state.category}`} />}
         <StyledWrapper>
           <Header />
-          <NavbarContainer />
           <StyledForm onSubmit={event => handleFormSubmit(event)}>
             <FormInfoBar />
             <Buffer />

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { NAV_ANCHOR } from '../../styles/colours';
 
 export const NavAnchor = styled(Link)`
-  color: ${NAV_ANCHOR};
+  /* color: ${NAV_ANCHOR}; */
+  color: #000000;
   text-decoration: none;
 `;
 
@@ -34,6 +35,7 @@ export const NavWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 60%;
+  background-color: #f0f0f0;
 
   @media (max-width: 700px) {
     width: 95%;

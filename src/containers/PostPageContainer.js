@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import _ from 'lodash';
-import NavBarContainer from './NavBarContainer';
 import Header from '../components/Header';
 import PostView from '../components/PostView';
 import NoMatchWrapper from '../components/NoMatchWrapper';
@@ -38,7 +37,6 @@ class PostPageContainer extends Component {
     return (
       <StyledWrapper>
         <Header />
-        <NavBarContainer />
         <SideBar />
         {this.props.selectedPost.map(post => (
           <PostView

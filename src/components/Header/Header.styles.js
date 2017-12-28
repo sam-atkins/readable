@@ -11,6 +11,7 @@ export const AppHeader = styled.header`
   height: 150px;
   padding: 20px;
   color: white;
+  background-color: #d1e3f6;
 `;
 
 export const rotate360 = keyframes`
@@ -29,4 +30,5 @@ export const AppLogo = styled.img`
 
 export const AppTitle = styled.h1`
   font-size: 1.5em;
+  color: #272b2e;
 `;
