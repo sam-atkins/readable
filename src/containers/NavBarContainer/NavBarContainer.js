@@ -13,8 +13,8 @@ import {
   NavItem,
   NavList,
   NavWrapper,
+  SpanSeparator,
 } from './NavBarContainer.styles';
-
 
 const NavBarContainer = ({ categories, categoryError, categoryLoading }) => {
   if (categoryLoading) {
@@ -33,9 +33,11 @@ const NavBarContainer = ({ categories, categoryError, categoryLoading }) => {
         </NavItem>
         {categories.map(category => (
           <NavItem key={category.id}>
+            <SpanSeparator>-</SpanSeparator>
             <NavAnchor to={`/${category.path}`}>{category.name}</NavAnchor>
           </NavItem>
         ))}
+        <SpanSeparator>|</SpanSeparator>
       </NavList>
     </NavWrapper>
   );

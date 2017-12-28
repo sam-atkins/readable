@@ -6,11 +6,11 @@ import TabMenu from '../TabMenu';
 
 const Header = () => (
   <StyledHeader>
+    <NavbarContainer />
     <AppHeader>
       <AppLogo src={logo} alt="logo" />
       <AppTitle>readable</AppTitle>
     </AppHeader>
-    <NavbarContainer />
     <TabMenu />
   </StyledHeader>
 );
