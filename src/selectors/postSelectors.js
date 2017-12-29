@@ -2,7 +2,7 @@ import { slugifyPostTitle } from '../utils/utils';
 
 export const getPostLoadingStatus = ({ post }) => post.postStatus.loading;
 
-export const getPostErrorStatus = ({ post }) => post.postStatus.error;
+export const getPostErrorStatus = ({ post }) => post.postStatus.addNewPostError;
 
 /**
  * Helper method for getPostValues

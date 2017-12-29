@@ -23,7 +23,7 @@ import {
 const initialState = {
   postStatus: {
     edit: false,
-    error: false,
+    addNewPostError: false,
     loading: true,
     redirect: false,
     requestDelete: false,
