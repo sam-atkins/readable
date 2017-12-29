@@ -11,6 +11,13 @@ export const CategoryViewWrapper = styled.div`
   display: subgrid;
 `;
 
+// export const PostGridWrapper = styled.div`
+//   /* justify-self: stretch; */
+//   grid-column-start: 1;
+//   grid-column-end: 2;
+//   display: subgrid;
+// `;
+
 export const CategoryPostWrapper = styled.div``;
 
 export const CategoryContent = styled.div`

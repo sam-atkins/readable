@@ -17,15 +17,11 @@ export const FormWrapperLabel = styled.div`
 `;
 
 export const StyledForm = styled.form`
-  margin: 0 20px;
-  padding: 1em;
-
   display: block;
   width: 100%;
   font-size: 14px;
   height: 100%;
   line-height: 20px;
-  padding: 6px 12px;
   background-image: none;
 `;
 

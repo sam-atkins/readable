@@ -2,8 +2,8 @@ import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const StyledHeader = styled.div`
-  grid-column: col 1 / span 3;
-  grid-row: 1 50px;
+  grid-column-start: 1;
+  grid-column-end: span 4;
 `;
 
 export const AppHeader = styled.div`
@@ -26,7 +26,7 @@ export const rotate360 = keyframes`
 
 export const AppLink = styled(Link)`
   text-decoration: none;
-  padding: .3rem;
+  padding: 0.3rem;
 `;
 
 export const AppLogo = styled.img`

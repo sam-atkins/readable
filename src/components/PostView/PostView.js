@@ -22,6 +22,7 @@ import {
 import selectComments from '../../selectors/commentSelectors';
 import { slugifyPostTitle } from '../../utils/utils';
 import {
+  ExistingCommentsWrapper,
   PostWrapper,
   StyledCommentWrapper,
   StyledPostBody,
@@ -34,10 +35,7 @@ import {
   PostTitleLink,
   StyledVoteCount,
 } from './PostView.styles';
-import {
-  StyledFaArrowDown,
-  StyledFaArrowUp,
-} from '../../styles/voteArrows';
+import { StyledFaArrowDown, StyledFaArrowUp } from '../../styles/voteArrows';
 
 class PostView extends Component {
   renderComments = () => {
@@ -82,18 +80,14 @@ class PostView extends Component {
 
     return (
       <PostWrapper>
-        <StyledVoteCount>
+        <StyledPostMetaWrapper>
           <StyledFaArrowUp
             onClick={() => userVotePost(post.id, 'upVote', 'posts')}
           />
-          <br />
-          {post.voteScore}
-          <br />
+          <StyledVoteCount>{post.voteScore}</StyledVoteCount>
           <StyledFaArrowDown
             onClick={() => userVotePost(post.id, 'downVote', 'posts')}
           />
-        </StyledVoteCount>
-        <StyledPostMetaWrapper>
           <PostTitleLink
             to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
           >
@@ -139,10 +133,10 @@ class PostView extends Component {
             </Fragment>
           )}
           {commentsFlag && (
-            <div>
+            <Fragment>
               <CommentForm parentId={post.id} />
-              Comments:
-            </div>
+              <ExistingCommentsWrapper>Comments:</ExistingCommentsWrapper>
+            </Fragment>
           )}
           {this.renderComments()}
         </StyledCommentWrapper>

@@ -25,9 +25,11 @@ const CategoryPageContainer = ({ posts, validUrl }) => {
     <StyledWrapper>
       <Header />
       <SideBar />
-      {posts.map(post => (
-        <PostView key={post.id} post={post} homeFlag={false} />
-      ))}
+      <PostGridWrapper>
+        {posts.map(post => (
+          <PostView key={post.id} post={post} homeFlag={false} />
+        ))}
+      </PostGridWrapper>
       <Footer />
     </StyledWrapper>
   );
@@ -43,6 +45,11 @@ CategoryPageContainer.defaultProps = {
 };
 
 const StyledWrapper = styled(PageWrapper)``;
+
+const PostGridWrapper = styled.div`
+  justify-self: stretch;
+  display: subgrid;
+`;
 
 const mapStateToProps = (state, ownProps) => ({
   validUrl: validCategoryUrl(state, ownProps.match.params.categoryUrl),
