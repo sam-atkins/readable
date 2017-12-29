@@ -9,5 +9,6 @@ export const SideBarMessageWrapper = styled.div`
 `;
 
 export const SideBarText = styled.p`
+  font-size: .8em;
   color: ${SIDEBAR_TEXT};
 `;

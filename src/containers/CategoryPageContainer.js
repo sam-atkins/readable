@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import PostView from '../components/PostView';
 import NoMatchWrapper from '../components/NoMatchWrapper';
 import NoPosts from '../components/NoPosts';
@@ -30,7 +29,6 @@ const CategoryPageContainer = ({ posts, validUrl }) => {
           <PostView key={post.id} post={post} homeFlag={false} />
         ))}
       </PostGridWrapper>
-      <Footer />
     </StyledWrapper>
   );
 };

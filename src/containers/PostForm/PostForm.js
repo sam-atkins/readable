@@ -5,7 +5,6 @@ import { Redirect } from 'react-router';
 import Header from '../../components/Header';
 import FormErrorMessage from '../../components/FormErrorMessage';
 import FormInfoBar from '../../components/FormInfoBar';
-import Footer from '../../components/Footer';
 import { getCategoryValues } from '../../selectors/categorySelectors';
 import { addNewPost, editExistingPost } from '../../actions/postActions';
 import { userInputIsValid } from '../../utils/utils';
@@ -182,7 +181,6 @@ class PostForm extends Component {
               <input type="submit" value="submit" />
             </div>
           </StyledForm>
-          <Footer />
         </StyledWrapper>
       </div>
     );

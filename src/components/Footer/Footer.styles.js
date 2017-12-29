@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { LINK_HOVER, SIDEBAR_TEXT } from '../../styles/colours';
 
 export const FooterWrapper = styled.div`
   grid-column: col 2 / span 1;
@@ -10,4 +11,13 @@ export const FooterWrapper = styled.div`
 
 export const FooterText = styled.div`
   font-size: 0.8em;
+  color: ${SIDEBAR_TEXT};
+
+  a {
+    color: ${SIDEBAR_TEXT};
+  }
+
+  a:hover {
+    color: ${LINK_HOVER};
+  }
 `;

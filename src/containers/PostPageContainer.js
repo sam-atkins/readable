@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import PostView from '../components/PostView';
 import NoMatchWrapper from '../components/NoMatchWrapper';
 import SideBar from '../components/SideBar';
-import Footer from '../components/Footer';
 import PageWrapper from '../styles/pagewrapper';
 import { selectPostByPostId, validPostUrl } from '../selectors/postSelectors';
 import { fetchComments } from '../actions/commentActions';
@@ -47,7 +46,6 @@ class PostPageContainer extends Component {
             commentsFlag
           />
         ))}
-        <Footer />
       </StyledWrapper>
     );
   }

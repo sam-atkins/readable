@@ -4,7 +4,7 @@ import { FooterText, FooterWrapper } from './Footer.styles';
 const Footer = () => (
   <FooterWrapper>
     <FooterText>
-      Built with{' '}
+      Crafted with{' '}
       <span role="img" aria-label="thinking face">
         🤔
       </span>{' '}
@@ -20,8 +20,11 @@ const Footer = () => (
       <span role="img" aria-label="heart">
         ♥
       </span>{' '}
-      by <a href="https://www.samatkins.me">Sam</a>. View source code on{' '}
-      <a href="https://github.com/cubiio/readable">Github</a>.
+      by <a href="https://www.samatkins.me">Sam</a>.
+      <p>
+        View source code on{' '}
+        <a href="https://github.com/cubiio/readable">Github</a>.
+      </p>
     </FooterText>
   </FooterWrapper>
 );
