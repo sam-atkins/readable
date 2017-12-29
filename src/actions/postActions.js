@@ -27,11 +27,6 @@ export const toggleRedirect = () => ({
   type: TOGGLE_FORM_REDIRECT,
 });
 
-export const ADD_NEW_POST_REQUEST = 'ADD_NEW_POST_REQUEST';
-export const requestAddPost = () => ({
-  type: ADD_NEW_POST_REQUEST,
-});
-
 export const ADD_NEW_POST_SUCCESS = 'ADD_NEW_POST_SUCCESS';
 export const addPostSuccess = payload => ({
   type: ADD_NEW_POST_SUCCESS,
