@@ -7,7 +7,6 @@ import {
   getCategoryLoadingStatus,
 } from '../../selectors/categorySelectors';
 import Loading from '../../components/Loading';
-import Error from '../../components/Error';
 import {
   NavAnchor,
   NavItem,
@@ -22,7 +21,17 @@ const NavBarContainer = ({ categories, categoryError, categoryLoading }) => {
   }
 
   if (categoryError) {
-    return <Error />;
+    return (
+      <NavWrapper>
+        <NavList>
+          <NavItem>
+            <NavAnchor to="/" activeClassName="active" exact>
+              home
+            </NavAnchor>
+          </NavItem>
+        </NavList>
+      </NavWrapper>
+    );
   }
 
   return (
@@ -36,10 +45,7 @@ const NavBarContainer = ({ categories, categoryError, categoryLoading }) => {
         {categories.map(category => (
           <NavItem key={category.id}>
             <SpanSeparator>-</SpanSeparator>
-            <NavAnchor
-              to={`/${category.path}`}
-              activeClassName="active"
-            >
+            <NavAnchor to={`/${category.path}`} activeClassName="active">
               {category.name}
             </NavAnchor>
           </NavItem>
