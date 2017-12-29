@@ -26,6 +26,7 @@ export const rotate360 = keyframes`
 
 export const AppLink = styled(Link)`
   text-decoration: none;
+  padding: .3rem;
 `;
 
 export const AppLogo = styled.img`
