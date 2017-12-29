@@ -9,12 +9,25 @@ export const StyledFaArrowUp = styled(FaArrowUp)`
     color: ${LINK_HOVER};
     cursor: pointer;
   }
+  :active {
+    color: #FF8B60;
+  }
+  :not(:active) {
+    transition: color 500ms step-end;
+  }
 `;
 
 export const StyledFaArrowDown = styled(FaArrowDown)`
   color: ${VOTE_COUNT};
+  margin-top: 0.1rem;
   :hover {
     color: ${LINK_HOVER};
     cursor: pointer;
+  }
+  :active {
+    color: #FF8B60;
+  }
+  :not(:active) {
+    transition: color 500ms step-end;
   }
 `;

@@ -31,7 +31,7 @@ export const StyledMetaBold = styled.span`
 `;
 
 export const StyledMetaBoldVoteCount = StyledMetaBold.extend`
-  padding-left: 1em;
+  padding-left: 1.5em;
 `;
 
 export const StyledPostMetaBoldLink = styled.a`
