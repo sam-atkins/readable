@@ -30,6 +30,10 @@ export const StyledMetaBold = styled.span`
   padding-right: 1rem;
 `;
 
+export const StyledMetaBoldVoteCount = StyledMetaBold.extend`
+  padding-left: 1em;
+`;
+
 export const StyledPostMetaBoldLink = styled.a`
   color: ${POST_META};
   font-size: x-small;

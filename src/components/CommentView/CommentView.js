@@ -14,6 +14,7 @@ import {
   CommentDiv,
   StyledCommentBody,
   StyledMetaBold,
+  StyledMetaBoldVoteCount,
   StyledMetaBoldWarning,
   StyledMetaBoldCancel,
   StyledPostMetaBoldLink,
@@ -43,7 +44,7 @@ const CommentView = ({
       <StyledFaArrowUp
         onClick={() => userVoteComment(comment.id, 'upVote', 'comments')}
       />
-      <StyledMetaBold>{comment.voteScore}</StyledMetaBold>
+      <StyledMetaBoldVoteCount>{comment.voteScore}</StyledMetaBoldVoteCount>
       <StyledFaArrowDown
         onClick={() => userVoteComment(comment.id, 'downVote', 'comments')}
       />

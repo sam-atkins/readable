@@ -8,24 +8,16 @@ import {
 
 export const Buffer = styled.div`
   background-color: ${FORM_BUFFER_BACKGROUND};
-  padding: 7px;
-`;
-
-export const FormWrapperLabel = styled.div`
-  padding-top: 2px;
 `;
 
 export const StyledForm = styled.form`
   display: flex;
-  margin: 0 20px;
-  padding: 1em;
 
   display: block;
   width: 100%;
   font-size: 14px;
   height: 100%;
   line-height: 20px;
-  padding: 6px 12px;
   background-image: none;
 `;
 
@@ -33,12 +25,13 @@ export const StyledTextArea = styled.textarea`
   width: 400px;
   height: auto;
   resize: vertical;
-  margin: 10px;
-  padding: 5px;
+  margin: 7px;
   border: 1px solid gray;
 `;
 
-export const StyledLabel = styled.label``;
+export const ButtonWrapper = styled.div`
+  display: flex;
+`;
 
 export const StyledSaveButton = styled.div`
   background: ${COMMENT_BUTTON_EDIT_BACKGROUND};
@@ -53,6 +46,10 @@ export const StyledSaveButton = styled.div`
   padding: 0 1.066667em;
   min-width: 50px;
   width: 60px;
+
+  :last-child {
+    margin-left: 5px;
+  }
 `;
 
 export const StyledCancelButton = StyledSaveButton.extend`

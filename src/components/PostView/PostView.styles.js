@@ -66,7 +66,6 @@ export const StyledCommentWrapper = styled.div`
 `;
 
 export const ExistingCommentsWrapper = styled.div`
-  margin-left: 2rem;
   padding-top: .5rem;
   font-size: 16px;
   font-weight: normal;
