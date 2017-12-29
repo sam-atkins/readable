@@ -15,6 +15,7 @@ export const NewPostButtonArrow = styled(Link)`
   padding-left: 15px;
   padding-right: 15px;
   text-decoration: none;
+  margin: 20px;
 
   &:after {
     content: '';

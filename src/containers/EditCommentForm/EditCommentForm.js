@@ -9,7 +9,7 @@ import { userInputIsValid } from '../../utils/utils';
 import FormErrorMessage from '../../components/FormErrorMessage';
 import {
   Buffer,
-  FormWrapperLabel,
+  ButtonWrapper,
   StyledCancelButton,
   StyledSaveButton,
   StyledForm,
@@ -56,26 +56,25 @@ class EditCommentForm extends Component {
     };
     return (
       <StyledForm>
-        <FormWrapperLabel>
-          <StyledTextArea
-            value={this.state.body}
-            name="body"
-            cols="20"
-            rows="3"
-            onChange={event => handleInputChange(event)}
-          />
-          {this.state.commentBodyInputError && (
-            <FormErrorMessage commentBodyErrorMessage min={1} max={1000} />
-          )}
-        </FormWrapperLabel>
+        <StyledTextArea
+          value={this.state.body}
+          name="body"
+          cols="20"
+          rows="3"
+          onChange={event => handleInputChange(event)}
+        />
+        {this.state.commentBodyInputError && (
+          <FormErrorMessage commentBodyErrorMessage min={1} max={1000} />
+        )}
         <Buffer />
-
-        <StyledSaveButton onClick={event => handleFormSubmit(event)}>
-          save
-        </StyledSaveButton>
-        <StyledCancelButton onClick={event => handleFormCancel(event)}>
-          cancel
-        </StyledCancelButton>
+        <ButtonWrapper>
+          <StyledSaveButton onClick={event => handleFormSubmit(event)}>
+            save
+          </StyledSaveButton>
+          <StyledCancelButton onClick={event => handleFormCancel(event)}>
+            cancel
+          </StyledCancelButton>
+        </ButtonWrapper>
       </StyledForm>
     );
   }

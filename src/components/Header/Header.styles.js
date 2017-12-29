@@ -1,16 +1,18 @@
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const StyledHeader = styled.div`
-  grid-column: col 1 / span 3;
-  grid-row: 1;
-  text-align: center;
+  grid-column-start: 1;
+  grid-column-end: span 4;
 `;
 
-export const AppHeader = styled.header`
+export const AppHeader = styled.div`
+  display: flex;
   background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  height: 50px;
+  padding-left: 10px;
+  color: #222;
+  background-color: #d1e3f6;
 `;
 
 export const rotate360 = keyframes`
@@ -22,11 +24,17 @@ export const rotate360 = keyframes`
   }
 `;
 
-export const AppLogo = styled.img`
-  animation: ${rotate360} infinite 20s linear;
-  height: 80px;
+export const AppLink = styled(Link)`
+  text-decoration: none;
+  padding: 0.3rem;
 `;
 
-export const AppTitle = styled.h1`
+export const AppLogo = styled.img`
+  animation: ${rotate360} infinite 20s linear;
+  height: 40px;
+`;
+
+export const AppTitle = styled.span`
   font-size: 1.5em;
+  color: #272b2e;
 `;

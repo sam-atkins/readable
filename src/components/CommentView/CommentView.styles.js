@@ -5,6 +5,7 @@ import {
   POST_BORDER,
   POST_META,
   TEXT_WARNING,
+  VOTE_COUNT,
 } from '../../styles/colours';
 
 export const CommentDiv = styled.div`
@@ -18,11 +19,19 @@ export const StyledCommentBody = styled.div`
   padding: 0.5rem;
 `;
 
+export const StyledVoteCount = styled.div`
+  color: ${VOTE_COUNT};
+`;
+
 export const StyledMetaBold = styled.span`
   color: ${POST_META};
   font-size: x-small;
   font-weight: bold;
   padding-right: 1rem;
+`;
+
+export const StyledMetaBoldVoteCount = StyledMetaBold.extend`
+  padding-left: 1.5em;
 `;
 
 export const StyledPostMetaBoldLink = styled.a`

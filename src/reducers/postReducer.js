@@ -1,7 +1,6 @@
 import {
   ADD_NEW_POST_FAILURE,
   ADD_NEW_POST_SUCCESS,
-  ADD_NEW_POST_REQUEST,
   CANCEL_REQUEST_DELETE_POST,
   CONFIRM_DELETE_POST,
   RECEIVE_POSTS_FAILURE,
@@ -59,17 +58,6 @@ const post = (state = initialState, action) => {
           edit: false,
           error: true,
           loading: false,
-          redirect: false,
-          requestDelete: false,
-        },
-      };
-    case ADD_NEW_POST_REQUEST:
-      return {
-        ...state,
-        postStatus: {
-          edit: false,
-          error: false,
-          loading: true,
           redirect: false,
           requestDelete: false,
         },

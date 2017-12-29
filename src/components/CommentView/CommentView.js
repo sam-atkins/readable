@@ -14,14 +14,15 @@ import {
   CommentDiv,
   StyledCommentBody,
   StyledMetaBold,
+  StyledMetaBoldVoteCount,
   StyledMetaBoldWarning,
   StyledMetaBoldCancel,
   StyledPostMetaBoldLink,
+  StyledVoteCount,
 } from './CommentView.styles';
 import {
   StyledFaArrowDown,
   StyledFaArrowUp,
-  StyledVoteCount,
 } from '../../styles/voteArrows';
 
 const CommentView = ({
@@ -43,7 +44,7 @@ const CommentView = ({
       <StyledFaArrowUp
         onClick={() => userVoteComment(comment.id, 'upVote', 'comments')}
       />
-      <StyledMetaBold>{comment.voteScore}</StyledMetaBold>
+      <StyledMetaBoldVoteCount>{comment.voteScore}</StyledMetaBoldVoteCount>
       <StyledFaArrowDown
         onClick={() => userVoteComment(comment.id, 'downVote', 'comments')}
       />
