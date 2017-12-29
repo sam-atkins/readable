@@ -21,7 +21,7 @@ const CategoryPageContainer = ({ posts, validUrl }) => {
   }
 
   return (
-    <StyledWrapper>
+    <PageWrapper>
       <Header />
       <SideBar />
       <PostGridWrapper>
@@ -29,7 +29,7 @@ const CategoryPageContainer = ({ posts, validUrl }) => {
           <PostView key={post.id} post={post} homeFlag={false} />
         ))}
       </PostGridWrapper>
-    </StyledWrapper>
+    </PageWrapper>
   );
 };
 
@@ -41,8 +41,6 @@ CategoryPageContainer.propTypes = {
 CategoryPageContainer.defaultProps = {
   posts: [],
 };
-
-const StyledWrapper = styled(PageWrapper)``;
 
 const PostGridWrapper = styled.div`
   justify-self: stretch;

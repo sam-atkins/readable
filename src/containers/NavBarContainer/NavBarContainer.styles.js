@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-// import { NAV_ANCHOR } from '../../styles/colours';
+import {
+  NAV_ANCHOR,
+  NAV_ANCHOR_ACTIVE,
+  NAV_WRAPPER_BACKGROUND,
+} from '../../styles/colours';
 
 export const NavWrapper = styled.div`
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  background-color: #f0f0f0;
+  background-color: ${NAV_WRAPPER_BACKGROUND};
   white-space: nowrap;
   text-transform: uppercase;
   width: 100%;
@@ -19,12 +23,12 @@ export const NavWrapper = styled.div`
 `;
 
 export const NavAnchor = styled(NavLink)`
-  color: #000000;
+  color: ${NAV_ANCHOR};
   text-decoration: none;
 
   &.active {
     font-weight: bold;
-    color: #FF4500;
+    color: ${NAV_ANCHOR_ACTIVE};
   }
 
   &:hover {
