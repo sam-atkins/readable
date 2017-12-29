@@ -3,6 +3,7 @@
 import deepFreeze from 'deep-freeze';
 import post from './postReducer';
 import {
+  ADD_NEW_POST_FAILURE,
   ADD_NEW_POST_SUCCESS,
   CANCEL_REQUEST_DELETE_POST,
   CONFIRM_DELETE_POST,
@@ -210,9 +211,59 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: false,
         redirect: true,
+        requestDelete: false,
+      },
+    };
+    deepFreeze(initialState);
+    expect(post(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should fail gracefully if add new post errors', () => {
+    const initialState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        edit: false,
+        error: false,
+        loading: true,
+        redirect: false,
+        requestDelete: false,
+      },
+    };
+    const action = {
+      type: ADD_NEW_POST_FAILURE,
+    };
+    const expectedState = {
+      ni6ok3ym: {
+        id: 'ni6ok3ym',
+        timestamp: 1468479767190,
+        title: 'Learn Redux in 10 minutes!',
+        body:
+          'Just kidding. It takes more than 10 minutes to learn technology.',
+        author: 'thingone',
+        category: 'redux',
+        voteScore: -5,
+        deleted: false,
+        commentCount: 0,
+      },
+      postStatus: {
+        edit: false,
+        addNewPostError: true,
+        loading: false,
+        redirect: false,
         requestDelete: false,
       },
     };
@@ -637,7 +688,6 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
-        sortByFocus: '',
       },
     };
     const action = {
@@ -646,7 +696,6 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'HIGHEST_VOTE',
-        sortByFocus: 'HIGHEST_VOTE',
       },
     };
     deepFreeze(initialState);
@@ -657,7 +706,6 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
-        sortByFocus: '',
       },
     };
     const action = {
@@ -666,7 +714,6 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'LOWEST_VOTE',
-        sortByFocus: 'LOWEST_VOTE',
       },
     };
     deepFreeze(initialState);
@@ -677,7 +724,6 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
-        sortByFocus: '',
       },
     };
     const action = {
@@ -686,7 +732,6 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'NEW',
-        sortByFocus: 'NEW',
       },
     };
     deepFreeze(initialState);
@@ -697,7 +742,6 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
-        sortByFocus: '',
       },
     };
     const action = {
@@ -706,7 +750,6 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'OLD',
-        sortByFocus: 'OLD',
       },
     };
     deepFreeze(initialState);

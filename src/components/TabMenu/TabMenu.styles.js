@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { LINK_HOVER } from '../../styles/colours';
+import {
+  LINK_HOVER,
+  TAB_MENU,
+  TAB_MENU_BACKGROUND,
+  TAB_MENU_SEPARATOR,
+} from '../../styles/colours';
 
 export const TabMenuList = styled.div`
   display: flex;
@@ -23,8 +28,8 @@ export const TabMenuItem = styled.li`
   padding: 2px 6px 1px 6px;
   text-align: center;
   width: 20%;
-  background-color: #eff7ff;
-  color: #369;
+  background-color: ${TAB_MENU_BACKGROUND};
+  color: ${TAB_MENU};
   font-size: small;
   font-weight: bold;
 
@@ -35,7 +40,7 @@ export const TabMenuItem = styled.li`
 `;
 
 export const TabMenuItemSeparator = styled.span`
-  background-color: #d1e3f6;
+  background-color: ${TAB_MENU_SEPARATOR};
   margin-left: 0.2rem;
   margin-right: 0.2rem;
 `;

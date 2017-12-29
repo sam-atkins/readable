@@ -58,7 +58,7 @@ describe('selectors for posts', () => {
   it('should select post error status', () => {
     const selectedState = {
       post: {
-        postStatus: { error: true, loading: false },
+        postStatus: { addNewPostError: true, loading: false },
       },
     };
     const expectedShape = true;

@@ -23,14 +23,13 @@ import {
 const initialState = {
   postStatus: {
     edit: false,
-    error: false,
+    addNewPostError: false,
     loading: true,
     redirect: false,
     requestDelete: false,
   },
   sortPosts: {
     sortBy: '',
-    sortByFocus: '',
   },
 };
 
@@ -68,7 +67,7 @@ const post = (state = initialState, action) => {
         [action.payload.id]: { ...action.payload },
         postStatus: {
           edit: false,
-          error: false,
+          addNewPostError: false,
           loading: false,
           redirect: true,
           requestDelete: false,
@@ -79,7 +78,7 @@ const post = (state = initialState, action) => {
         ...state,
         postStatus: {
           edit: false,
-          error: true,
+          addNewPostError: true,
           loading: false,
           redirect: false,
           requestDelete: false,
@@ -189,7 +188,6 @@ const post = (state = initialState, action) => {
         ...state,
         sortPosts: {
           sortBy: 'HIGHEST_VOTE',
-          sortByFocus: 'HIGHEST_VOTE',
         },
       };
     case SORT_BY_LOWEST_VOTE:
@@ -197,7 +195,6 @@ const post = (state = initialState, action) => {
         ...state,
         sortPosts: {
           sortBy: 'LOWEST_VOTE',
-          sortByFocus: 'LOWEST_VOTE',
         },
       };
     case SORT_BY_NEW:
@@ -205,7 +202,6 @@ const post = (state = initialState, action) => {
         ...state,
         sortPosts: {
           sortBy: 'NEW',
-          sortByFocus: 'NEW',
         },
       };
     case SORT_BY_OLD:
@@ -213,7 +209,6 @@ const post = (state = initialState, action) => {
         ...state,
         sortPosts: {
           sortBy: 'OLD',
-          sortByFocus: 'OLD',
         },
       };
     default:

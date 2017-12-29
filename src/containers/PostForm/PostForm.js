@@ -174,6 +174,12 @@ class PostForm extends Component {
           )}
           <p>*required</p>
           <Buffer />
+          {this.props.userAddNewPostError && (
+            <div>
+              Oh dear, something went wrong, please try again in a short while.
+            </div>
+          )}
+          <Buffer />
           <div>
             <input type="submit" value="submit" />
           </div>
@@ -196,6 +202,7 @@ PostForm.propTypes = {
   }),
   redirect: PropTypes.bool,
   edit: PropTypes.bool.isRequired,
+  userAddNewPostError: PropTypes.bool,
 };
 
 PostForm.defaultProps = {
@@ -207,6 +214,7 @@ PostForm.defaultProps = {
     author: '',
   },
   redirect: false,
+  userAddNewPostError: false,
 };
 
 const mapStateToProps = state => ({
@@ -215,6 +223,7 @@ const mapStateToProps = state => ({
   edit: state.post.postStatus.edit,
   postId: state.post.postStatus.postIdForEditing,
   postToEdit: state.post[state.post.postStatus.postIdForEditing],
+  userAddNewPostError: state.post.postStatus.addNewPostError,
 });
 
 const mapDispatchToProps = dispatch => ({

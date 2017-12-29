@@ -102,6 +102,12 @@ class CommentForm extends Component {
         <StyledButton onClick={event => handleFormSubmit(event)}>
           save
         </StyledButton>
+        <Buffer />
+        {this.props.userAddNewCommentError && (
+          <div>
+            Oh dear, something went wrong, please try again in a short while.
+          </div>
+        )}
       </StyledForm>
     );
   }
@@ -111,13 +117,19 @@ CommentForm.propTypes = {
   body: PropTypes.string,
   author: PropTypes.string,
   parentId: PropTypes.string.isRequired,
+  userAddNewCommentError: PropTypes.bool,
   submitFormToAddComment: PropTypes.func.isRequired,
 };
 
 CommentForm.defaultProps = {
   body: '',
   author: '',
+  userAddNewCommentError: false,
 };
+
+const mapStateToProps = state => ({
+  userAddNewCommentError: state.comments.commentStatus.errorAddComment,
+});
 
 const mapDispatchToProps = dispatch => ({
   submitFormToAddComment: (payload) => {
@@ -125,4 +137,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(CommentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);
