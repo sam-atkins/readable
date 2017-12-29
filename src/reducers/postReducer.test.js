@@ -637,7 +637,6 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
-        sortByFocus: '',
       },
     };
     const action = {
@@ -646,7 +645,6 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'HIGHEST_VOTE',
-        sortByFocus: 'HIGHEST_VOTE',
       },
     };
     deepFreeze(initialState);
@@ -657,7 +655,6 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
-        sortByFocus: '',
       },
     };
     const action = {
@@ -666,7 +663,6 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'LOWEST_VOTE',
-        sortByFocus: 'LOWEST_VOTE',
       },
     };
     deepFreeze(initialState);
@@ -677,7 +673,6 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
-        sortByFocus: '',
       },
     };
     const action = {
@@ -686,7 +681,6 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'NEW',
-        sortByFocus: 'NEW',
       },
     };
     deepFreeze(initialState);
@@ -697,7 +691,6 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
-        sortByFocus: '',
       },
     };
     const action = {
@@ -706,7 +699,6 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'OLD',
-        sortByFocus: 'OLD',
       },
     };
     deepFreeze(initialState);
