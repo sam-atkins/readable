@@ -5,11 +5,12 @@ import { Redirect } from 'react-router';
 import Header from '../../components/Header';
 import FormErrorMessage from '../../components/FormErrorMessage';
 import FormInfoBar from '../../components/FormInfoBar';
+import SideBar from '../../components/SideBar';
 import { getCategoryValues } from '../../selectors/categorySelectors';
 import { addNewPost, editExistingPost } from '../../actions/postActions';
 import { userInputIsValid } from '../../utils/utils';
+import PageWrapper from '../../styles/pagewrapper';
 import {
-  StyledWrapper,
   Buffer,
   FormWrapperLabel,
   StyledForm,
@@ -80,109 +81,104 @@ class PostForm extends Component {
     };
 
     return (
-      <div>
+      <PageWrapper>
         {this.props.redirect && <Redirect to={`/${this.state.category}`} />}
-        <StyledWrapper>
-          <Header />
-          <StyledForm onSubmit={event => handleFormSubmit(event)}>
-            <FormInfoBar />
-            <Buffer />
-            <FormWrapperLabel>
-              <StyledLabel>
-                <StyledLabelSpan>*title</StyledLabelSpan>
-              </StyledLabel>
-            </FormWrapperLabel>
-            <FormWrapperLabel>
-              <StyledTextArea
-                name="title"
-                value={this.state.title}
-                cols="20"
-                rows="4"
-                onChange={event => handleInputChange(event)}
-              />
-              {this.state.titleInputError && (
-                <FormErrorMessage titleErrorMessage min={1} max={100} />
-              )}
-            </FormWrapperLabel>
-            <Buffer />
-            <FormWrapperLabel />
-            <FormWrapperLabel>
-              <StyledLabel>
-                <StyledLabelSpan>text (optional)</StyledLabelSpan>
-              </StyledLabel>
-            </FormWrapperLabel>
-            <FormWrapperLabel>
-              <StyledTextArea
-                name="body"
-                value={this.state.body}
-                cols="20"
-                rows="8"
-                onChange={event => handleInputChange(event)}
-              />
-              {this.state.bodyInputError && (
-                <FormErrorMessage bodyErrorMessage min={0} max={2000} />
-              )}
-            </FormWrapperLabel>
-            <Buffer />
-            <FormWrapperLabel />
-            <FormWrapperLabel>
-              <StyledLabel>
-                <StyledLabelSpan>*choose a sub-readable</StyledLabelSpan>
-              </StyledLabel>
-            </FormWrapperLabel>
-            <FormWrapperLabel>
-              <StyledSelect
-                name="category"
-                value={this.state.category}
-                onChange={event => handleInputChange(event)}
-              >
-                <option disabled>Choose a sub-readable:</option>
-                {this.props.categories.map(category => (
-                  <option
-                    name="category"
-                    key={category.id}
-                    value={category.name}
-                  >
-                    {category.name}
-                  </option>
-                ))}
-              </StyledSelect>
-              <StyledParagraph>
-                your subscribed sub-readables <br />
-                {this.props.categories.map(category => (
-                  <CategoryLink key={category.id} to={`/${category.path}`}>
-                    {category.name}{' '}
-                  </CategoryLink>
-                ))}
-              </StyledParagraph>
-            </FormWrapperLabel>
-            {!this.props.edit && (
-              <div>
-                <FormWrapperLabel>
-                  <StyledLabel>
-                    <StyledLabelSpan>*username</StyledLabelSpan>
-                  </StyledLabel>
-                </FormWrapperLabel>
-                <FormWrapperLabel>
-                  <StyledInput
-                    name="author"
-                    value={this.state.author}
-                    onChange={event => handleInputChange(event)}
-                  />
-                  {this.state.authorInputError && (
-                    <FormErrorMessage authorErrorMessage min={1} max={20} />
-                  )}
-                </FormWrapperLabel>
-              </div>
+        <Header />
+        <SideBar />
+        <StyledForm onSubmit={event => handleFormSubmit(event)}>
+          <FormInfoBar />
+          <Buffer />
+          <FormWrapperLabel>
+            <StyledLabel>
+              <StyledLabelSpan>*title</StyledLabelSpan>
+            </StyledLabel>
+          </FormWrapperLabel>
+          <FormWrapperLabel>
+            <StyledTextArea
+              name="title"
+              value={this.state.title}
+              cols="20"
+              rows="4"
+              onChange={event => handleInputChange(event)}
+            />
+            {this.state.titleInputError && (
+              <FormErrorMessage titleErrorMessage min={1} max={100} />
             )}
-            <p>*required</p>
-            <Buffer />
+          </FormWrapperLabel>
+          <Buffer />
+          <FormWrapperLabel />
+          <FormWrapperLabel>
+            <StyledLabel>
+              <StyledLabelSpan>text (optional)</StyledLabelSpan>
+            </StyledLabel>
+          </FormWrapperLabel>
+          <FormWrapperLabel>
+            <StyledTextArea
+              name="body"
+              value={this.state.body}
+              cols="20"
+              rows="8"
+              onChange={event => handleInputChange(event)}
+            />
+            {this.state.bodyInputError && (
+              <FormErrorMessage bodyErrorMessage min={0} max={2000} />
+            )}
+          </FormWrapperLabel>
+          <Buffer />
+          <FormWrapperLabel />
+          <FormWrapperLabel>
+            <StyledLabel>
+              <StyledLabelSpan>*choose a sub-readable</StyledLabelSpan>
+            </StyledLabel>
+          </FormWrapperLabel>
+          <FormWrapperLabel>
+            <StyledSelect
+              name="category"
+              value={this.state.category}
+              onChange={event => handleInputChange(event)}
+            >
+              <option disabled>Choose a sub-readable:</option>
+              {this.props.categories.map(category => (
+                <option name="category" key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </StyledSelect>
+            <StyledParagraph>
+              your subscribed sub-readables <br />
+              {this.props.categories.map(category => (
+                <CategoryLink key={category.id} to={`/${category.path}`}>
+                  {category.name}{' '}
+                </CategoryLink>
+              ))}
+            </StyledParagraph>
+          </FormWrapperLabel>
+          {!this.props.edit && (
             <div>
-              <input type="submit" value="submit" />
+              <FormWrapperLabel>
+                <StyledLabel>
+                  <StyledLabelSpan>*username</StyledLabelSpan>
+                </StyledLabel>
+              </FormWrapperLabel>
+              <FormWrapperLabel>
+                <StyledInput
+                  name="author"
+                  value={this.state.author}
+                  onChange={event => handleInputChange(event)}
+                />
+                {this.state.authorInputError && (
+                  <FormErrorMessage authorErrorMessage min={1} max={20} />
+                )}
+              </FormWrapperLabel>
             </div>
-          </StyledForm>
-        </StyledWrapper>
-      </div>
+          )}
+          <p>*required</p>
+          <Buffer />
+          <div>
+            <input type="submit" value="submit" />
+          </div>
+        </StyledForm>
+      </PageWrapper>
     );
   }
 }

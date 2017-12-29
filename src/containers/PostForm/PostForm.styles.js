@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import PageWrapper from '../../styles/pagewrapper';
 import {
   FORM_BUFFER_BACKGROUND,
   FORM_WRAPPER_LABEL_BACKGROUND,
 } from '../../styles/colours';
-
-export const StyledWrapper = styled(PageWrapper)``;
 
 export const Buffer = styled.div`
   background-color: ${FORM_BUFFER_BACKGROUND};
@@ -20,10 +17,8 @@ export const FormWrapperLabel = styled.div`
 
 export const StyledForm = styled.form`
   margin: 0 20px;
-  padding: 1em;
-
   display: block;
-  width: 100%;
+  width: 80%;
   font-size: 14px;
   height: 100%;
   line-height: 20px;
