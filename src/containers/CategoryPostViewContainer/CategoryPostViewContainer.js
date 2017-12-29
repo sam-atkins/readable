@@ -15,7 +15,6 @@ import {
   CategoryPostWrapper,
   CategoryContent,
   CategoryHeader,
-  // PostGridWrapper,
 } from './CategoryPostViewContainer.styles';
 
 const CategoryPostViewContainer = ({

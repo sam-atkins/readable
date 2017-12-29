@@ -14,8 +14,6 @@ export const PostWrapper = styled.div`
   justify-self: stretch;
   display: subgrid;
   padding-left: 2rem;
-  /* display: grid; */
-  /* display: flex; */
   grid-template-columns: 50px repeat(2, [col] 1fr);
   grid-template-rows: repeat(3, [row] 1fr);
   grid-gap: 2px;
@@ -35,6 +33,7 @@ export const StyledPostMetaWrapper = styled.div`
   grid-column: 2;
   grid-row: 1;
   margin-left: 2rem;
+  margin-top: .5rem;
 `;
 
 export const PostTitleLink = styled(Link)`
@@ -63,6 +62,7 @@ export const StyledCommentWrapper = styled.div`
   grid-column-start: 2;
   grid-row: 3;
   margin-left: 2rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const ExistingCommentsWrapper = styled.div`

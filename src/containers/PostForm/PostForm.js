@@ -84,7 +84,7 @@ class PostForm extends Component {
       <PageWrapper>
         {this.props.redirect && <Redirect to={`/${this.state.category}`} />}
         <Header />
-        <SideBar />
+        <SideBar postForm />
         <StyledForm onSubmit={event => handleFormSubmit(event)}>
           <FormInfoBar />
           <Buffer />
