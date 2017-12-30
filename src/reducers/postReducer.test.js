@@ -29,7 +29,7 @@ describe('post reducer', () => {
     const initialState = {
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -39,7 +39,7 @@ describe('post reducer', () => {
     const expectedState = {
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -53,7 +53,7 @@ describe('post reducer', () => {
     const initialState = {
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -113,7 +113,7 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: false,
         redirect: false,
         requestDelete: false,
@@ -127,7 +127,7 @@ describe('post reducer', () => {
     const initialState = {
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -139,7 +139,7 @@ describe('post reducer', () => {
     const expectedState = {
       postStatus: {
         edit: false,
-        error: true,
+        addNewPostError: true,
         loading: false,
         redirect: false,
         requestDelete: false,
@@ -165,7 +165,7 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -237,7 +237,7 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -275,7 +275,7 @@ describe('post reducer', () => {
     const initialState = {
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -287,7 +287,7 @@ describe('post reducer', () => {
     const expectedState = {
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: false,
         redirect: false,
         requestDelete: false,
@@ -301,7 +301,7 @@ describe('post reducer', () => {
     const initialState = {
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -315,7 +315,7 @@ describe('post reducer', () => {
     const expectedState = {
       postStatus: {
         edit: true,
-        error: false,
+        addNewPostError: false,
         loading: false,
         redirect: false,
         requestDelete: false,
@@ -353,7 +353,7 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -399,7 +399,7 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: false,
         redirect: false,
         requestDelete: false,
@@ -413,7 +413,7 @@ describe('post reducer', () => {
     const initialState = {
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -427,7 +427,7 @@ describe('post reducer', () => {
     const expectedState = {
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: false,
         redirect: false,
         requestDelete: true,
@@ -454,7 +454,7 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: true,
         redirect: false,
         requestDelete: false,
@@ -478,7 +478,7 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: false,
         redirect: false,
         requestDelete: false,
@@ -629,7 +629,7 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: false,
         redirect: false,
         requestDelete: false,
@@ -673,7 +673,7 @@ describe('post reducer', () => {
       },
       postStatus: {
         edit: false,
-        error: false,
+        addNewPostError: false,
         loading: false,
         redirect: false,
         requestDelete: false,

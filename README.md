@@ -134,16 +134,62 @@ The ESLint config extends from AirBnB, with a few changes. Refer to the `.eslint
 
 ### Build
 
-[placeholder]
+To create a production build, run this command from the project root:
+
+```sh
+yarn build
+```
+
+If the build is successful, it results in this output:
+
+```
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  yarn global add serve
+  serve -s build
+```
+
+The contents of the `build` directory can be used for a deployment.
 
 ### Deploy
 
-[placeholder]
+**API**
+
+Deploy the server by running `now` on the command line in the api project folder. Copy the API url provided - this is the `production` API url - and add it to the api.js file.
+
+```
+let api = '';
+
+if (process.env.NODE_ENV === 'production') {
+  // add the now.sh url below
+  api = 'https://api-server-example-url.now.sh';
+} else {
+  api = 'http://localhost:3001';
+}
+```
+
+**Client**
+
+Add a `now.json` file at the project root level and add the following contents:
+
+```
+{
+  "now": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+}
+```
+
+Keys and secrets can be added to this file as required. Refer to the docs for more [info](https://zeit.co/docs/getting-started/environment-variables).
+
+From the `/build` folder, run `now -n example-name`. This will deploy the production version of the app under the name 'example-name'.
 
 ### Demo
 
-[placeholder]
-
+A demo of the app is deployed with [now.sh](https://zeit.co/now) and is available [here](https://cubiio-readable-xlgwavtjao.now.sh/).
 
 ## Inspiration and Information
 
