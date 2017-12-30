@@ -155,6 +155,7 @@ The contents of the `build` directory can be used for a deployment.
 ### Deploy
 
 **API**
+
 Deploy the server by running `now` on the command line in the api project folder. Copy the API url provided - this is the `production` API url - and add it to the api.js file.
 
 ```
@@ -169,7 +170,6 @@ if (process.env.NODE_ENV === 'production') {
 ```
 
 **Client**
-From the `/build` folder, run `now -n example-name`. This will deploy the production version of the app under the name 'example-name'.
 
 Add a `now.json` file at the project root level and add the following contents:
 
@@ -183,7 +183,9 @@ Add a `now.json` file at the project root level and add the following contents:
 }
 ```
 
-Keys and secrets can be added to this file.
+Keys and secrets can be added to this file as required. Refer to the docs for more [info](https://zeit.co/docs/getting-started/environment-variables).
+
+From the `/build` folder, run `now -n example-name`. This will deploy the production version of the app under the name 'example-name'.
 
 ### Demo
 
