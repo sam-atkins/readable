@@ -43,7 +43,7 @@ const post = (state = initialState, action) => {
         ...posts.reduce((newObj, pst) => ({ ...newObj, [pst.id]: pst }), {}),
         postStatus: {
           edit: false,
-          error: false,
+          addNewPostError: false,
           loading: false,
           redirect: false,
           requestDelete: false,
@@ -55,7 +55,7 @@ const post = (state = initialState, action) => {
         ...posts,
         postStatus: {
           edit: false,
-          error: true,
+          addNewPostError: true,
           loading: false,
           redirect: false,
           requestDelete: false,
@@ -89,7 +89,7 @@ const post = (state = initialState, action) => {
         ...state,
         postStatus: {
           edit: true,
-          error: false,
+          addNewPostError: false,
           loading: false,
           redirect: false,
           requestDelete: false,
@@ -101,7 +101,7 @@ const post = (state = initialState, action) => {
         ...state,
         postStatus: {
           edit: false,
-          error: false,
+          addNewPostError: false,
           loading: false,
           redirect: false,
           requestDelete: false,
@@ -113,7 +113,7 @@ const post = (state = initialState, action) => {
         [action.payload.id]: { ...action.payload },
         postStatus: {
           edit: false,
-          error: false,
+          addNewPostError: false,
           loading: false,
           redirect: false,
           requestDelete: false,
@@ -124,7 +124,7 @@ const post = (state = initialState, action) => {
         ...state,
         postStatus: {
           edit: false,
-          error: false,
+          addNewPostError: false,
           loading: false,
           redirect: false,
           requestDelete: true,
@@ -136,7 +136,7 @@ const post = (state = initialState, action) => {
         ...state,
         postStatus: {
           edit: false,
-          error: false,
+          addNewPostError: false,
           loading: false,
           redirect: false,
           requestDelete: false,
@@ -164,7 +164,7 @@ const post = (state = initialState, action) => {
         [action.payload.id]: { ...action.payload },
         postStatus: {
           edit: false,
-          error: false,
+          addNewPostError: false,
           loading: false,
           redirect: false,
           requestDelete: false,
@@ -176,7 +176,7 @@ const post = (state = initialState, action) => {
         ...state,
         postStatus: {
           edit: false,
-          error: false,
+          addNewPostError: false,
           loading: false,
           redirect: false,
           requestDelete: false,

@@ -148,7 +148,7 @@ class PostView extends Component {
 PostView.propTypes = {
   post: PropTypes.object.isRequired,
   comments: PropTypes.array.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   homeFlag: PropTypes.bool,
   postPage: PropTypes.bool,
@@ -165,7 +165,6 @@ PostView.defaultProps = {
   homeFlag: false,
   postPage: false,
   commentsFlag: false,
-  error: false,
 };
 
 const mapStateToProps = (state, ownProps) => ({
