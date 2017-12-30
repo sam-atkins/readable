@@ -1,7 +1,13 @@
 /* global fetch */
 import { createRandomID } from '../utils/utils';
 
-const api = 'http://localhost:3001';
+let api = '';
+
+if (process.env.NODE_ENV === 'production') {
+  api = 'https://api-server-ccrikncelx.now.sh';
+} else {
+  api = 'http://localhost:3001';
+}
 
 // Generates a unique token; removed because in order to test components using
 // localStorage need to eject from `create-react-app`
