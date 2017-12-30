@@ -56,3 +56,7 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# build and deploy
+build
+now.json
