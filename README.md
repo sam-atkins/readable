@@ -189,7 +189,7 @@ From the `/build` folder, run `now -n example-name`. This will deploy the produc
 
 ### Demo
 
-A demo of the app is deployed with [now.sh](https://zeit.co/now) and is available [here](https://cubiio-readable-xlgwavtjao.now.sh/).
+A demo of the app is deployed with [now.sh](https://zeit.co/now) and is available [here](https://cubiio-readable-dpwdjidcsy.now.sh/).
 
 ## Inspiration and Information
 
