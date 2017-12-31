@@ -5,65 +5,45 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import PostView from '../../components/PostView';
 import {
-  getCategoryValues,
-  getCategoryErrorStatus,
-  getCategoryLoadingStatus,
-} from '../../selectors/categorySelectors';
-import { getPostValues } from '../../selectors/postSelectors';
-import {
-  CategoryViewWrapper,
-  CategoryPostWrapper,
-  CategoryContent,
-  CategoryHeader,
-} from './RootPageContainer.styles';
+  getPostErrorStatus,
+  getPostLoadingStatus,
+  getPostValues,
+} from '../../selectors/postSelectors';
+import { ContentWrapper } from './RootPageContainer.styles';
 
-const RootPageContainer = ({
-  categories,
-  categoryError,
-  categoryLoading,
-  posts,
-}) => {
-  if (categoryLoading) {
+const RootPageContainer = ({ loadingError, contentLoading, posts }) => {
+  if (contentLoading) {
     return <Loading />;
   }
 
-  if (categoryError) {
+  if (loadingError) {
     return <Error />;
   }
 
   return (
-    <CategoryViewWrapper>
-      {categories.map(cat => (
-        <CategoryPostWrapper key={cat.id}>
-          <CategoryContent>
-            <CategoryHeader>{cat.name}</CategoryHeader>
-          </CategoryContent>
-          {posts.reduce((postArray, post) => {
-            if (post.category === cat.id && post.deleted === false) {
-              return [
-                ...postArray,
-                <PostView post={post} key={post.id} homeFlag />,
-              ];
-            }
-            return postArray;
-          }, [])}
-        </CategoryPostWrapper>
-      ))}
-    </CategoryViewWrapper>
+    <ContentWrapper>
+      {posts.reduce((postArray, post) => {
+        if (post.deleted === false) {
+          return [
+            ...postArray,
+            <PostView post={post} key={post.id} homeFlag />,
+          ];
+        }
+        return postArray;
+      }, [])}
+    </ContentWrapper>
   );
 };
 
 RootPageContainer.propTypes = {
-  categories: PropTypes.array.isRequired,
-  categoryLoading: PropTypes.bool.isRequired,
-  categoryError: PropTypes.bool.isRequired,
+  loadingError: PropTypes.bool.isRequired,
+  contentLoading: PropTypes.bool.isRequired,
   posts: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({
-  categories: getCategoryValues(state),
-  categoryError: getCategoryErrorStatus(state),
-  categoryLoading: getCategoryLoadingStatus(state),
+  loadingError: getPostErrorStatus(state),
+  contentLoading: getPostLoadingStatus(state),
   posts: getPostValues(state, state.post.sortPosts.sortBy),
 });
 
