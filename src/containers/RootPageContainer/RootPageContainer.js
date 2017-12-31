@@ -15,9 +15,9 @@ import {
   CategoryPostWrapper,
   CategoryContent,
   CategoryHeader,
-} from './CategoryPostViewContainer.styles';
+} from './RootPageContainer.styles';
 
-const CategoryPostViewContainer = ({
+const RootPageContainer = ({
   categories,
   categoryError,
   categoryLoading,
@@ -53,7 +53,7 @@ const CategoryPostViewContainer = ({
   );
 };
 
-CategoryPostViewContainer.propTypes = {
+RootPageContainer.propTypes = {
   categories: PropTypes.array.isRequired,
   categoryLoading: PropTypes.bool.isRequired,
   categoryError: PropTypes.bool.isRequired,
@@ -67,4 +67,4 @@ const mapStateToProps = state => ({
   posts: getPostValues(state, state.post.sortPosts.sortBy),
 });
 
-export default connect(mapStateToProps)(CategoryPostViewContainer);
+export default connect(mapStateToProps)(RootPageContainer);
