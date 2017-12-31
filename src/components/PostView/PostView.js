@@ -95,7 +95,10 @@ class PostView extends Component {
           </PostTitleLink>
           <StyledPostMeta>
             Submitted {distanceInWordsToNow(post.timestamp)} ago by{' '}
-            {post.author}
+            {post.author} to{' '}
+            <StyledPostMetaBoldLink to={`/${post.category}`}>
+              {`r/${post.category}`}
+            </StyledPostMetaBoldLink>
           </StyledPostMeta>
         </StyledPostMetaWrapper>
         {!homeFlag && <StyledPostBody>{post.body}</StyledPostBody>}
