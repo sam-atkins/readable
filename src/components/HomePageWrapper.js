@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from './Header';
-import CategoryPostViewContainer from '../containers/CategoryPostViewContainer';
+import RootPageContainer from '../containers/RootPageContainer';
 import SideBar from './SideBar';
 import PageWrapper from '../styles/pagewrapper';
 
 const HomePageWrapper = () => (
   <PageWrapper>
     <Header />
-    <CategoryPostViewContainer />
+    <RootPageContainer />
     <SideBar />
   </PageWrapper>
 );

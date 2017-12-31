@@ -66,7 +66,7 @@ export const sortPostsByOldestDate = postsArray =>
  * @returns {array} based on the 'sortBy' sortType arg
  */
 export const getPostValues = ({ post }, sortType, urlParam = '') => {
-  if (post.postStatus.error === true) {
+  if (post.postStatus.loading === true || post.postStatus.error === true) {
     return [];
   }
 

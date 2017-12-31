@@ -43,7 +43,6 @@ export const NavItem = styled.li`
   text-transform: uppercase;
   font-size: x-small;
   line-height: 18px;
-  width: 20%;
 `;
 
 export const SpanSeparator = styled.span`
