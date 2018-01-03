@@ -30,6 +30,10 @@ const initialState = {
   },
   sortPosts: {
     sortBy: '',
+    newest: false,
+    oldest: false,
+    highest: false,
+    lowest: false,
   },
 };
 
@@ -188,6 +192,10 @@ const post = (state = initialState, action) => {
         ...state,
         sortPosts: {
           sortBy: 'HIGHEST_VOTE',
+          newest: false,
+          oldest: false,
+          highest: true,
+          lowest: false,
         },
       };
     case SORT_BY_LOWEST_VOTE:
@@ -195,6 +203,10 @@ const post = (state = initialState, action) => {
         ...state,
         sortPosts: {
           sortBy: 'LOWEST_VOTE',
+          newest: false,
+          oldest: false,
+          highest: false,
+          lowest: true,
         },
       };
     case SORT_BY_NEW:
@@ -202,6 +214,10 @@ const post = (state = initialState, action) => {
         ...state,
         sortPosts: {
           sortBy: 'NEW',
+          newest: true,
+          oldest: false,
+          highest: false,
+          lowest: false,
         },
       };
     case SORT_BY_OLD:
@@ -209,6 +225,10 @@ const post = (state = initialState, action) => {
         ...state,
         sortPosts: {
           sortBy: 'OLD',
+          newest: false,
+          oldest: true,
+          highest: false,
+          lowest: false,
         },
       };
     default:
