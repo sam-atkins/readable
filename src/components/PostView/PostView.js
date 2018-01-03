@@ -23,6 +23,9 @@ import selectComments from '../../selectors/commentSelectors';
 import { slugifyPostTitle } from '../../utils/utils';
 import {
   ExistingCommentsWrapper,
+  FlexWrapper,
+  FlexDiv1,
+  FlexDiv2,
   PostWrapper,
   StyledCommentWrapper,
   StyledPostBody,
@@ -81,18 +84,24 @@ class PostView extends Component {
     return (
       <PostWrapper>
         <StyledPostMetaWrapper>
-          <StyledFaArrowUp
-            onClick={() => userVotePost(post.id, 'upVote', 'posts')}
-          />
-          <StyledVoteCount>{post.voteScore}</StyledVoteCount>
-          <StyledFaArrowDown
-            onClick={() => userVotePost(post.id, 'downVote', 'posts')}
-          />
-          <PostTitleLink
-            to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
-          >
-            {post.title}
-          </PostTitleLink>
+          <FlexWrapper>
+            <FlexDiv1>
+              <StyledFaArrowUp
+                onClick={() => userVotePost(post.id, 'upVote', 'posts')}
+              />
+              <StyledVoteCount>{post.voteScore}</StyledVoteCount>
+              <StyledFaArrowDown
+                onClick={() => userVotePost(post.id, 'downVote', 'posts')}
+              />
+            </FlexDiv1>
+            <FlexDiv2>
+              <PostTitleLink
+                to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
+              >
+                {post.title}
+              </PostTitleLink>
+            </FlexDiv2>
+          </FlexWrapper>
           <StyledPostMeta>
             Submitted {distanceInWordsToNow(post.timestamp)} ago by{' '}
             {post.author} to{' '}
