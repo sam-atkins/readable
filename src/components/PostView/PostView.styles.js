@@ -38,6 +38,10 @@ export const FlexDiv1 = styled.div`
 
 export const FlexDiv2 = styled.div`
   flex: 3;
+
+  @media (max-width: 650px) {
+    flex: 1;
+  }
 `;
 
 export const StyledVoteCount = styled.span`
@@ -50,7 +54,11 @@ export const StyledVoteCount = styled.span`
 
 export const PostTitleLink = styled(Link)`
   color: ${POST_TITLE};
-  margin-left: -2.5rem;
+  margin-left: -1rem;
+
+  @media (max-width: 850px) {
+    margin-left: 1.rem;
+  }
 `;
 
 export const StyledPostMeta = styled.div`
