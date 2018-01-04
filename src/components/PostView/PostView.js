@@ -23,7 +23,9 @@ import selectComments from '../../selectors/commentSelectors';
 import { slugifyPostTitle } from '../../utils/utils';
 import {
   ExistingCommentsWrapper,
-  PostWrapper,
+  FlexWrapper,
+  FlexDiv1,
+  FlexDiv2,
   StyledCommentWrapper,
   StyledPostBody,
   StyledPostMeta,
@@ -35,6 +37,7 @@ import {
   PostTitleLink,
   StyledVoteCount,
 } from './PostView.styles';
+import { PostGridWrapper } from '../../styles/pagewrapper';
 import { StyledFaArrowDown, StyledFaArrowUp } from '../../styles/voteArrows';
 
 class PostView extends Component {
@@ -79,20 +82,26 @@ class PostView extends Component {
     }
 
     return (
-      <PostWrapper>
+      <PostGridWrapper>
         <StyledPostMetaWrapper>
-          <StyledFaArrowUp
-            onClick={() => userVotePost(post.id, 'upVote', 'posts')}
-          />
-          <StyledVoteCount>{post.voteScore}</StyledVoteCount>
-          <StyledFaArrowDown
-            onClick={() => userVotePost(post.id, 'downVote', 'posts')}
-          />
-          <PostTitleLink
-            to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
-          >
-            {post.title}
-          </PostTitleLink>
+          <FlexWrapper>
+            <FlexDiv1>
+              <StyledFaArrowUp
+                onClick={() => userVotePost(post.id, 'upVote', 'posts')}
+              />
+              <StyledVoteCount>{post.voteScore}</StyledVoteCount>
+              <StyledFaArrowDown
+                onClick={() => userVotePost(post.id, 'downVote', 'posts')}
+              />
+            </FlexDiv1>
+            <FlexDiv2>
+              <PostTitleLink
+                to={`/${post.category}/${post.id}/${slugifyPostTitle(post.title)}`}
+              >
+                {post.title}
+              </PostTitleLink>
+            </FlexDiv2>
+          </FlexWrapper>
           <StyledPostMeta>
             Submitted {distanceInWordsToNow(post.timestamp)} ago by{' '}
             {post.author} to{' '}
@@ -143,7 +152,7 @@ class PostView extends Component {
           )}
           {this.renderComments()}
         </StyledCommentWrapper>
-      </PostWrapper>
+      </PostGridWrapper>
     );
   }
 }

@@ -688,6 +688,10 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
+        newest: false,
+        oldest: false,
+        highest: false,
+        lowest: false,
       },
     };
     const action = {
@@ -696,6 +700,10 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'HIGHEST_VOTE',
+        newest: false,
+        oldest: false,
+        highest: true,
+        lowest: false,
       },
     };
     deepFreeze(initialState);
@@ -706,6 +714,10 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
+        newest: false,
+        oldest: false,
+        highest: false,
+        lowest: false,
       },
     };
     const action = {
@@ -714,6 +726,10 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'LOWEST_VOTE',
+        newest: false,
+        oldest: false,
+        highest: false,
+        lowest: true,
       },
     };
     deepFreeze(initialState);
@@ -724,6 +740,10 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
+        newest: false,
+        oldest: false,
+        highest: false,
+        lowest: false,
       },
     };
     const action = {
@@ -732,6 +752,10 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'NEW',
+        newest: true,
+        oldest: false,
+        highest: false,
+        lowest: false,
       },
     };
     deepFreeze(initialState);
@@ -742,6 +766,10 @@ describe('post reducer', () => {
     const initialState = {
       sortPosts: {
         sortBy: '',
+        newest: false,
+        oldest: false,
+        highest: false,
+        lowest: false,
       },
     };
     const action = {
@@ -750,6 +778,10 @@ describe('post reducer', () => {
     const expectedState = {
       sortPosts: {
         sortBy: 'OLD',
+        newest: false,
+        oldest: true,
+        highest: false,
+        lowest: false,
       },
     };
     deepFreeze(initialState);

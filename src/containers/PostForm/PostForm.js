@@ -9,7 +9,7 @@ import SideBar from '../../components/SideBar';
 import { getCategoryValues } from '../../selectors/categorySelectors';
 import { addNewPost, editExistingPost } from '../../actions/postActions';
 import { userInputIsValid } from '../../utils/utils';
-import PageWrapper from '../../styles/pagewrapper';
+import { PageWrapper } from '../../styles/pagewrapper';
 import {
   Buffer,
   FormWrapperLabel,
@@ -27,13 +27,26 @@ class PostForm extends Component {
   state = {
     // id field is required for PUT request to edit an existing post
     /* eslint-disable */
-    id: this.props.postToEdit.id,
+    id: '',
     /* eslint-enable */
-    title: this.props.postToEdit.title,
-    body: this.props.postToEdit.body,
-    category: this.props.postToEdit.category,
-    author: this.props.postToEdit.author,
+    title: '',
+    body: '',
+    category: '',
+    author: '',
   };
+
+  componentWillMount() {
+    this.setState({
+      // id field is required for PUT request to edit an existing post
+      /* eslint-disable */
+      id: this.props.postToEdit.id,
+      /* eslint-enable */
+      title: this.props.postToEdit.title,
+      body: this.props.postToEdit.body,
+      category: this.props.postToEdit.category,
+      author: this.props.postToEdit.author,
+    });
+  }
 
   render() {
     const handleInputChange = (event) => {

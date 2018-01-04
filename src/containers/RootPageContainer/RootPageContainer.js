@@ -9,7 +9,7 @@ import {
   getPostLoadingStatus,
   getPostValues,
 } from '../../selectors/postSelectors';
-import { ContentWrapper } from './RootPageContainer.styles';
+import { PostGridWrapper } from '../../styles/pagewrapper';
 
 const RootPageContainer = ({ loadingError, contentLoading, posts }) => {
   if (contentLoading) {
@@ -21,7 +21,7 @@ const RootPageContainer = ({ loadingError, contentLoading, posts }) => {
   }
 
   return (
-    <ContentWrapper>
+    <PostGridWrapper>
       {posts.reduce((postArray, post) => {
         if (post.deleted === false) {
           return [
@@ -31,7 +31,7 @@ const RootPageContainer = ({ loadingError, contentLoading, posts }) => {
         }
         return postArray;
       }, [])}
-    </ContentWrapper>
+    </PostGridWrapper>
   );
 };
 

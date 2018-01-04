@@ -1,12 +1,13 @@
 /* global fetch */
 import { createRandomID } from '../utils/utils';
+import { apiDev, prodApi } from './config';
 
 let api = '';
 
 if (process.env.NODE_ENV === 'production') {
-  api = 'https://api-server-ccrikncelx.now.sh';
+  api = prodApi;
 } else {
-  api = 'http://localhost:3001';
+  api = apiDev;
 }
 
 // Generates a unique token; removed because in order to test components using

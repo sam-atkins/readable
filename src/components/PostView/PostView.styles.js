@@ -10,42 +10,53 @@ import {
   VOTE_COUNT,
 } from '../../styles/colours';
 
-export const PostWrapper = styled.div`
-  justify-self: stretch;
-  display: subgrid;
-  padding-left: 2rem;
-  grid-template-columns: 50px repeat(2, [col] 1fr);
-  grid-template-rows: repeat(3, [row] 1fr);
-  grid-gap: 2px;
-  grid-auto-rows: auto;
+export const StyledPostMetaWrapper = styled.div`
+  grid-column-start: 2;
+  grid-column-end: 5;
+  grid-row: 1;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
 `;
 
-export const StyledVoteCount = styled.div`
+export const FlexWrapper = styled.div`
+  display: flex;
+`;
+
+export const FlexDiv1 = styled.div`
+  flex: 1;
+`;
+
+export const FlexDiv2 = styled.div`
+  flex: 3;
+
+  @media (max-width: 650px) {
+    flex: 1;
+  }
+`;
+
+export const StyledVoteCount = styled.span`
   color: ${VOTE_COUNT};
   padding-top: 0.1rem;
   padding-left: 0.2rem;
-  grid-column: 1;
-`;
-
-export const StyledPostMetaWrapper = styled.div`
-  grid-column-start: 2;
-  grid-column-end: 4;
-  grid-column: 2;
-  grid-row: 1;
-  margin-left: 2rem;
-  margin-top: .5rem;
+  padding: 0.1rem;
+  margin: .5rem;
 `;
 
 export const PostTitleLink = styled(Link)`
   color: ${POST_TITLE};
-  margin-left: 20px;
+  margin-left: -1rem;
+
+  @media (max-width: 850px) {
+    margin-left: 1.rem;
+  }
 `;
 
 export const StyledPostMeta = styled.div`
   color: ${POST_META};
   font-size: x-small;
-  margin-top: .3rem;
-  margin-bottom: .3rem;
+  margin-top: 0.3rem;
+  margin-left: 0.2rem;
+  margin-bottom: 0.3rem;
 `;
 
 export const StyledPostBody = styled.div`
@@ -61,12 +72,12 @@ export const StyledPostBody = styled.div`
 export const StyledCommentWrapper = styled.div`
   grid-column-start: 2;
   grid-row: 3;
-  margin-left: 2rem;
+  margin-left: 2.2rem;
   margin-bottom: 1.5rem;
 `;
 
 export const ExistingCommentsWrapper = styled.div`
-  padding-top: .5rem;
+  padding-top: 0.5rem;
   font-size: 16px;
   font-weight: normal;
 `;

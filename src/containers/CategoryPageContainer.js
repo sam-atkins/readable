@@ -7,7 +7,7 @@ import PostView from '../components/PostView';
 import NoMatchWrapper from '../components/NoMatchWrapper';
 import NoPosts from '../components/NoPosts';
 import SideBar from '../components/SideBar';
-import PageWrapper from '../styles/pagewrapper';
+import { PageWrapper } from '../styles/pagewrapper';
 import { validCategoryUrl } from '../selectors/categorySelectors';
 import { getPostValues } from '../selectors/postSelectors';
 
