@@ -10,16 +10,6 @@ import {
   VOTE_COUNT,
 } from '../../styles/colours';
 
-export const PostWrapper = styled.div`
-  justify-self: stretch;
-  display: subgrid;
-  padding-left: 2rem;
-  grid-template-columns: 50px repeat(2, [col] 1fr);
-  grid-template-rows: repeat(3, [row] 1fr);
-  grid-gap: 2px;
-  grid-auto-rows: auto;
-`;
-
 export const StyledPostMetaWrapper = styled.div`
   grid-column-start: 2;
   grid-column-end: 5;

@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import PostView from '../components/PostView';
 import NoMatchWrapper from '../components/NoMatchWrapper';
 import SideBar from '../components/SideBar';
-import PageWrapper from '../styles/pagewrapper';
+import { PageWrapper } from '../styles/pagewrapper';
 import { selectPostByPostId, validPostUrl } from '../selectors/postSelectors';
 import { fetchComments } from '../actions/commentActions';
 

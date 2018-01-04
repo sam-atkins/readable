@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const PageWrapper = styled.div`
+export const PageWrapper = styled.div`
   display: grid;
   grid-template-columns: 600 auto 300
   grid-gap: 5px;
@@ -10,4 +10,7 @@ const PageWrapper = styled.div`
   font-family: sans-serif;
 `;
 
-export default PageWrapper;
+export const PostGridWrapper = styled.div`
+  justify-self: stretch;
+  display: subgrid;
+`;

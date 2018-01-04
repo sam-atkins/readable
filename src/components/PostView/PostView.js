@@ -26,7 +26,6 @@ import {
   FlexWrapper,
   FlexDiv1,
   FlexDiv2,
-  PostWrapper,
   StyledCommentWrapper,
   StyledPostBody,
   StyledPostMeta,
@@ -38,6 +37,7 @@ import {
   PostTitleLink,
   StyledVoteCount,
 } from './PostView.styles';
+import { PostGridWrapper } from '../../styles/pagewrapper';
 import { StyledFaArrowDown, StyledFaArrowUp } from '../../styles/voteArrows';
 
 class PostView extends Component {
@@ -82,7 +82,7 @@ class PostView extends Component {
     }
 
     return (
-      <PostWrapper>
+      <PostGridWrapper>
         <StyledPostMetaWrapper>
           <FlexWrapper>
             <FlexDiv1>
@@ -152,7 +152,7 @@ class PostView extends Component {
           )}
           {this.renderComments()}
         </StyledCommentWrapper>
-      </PostWrapper>
+      </PostGridWrapper>
     );
   }
 }

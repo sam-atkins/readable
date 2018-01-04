@@ -9,7 +9,7 @@ import SideBar from '../../components/SideBar';
 import { getCategoryValues } from '../../selectors/categorySelectors';
 import { addNewPost, editExistingPost } from '../../actions/postActions';
 import { userInputIsValid } from '../../utils/utils';
-import PageWrapper from '../../styles/pagewrapper';
+import { PageWrapper } from '../../styles/pagewrapper';
 import {
   Buffer,
   FormWrapperLabel,

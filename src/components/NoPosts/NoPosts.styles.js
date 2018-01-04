@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PageWrapper from '../../styles/pagewrapper';
+import { PageWrapper } from '../../styles/pagewrapper';
 import { POST_META } from '../../styles/colours';
 
 export const StyledWrapper = styled(PageWrapper)``;
