@@ -6,7 +6,7 @@
 
 
 ## Description
-This is the second  project for the [React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019).
+This is the second project for the [React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019).
 
 Readable is an app where users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
 
