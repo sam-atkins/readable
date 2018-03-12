@@ -1,3 +1,5 @@
+/* global describe, it, expect */
+
 import {
   getCategoryValues,
   getCategoryErrorStatus,
@@ -5,7 +7,6 @@ import {
   validCategoryUrl,
 } from './categorySelectors';
 
-/* global describe, it, expect */
 
 describe('selectors for category', () => {
   it('should select category loading status', () => {
