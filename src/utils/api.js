@@ -94,6 +94,10 @@ export const deletePost = payload =>
     .then(response => response.json())
     .then(data => data);
 
+/**
+ *
+ * @param {number} payload comment.parentId i.e. post.id
+ */
 export const fetchCommentsForSinglePost = payload =>
   fetch(`${api}/posts/${payload}/comments`, {
     method: 'GET',

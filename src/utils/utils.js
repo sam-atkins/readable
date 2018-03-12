@@ -1,14 +1,22 @@
 import slugify from 'slugify';
 import _ from 'lodash';
 
+/**
+ *
+ * @param {string} postTitle
+ */
 export const slugifyPostTitle = postTitle =>
   slugify(postTitle, { lower: true, remove: /[$*_+~.()'"!\-:@?]/g });
 
 const char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 export const createRandomID = number => _.sampleSize(char, number).join('');
 
-export const userInputIsValid = (type, fieldInput) => {
-
+// /**
+//  *
+//  * @param {string} fieldInputType
+//  * @param {string} fieldInput
+//  */
+export const userInputIsValid = (fieldInputType, fieldInput) => {
   const formMaxLengths = {
     title: 100,
     author: 20,
@@ -25,9 +33,8 @@ export const userInputIsValid = (type, fieldInput) => {
 
   const input = fieldInput.trim();
 
-  const maxLength = formMaxLengths[type];
-  const minLength = formMinLengths[type];
-
+  const maxLength = formMaxLengths[fieldInputType];
+  const minLength = formMinLengths[fieldInputType];
 
   if (input.length >= minLength && input.length < maxLength) {
     return true;
