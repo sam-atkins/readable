@@ -1,4 +1,4 @@
-import slugify from 'slugify';
+import * as slug from 'slug';
 import * as _ from 'lodash';
 
 /**
@@ -6,7 +6,7 @@ import * as _ from 'lodash';
  * @param {string} postTitle
  */
 export const slugifyPostTitle = (postTitle: string) =>
-  slugify(postTitle, { lower: true, remove: /[$*_+~.()'"!\-:@?]/g });
+  slug(postTitle, { lower: true, remove: /[$*_+~.()'"!\-:@?]/g });
 
 /**
  * creates a randomId to a specified length i.e. no. of characters

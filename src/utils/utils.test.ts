@@ -29,7 +29,7 @@ describe('slugifies a post title', () => {
 });
 
 describe('validates user input', () => {
-  it('should return true if title string is greater than 0, less than 100', () => {
+  it('should return true if title string is > 0 and < 100', () => {
     const type = 'title';
     const fieldInput = 'a';
     expect(userInputIsValid(type, fieldInput)).toBeTruthy();
@@ -44,11 +44,12 @@ describe('validates user input', () => {
   it('should return false if title string is greater than 100', () => {
     const type = 'title';
     const fieldInput =
-      'This is a really long title which needs to be over 100 characters. I think it needs to be even longer than that.';
+      'This is a really long title which needs to be over ' +
+      '100 characters. I think it needs to be even longer than that.';
     expect(userInputIsValid(type, fieldInput)).toBeFalsy();
   });
 
-  it('should return true if author string is greater than 0, less than 20', () => {
+  it('should return true if author string is > 0, < 20', () => {
     const type = 'author';
     const fieldInput = 'sam';
     expect(userInputIsValid(type, fieldInput)).toBeTruthy();
